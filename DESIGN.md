@@ -96,21 +96,12 @@ Display is set **light (300)** as in the reference, never heavier than 500.
 Jadeeed's visual signature is **Uzbek atlas (ikat)** rendered as a modern graphic device —
 vertical wavy warp bands whose edges are "torn" and slightly blurred, like resist-dyed threads.
 
-Generated in SVG by `scripts/generate-atlas.mjs` → `public/atlas/*.svg` (and as React
-`<AtlasPattern variant=…>`). Colours: **ink, white/paper, navy, navy-2 only.**
-
-Construction (modelled on how real ikat is made — dye first, weave second):
-1. Tile 480×960, seamless both ways (every wave period divides 960; first/last band match).
-2. 10 vertical bands whose edges are sine waves (amplitude 10–26px, period 240/320/480/960px).
-3. The motif is sampled per **warp thread** (3px wide, 4px steps). Every thread is shifted
-   vertically by its own offset (±16px, loosely bundled with its neighbours) — exactly the
-   misregistration that gives ikat its blurred, "torn" edge.
-4. "Flames": each thread pushes the band edges sideways in short blocks (24–48px);
-   most blocks move 3px, a few leap 10px — irregular tongues of colour bleeding into the neighbour.
-5. Two bands carry the classic atlas "eye" — a stacked chain of almond lenses
-   (ink core, paper ring, navy-2 rim). One band has a navy comb rhythm.
-6. Deterministic seed → identical output on every build. `shape-rendering: crispEdges`, no filters
-   (cheap to rasterise and to animate).
+Source: **a photo of real ikat fabric** (`assets/brand/atlas-source.webp`) — not drawn.
+`scripts/process-atlas.mjs` mirrors it into a seamless 2×2 tile (ikat motifs are symmetric, so the
+mirror joins are invisible) → `public/atlas/ikat.webp` (1×) / `ikat@2x.webp`, served with CSS `image-set`,
+and a 16px band through a motif row → `public/atlas/ikat-strip.webp` for dividers and the preloader.
+The fabric brings its own dyes (cornflower blues, sage, ink on white); they appear **only inside the pattern**,
+never as UI colours. React: `<AtlasPattern variant=…>` / `<AtlasStrip>`.
 
 Variants:
 
@@ -118,14 +109,14 @@ Variants:
 |---|---|---|
 | `dense` | "Siz o'shami?" block, footer, "Rahmat" page, brand-phrase plate | full-contrast navy / ink / paper bands |
 | `light` | section backgrounds | same tile, **opacity 0.04–0.08** on paper |
-| `strip` | divider between big sections, preloader | 12px tall, horizontal repeat of warp threads, 480×12 |
+| `strip` | divider between big sections, preloader | 16px band cut through a row of motifs, repeated along x |
 | `loading` | product image placeholder (instead of grey skeleton) | `light` tile at 0.12 + slow flow |
 
 Rules — **use rarely so it stays special**:
 - ✅ banner-adjacent phrase block, section dividers, footer, thank-you page, image loading fill, plate behind brand phrases.
 - ❌ never on every card, never under body copy that must be read, never in admin.
 - Text on `dense` sits on a solid ink/paper plate or is Unbounded ≥ 32px with ≥ 4.5:1 against the darkest band.
-- The pattern **flows**: `translateY` loop 0 → −960px over 60s (linear, infinite), paused off-screen,
+- The pattern **flows**: `translateY` loop over one tile height (736px) in 60s (linear, infinite), paused off-screen,
   disabled under `prefers-reduced-motion`.
 
 ## 7. Motion

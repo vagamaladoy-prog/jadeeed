@@ -19,11 +19,8 @@ type Props = {
   style?: CSSProperties;
 };
 
-const SRC: Record<Variant, string> = {
-  dense: "/atlas/dense.svg",
-  light: "/atlas/light.svg",
-  loading: "/atlas/light.svg",
-};
+// the brand ikat fabric (scripts/process-atlas.mjs): 1× / 2× files, the browser picks one
+export const ATLAS_BG = "image-set(url(/atlas/ikat.webp) 1x, url(/atlas/ikat@2x.webp) 2x)";
 const OPACITY: Record<Variant, number> = { dense: 1, light: 0.06, loading: 0.14 };
 
 /** The flowing tile itself: pure CSS (compositor-only transform animation, no JS per frame). */
@@ -35,7 +32,7 @@ function Fabric({ variant, scale, flow, paused }: { variant: Variant; scale: num
       style={
         {
           height: `calc(100% + ${h}px)`,
-          backgroundImage: `url(${SRC[variant]})`,
+          backgroundImage: ATLAS_BG,
           backgroundSize: `${Math.round(ATLAS_TILE.width * scale)}px ${h}px`,
           "--atlas-tile-h": `${h}px`,
           animationPlayState: paused ? "paused" : undefined,
@@ -103,14 +100,14 @@ function InteractiveAtlas({ variant, scale, flow, className, style }: Required<P
   );
 }
 
-/** 12px atlas divider between large sections. `stitch` = sews itself left→right once in view. */
+/** 16px atlas divider between large sections. `stitch` = sews itself left→right once in view. */
 export function AtlasStrip({ className, stitch = true }: { className?: string; stitch?: boolean }) {
   return (
     <motion.div
       aria-hidden
       role="presentation"
-      className={cn("h-3 w-full origin-left", className)}
-      style={{ backgroundImage: "url(/atlas/strip.svg)", backgroundSize: `${ATLAS_TILE.width}px ${ATLAS_TILE.stripHeight}px`, backgroundRepeat: "repeat-x" }}
+      className={cn("h-4 w-full origin-left", className)}
+      style={{ backgroundImage: "url(/atlas/ikat-strip.webp)", backgroundSize: `${ATLAS_TILE.stripWidth}px ${ATLAS_TILE.stripHeight}px`, backgroundRepeat: "repeat-x" }}
       initial={stitch ? { scaleX: 0 } : false}
       whileInView={{ scaleX: 1 }}
       viewport={{ once: true, amount: 0.5 }}

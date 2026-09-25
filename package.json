@@ -17,7 +17,7 @@
     "telegram:setup": "node scripts/telegram-setup.mjs",
     "admin:hash": "node scripts/admin-hash.mjs",
     "secret": "node -e \"console.log(require('crypto').randomBytes(32).toString('base64url'))\"",
-    "assets": "node scripts/generate-atlas.mjs && node scripts/process-logo.mjs",
+    "assets": "node scripts/process-atlas.mjs && node scripts/process-logo.mjs",
     "selftest": "tsx --conditions=react-server scripts/selftest.mts",
     "db:local": "node scripts/local-db.mjs",
     "test:order": "tsx --conditions=react-server scripts/test-order.mts",

@@ -1,3 +1,5 @@
+import { ATLAS_TILE } from "@/components/atlas/tiles";
+
 /**
  * First-visit preloader (≤ 1.2 s): an atlas strip "stitches" left→right, "Aylanib kelay..." below.
  * Rendered on the server but shown only when <html data-preload> is set by the inline boot
@@ -7,10 +9,10 @@
 export function Preloader({ phrase }: { phrase: string }) {
   return (
     <div aria-hidden className="preloader fixed inset-0 z-[100] hidden flex-col items-center justify-center gap-6 bg-paper">
-      <div className="h-3 w-[min(320px,70vw)] overflow-hidden">
+      <div className="h-4 w-[min(320px,70vw)] overflow-hidden">
         <div
           className="h-full w-full origin-left animate-preloader-stitch"
-          style={{ backgroundImage: "url(/atlas/strip.svg)", backgroundSize: "480px 12px", backgroundRepeat: "repeat-x" }}
+          style={{ backgroundImage: "url(/atlas/ikat-strip.webp)", backgroundSize: `${ATLAS_TILE.stripWidth}px ${ATLAS_TILE.stripHeight}px`, backgroundRepeat: "repeat-x" }}
         />
       </div>
       <p className="phrase text-heading text-ink">{phrase}</p>
