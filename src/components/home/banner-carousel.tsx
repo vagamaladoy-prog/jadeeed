@@ -108,7 +108,7 @@ export function BannerCarousel({ banners }: { banners: BannerDTO[] }) {
     >
       <motion.div className="banner-in absolute inset-0 will-change-transform" style={{ y: parallaxOn ? parallax : 0 }}>
         {/* first slide is always in the DOM (LCP); others crossfade over it */}
-        <div className="absolute inset-0" aria-hidden={index !== 0}>
+        <div className="absolute inset-0" inert={index !== 0}>
           {slide(banners[0], 0)}
         </div>
         <AnimatePresence initial={false}>

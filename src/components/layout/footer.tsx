@@ -32,7 +32,7 @@ export async function Footer({
     <footer className="relative overflow-hidden bg-ink text-white">
       {/* dense atlas band — decorative, no text on it */}
       <div className="relative h-24 md:h-32">
-        <AtlasPattern variant="dense" scale={0.6} />
+        <AtlasPattern variant="dense" scale={0.6} interactive />
       </div>
 
       <div className="container-page grid gap-12 py-16 md:grid-cols-12 md:py-20">

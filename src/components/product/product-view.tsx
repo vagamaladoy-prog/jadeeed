@@ -1,14 +1,13 @@
 "use client";
 import { useMemo, useState } from "react";
+import dynamic from "next/dynamic";
 import { useUrlParam } from "@/hooks/use-url-param";
 import { AnimatePresence, motion } from "motion/react";
 import { Ruler } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { ProductGallery } from "./product-gallery";
 import { Price } from "./price";
-import { SizeChartSheet } from "./size-chart-sheet";
 import { Button } from "@/components/ui/button";
-import { Sheet } from "@/components/ui/sheet";
 import { ExternalLink } from "@/components/contact/external-link";
 import { Magnet } from "@/components/bits/magnet";
 import { useTelegram } from "@/components/telegram/telegram-provider";
@@ -18,6 +17,10 @@ import { formatPrice } from "@/lib/format";
 import { tr, type ProductDTO, type SizeCode } from "@/lib/types";
 import { SPRING } from "@/lib/motion";
 import { cn } from "@/lib/cn";
+
+// bottom sheets (vaul) load on first open — not needed for the first paint
+const Sheet = dynamic(() => import("@/components/ui/sheet").then((m) => m.Sheet), { ssr: false });
+const SizeChartSheet = dynamic(() => import("./size-chart-sheet").then((m) => m.SizeChartSheet), { ssr: false });
 
 export function ProductView({
   product,
@@ -42,6 +45,10 @@ export function ProductView({
   const [needSize, setNeedSize] = useState(false);
   const [chartOpen, setChartOpen] = useState(false);
   const [sizeSheet, setSizeSheet] = useState(false);
+  // mount a sheet the first time it opens, keep it mounted so it can animate closed
+  const [sheetsUsed, setSheetsUsed] = useState({ size: false, chart: false });
+  if ((sizeSheet && !sheetsUsed.size) || (chartOpen && !sheetsUsed.chart))
+    setSheetsUsed({ size: sheetsUsed.size || sizeSheet, chart: sheetsUsed.chart || chartOpen });
   const items = useCart();
   const name = tr(product.name, locale);
 
@@ -238,16 +245,20 @@ export function ProductView({
       </div>
       <div className="h-16 lg:hidden" aria-hidden />
 
-      <Sheet open={sizeSheet} onOpenChange={setSizeSheet} title={t("chooseSize")}>
-        <div className="flex flex-col gap-6 pb-2">
-          {sizeChips(true)}
-          <button type="button" onClick={() => setChartOpen(true)} className="flex min-h-11 w-fit items-center gap-2 text-body-sm text-navy underline underline-offset-4">
-            <Ruler className="size-4" /> {t("sizeChart")}
-          </button>
-          {addButton(true)}
-        </div>
-      </Sheet>
-      <SizeChartSheet open={chartOpen} onOpenChange={setChartOpen} chart={product.sizeChart} supportUrl={supportUrl} highlight={size} />
+      {sheetsUsed.size && (
+        <Sheet open={sizeSheet} onOpenChange={setSizeSheet} title={t("chooseSize")}>
+          <div className="flex flex-col gap-6 pb-2">
+            {sizeChips(true)}
+            <button type="button" onClick={() => setChartOpen(true)} className="flex min-h-11 w-fit items-center gap-2 text-body-sm text-navy underline underline-offset-4">
+              <Ruler className="size-4" /> {t("sizeChart")}
+            </button>
+            {addButton(true)}
+          </div>
+        </Sheet>
+      )}
+      {sheetsUsed.chart && (
+        <SizeChartSheet open={chartOpen} onOpenChange={setChartOpen} chart={product.sizeChart} supportUrl={supportUrl} highlight={size} />
+      )}
     </>
   );
 }

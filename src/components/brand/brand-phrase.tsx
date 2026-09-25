@@ -11,6 +11,9 @@ type Props = {
   /** "write": letter by letter, like handwriting (45 ms/char, ≤ 1.2 s) · "reveal": whole line rises */
   animate?: "write" | "reveal" | "none";
   delay?: number;
+  /** "view": plays when scrolled into view (Motion) · "load": plays on first paint, pure CSS —
+   *  use it above the fold so the phrase never waits for JavaScript */
+  trigger?: "view" | "load";
   className?: string;
 };
 
@@ -19,7 +22,7 @@ type Props = {
  * DB (admin → «Фразы бренда»). Letter animation is adapted from React Bits «BlurText»
  * (animateBy="letters"), limited to opacity + transform per DESIGN.md.
  */
-export function BrandPhrase({ text, as: Tag = "p", animate = "reveal", delay = 0, className }: Props) {
+export function BrandPhrase({ text, as: Tag = "p", animate = "reveal", delay = 0, trigger = "view", className }: Props) {
   const reduce = useReducedMotion();
   const base = cn("phrase", className);
 
@@ -49,8 +52,30 @@ export function BrandPhrase({ text, as: Tag = "p", animate = "reveal", delay = 0
   const words: { ch: string; i: number }[][] = [[]];
   chars.forEach((ch, i) => (ch === " " ? words.push([]) : words[words.length - 1].push({ ch, i })));
 
+  if (trigger === "load") {
+    return (
+      <Tag className={base}>
+        <span className="sr-only">{text}</span>
+        {words.map((w, wi) => (
+          <span key={wi}>
+            <span aria-hidden className="inline-block whitespace-nowrap">
+              {w.map(({ ch, i }) => (
+                <span key={i} className="inline-block animate-letter" style={{ animationDelay: `${Math.round((delay + i * step) * 1000)}ms` }}>
+                  {ch}
+                </span>
+              ))}
+            </span>
+            {wi < words.length - 1 && " "}
+          </span>
+        ))}
+      </Tag>
+    );
+  }
+
   return (
-    <Tag className={base} aria-label={text}>
+    <Tag className={base}>
+      {/* the phrase for screen readers; the animated letters below are hidden from them */}
+      <span className="sr-only">{text}</span>
       {words.map((w, wi) => (
         <span key={wi}>
           <span aria-hidden className="inline-block whitespace-nowrap">

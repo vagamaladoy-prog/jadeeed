@@ -24,33 +24,58 @@ const SRC: Record<Variant, string> = {
   light: "/atlas/light.svg",
   loading: "/atlas/light.svg",
 };
+const OPACITY: Record<Variant, number> = { dense: 1, light: 0.06, loading: 0.14 };
+
+/** The flowing tile itself: pure CSS (compositor-only transform animation, no JS per frame). */
+function Fabric({ variant, scale, flow, paused }: { variant: Variant; scale: number; flow: boolean; paused?: boolean }) {
+  const h = Math.round(ATLAS_TILE.height * scale);
+  return (
+    <div
+      className={cn("absolute inset-x-0 top-0 will-change-transform", flow && "animate-atlas-flow")}
+      style={
+        {
+          height: `calc(100% + ${h}px)`,
+          backgroundImage: `url(${SRC[variant]})`,
+          backgroundSize: `${Math.round(ATLAS_TILE.width * scale)}px ${h}px`,
+          "--atlas-tile-h": `${h}px`,
+          animationPlayState: paused ? "paused" : undefined,
+        } as CSSProperties
+      }
+    />
+  );
+}
 
 /**
  * Jadeeed atlas (ikat) — see DESIGN.md §6. Absolutely fills its positioned parent.
  * Never place it under body copy that has to be read.
  */
 export function AtlasPattern({ variant = "dense", scale = 1, flow = true, interactive = false, className, style }: Props) {
+  if (interactive) return <InteractiveAtlas variant={variant} scale={scale} flow={flow} className={className} style={style} />;
+  return (
+    <div aria-hidden className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)} style={style}>
+      <div className="absolute inset-0" style={{ opacity: OPACITY[variant] }}>
+        <Fabric variant={variant} scale={scale} flow={flow} />
+      </div>
+    </div>
+  );
+}
+
+/** Large atlas blocks: pause off-screen, drift with the cursor (desktop) or with scroll (touch). */
+function InteractiveAtlas({ variant, scale, flow, className, style }: Required<Pick<Props, "variant" | "scale" | "flow">> & Pick<Props, "className" | "style">) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { margin: "100px" });
   const reduce = useReducedMotion();
   const fine = useFinePointer();
 
-  const w = Math.round(ATLAS_TILE.width * scale);
-  const h = Math.round(ATLAS_TILE.height * scale);
-
-  // cursor parallax (desktop)
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const sx = useSpring(mx, { stiffness: 60, damping: 20 });
   const sy = useSpring(my, { stiffness: 60, damping: 20 });
-  // scroll parallax (touch)
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const scrollY = useTransform(scrollYProgress, [0, 1], [-12, 12]);
 
-  const cursorOn = interactive && fine && !reduce;
-  const scrollOn = interactive && !fine && !reduce;
-
-  const opacity = variant === "light" ? 0.06 : variant === "loading" ? 0.14 : 1;
+  const cursorOn = fine && !reduce;
+  const scrollOn = !fine && !reduce;
 
   return (
     <div
@@ -70,21 +95,9 @@ export function AtlasPattern({ variant = "dense", scale = 1, flow = true, intera
     >
       <motion.div
         className="absolute -inset-4"
-        style={{ x: cursorOn ? sx : 0, y: cursorOn ? sy : scrollOn ? scrollY : 0, opacity }}
+        style={{ x: cursorOn ? sx : 0, y: cursorOn ? sy : scrollOn ? scrollY : 0, opacity: OPACITY[variant] }}
       >
-        <div
-          className={cn("absolute inset-x-0 top-0 will-change-transform", flow && "animate-atlas-flow")}
-          style={
-            {
-              height: `calc(100% + ${h}px)`,
-              backgroundImage: `url(${SRC[variant]})`,
-              backgroundSize: `${w}px ${h}px`,
-              backgroundRepeat: "repeat",
-              "--atlas-tile-h": `${h}px`,
-              animationPlayState: inView ? "running" : "paused",
-            } as CSSProperties
-          }
-        />
+        <Fabric variant={variant} scale={scale} flow={flow} paused={!inView} />
       </motion.div>
     </div>
   );

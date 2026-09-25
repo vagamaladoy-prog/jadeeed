@@ -6,7 +6,9 @@ import { cn } from "@/lib/cn";
 
 /**
  * Product photo that fills its (relative, sized) parent. While loading, the image well shows
- * a faint flowing atlas instead of a grey skeleton; the photo fades in on top.
+ * a faint flowing atlas instead of a grey skeleton (it sits underneath the photo).
+ * Priority (above-the-fold) photos are visible the moment they decode — never gated on JS —
+ * so they don't delay LCP; the others fade in once loaded.
  */
 export function ProductImage({
   src,
@@ -35,8 +37,9 @@ export function ProductImage({
         unoptimized={svg}
         onLoad={() => setLoaded(true)}
         className={cn(
-          "object-cover transition-opacity duration-[var(--dur-in)]",
-          loaded ? "opacity-100" : "opacity-0",
+          "object-cover",
+          !priority && "transition-opacity duration-[var(--dur-in)]",
+          !priority && !loaded && "opacity-0",
           className,
         )}
       />

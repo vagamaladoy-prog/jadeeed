@@ -65,7 +65,7 @@ export function Header() {
       {/* phone strip */}
       <div className="container-page relative flex h-(--topbar-h) items-center justify-between lg:hidden">
         <Link href="/" aria-label="Jadeeed" className="-ml-1 flex h-11 items-center px-1">
-          <Logo tone={tone} height={36} priority />
+          <Logo tone={tone} height={36} />
         </Link>
         <LanguageSwitch tone={tone} />
       </div>
@@ -79,7 +79,7 @@ export function Header() {
       >
         <Link href="/" aria-label="Jadeeed" className="flex h-11 items-center">
           <motion.span initial={false} animate={{ scale: compact ? 0.84 : 1 }} transition={T} className="origin-left">
-            <Logo tone={tone} height={48} priority />
+            <Logo tone={tone} height={48} />
           </motion.span>
         </Link>
         <nav aria-label={t("menu")} className="flex flex-1 items-center gap-8">

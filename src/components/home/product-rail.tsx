@@ -32,9 +32,9 @@ export function ProductRail({ products, badgePhrase }: { products: ProductCardDT
     <div className="relative">
       <div ref={ref} className="overflow-hidden px-gutter lg:px-0" data-lenis-prevent-touch>
         <Stagger className="flex touch-pan-y gap-3 md:gap-5">
-          {products.map((p, i) => (
+          {products.map((p) => (
             <StaggerItem key={p.id} className="w-[64%] shrink-0 sm:w-[42%] md:w-[31%] lg:w-[23.5%]">
-              <ProductCard product={p} badgePhrase={badgePhrase} priority={i < 2} sizes="(min-width: 1024px) 24vw, (min-width: 768px) 31vw, 64vw" />
+              <ProductCard product={p} badgePhrase={badgePhrase} sizes="(min-width: 1024px) 24vw, (min-width: 768px) 31vw, 64vw" />
             </StaggerItem>
           ))}
         </Stagger>

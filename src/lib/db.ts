@@ -7,7 +7,9 @@ import { PrismaClient } from "@/generated/prisma/client";
 function createClient() {
   const connectionString = process.env.DATABASE_URL;
   if (!connectionString) throw new Error("DATABASE_URL is not set");
-  const adapter = new PrismaPg({ connectionString, max: process.env.VERCEL ? 3 : 10 });
+  // small pool per serverless instance; DB_POOL_MAX=1 for the local PGlite test server
+  const max = Number(process.env.DB_POOL_MAX) || (process.env.VERCEL ? 3 : 10);
+  const adapter = new PrismaPg({ connectionString, max });
   return new PrismaClient({ adapter });
 }
 

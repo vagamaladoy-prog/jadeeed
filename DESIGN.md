@@ -131,8 +131,10 @@ Rules — **use rarely so it stays special**:
 ## 7. Motion
 
 Libraries: **Motion** (`motion/react`) for component motion, **Lenis** smooth scroll (storefront only,
-not admin, not Mini App), **React Bits** components (copied into `src/components/bits/`, recoloured
-to tokens), **Embla** for swipe.
+not admin, not Mini App; initialised on the first mouse-wheel event so it costs nothing on phones
+and during page load), **React Bits** components (copied into `src/components/bits/` and recoloured
+to tokens: *Magnet*; the letter "writing" of `BrandPhrase` is adapted from *BlurText*), **Embla** for swipe.
+Continuous effects (atlas flow, marquee, story bars) are CSS transform animations — no JS per frame.
 
 Tokens (`src/lib/motion.ts` + CSS vars):
 
@@ -157,8 +159,8 @@ Inventory:
 | Element | Motion |
 |---|---|
 | Banner | fade-in + scale 1.06→1 (1.1s); parallax 0.25 on scroll; crossfade every 5.5s; swipe; story-style progress bars |
-| "Siz o'shami?" | letter-by-letter "writing" (React Bits *SplitText*-style, 45ms/char), atlas flows down, shifts ±12px with cursor / scroll |
-| Marquee | brand phrases + ✦, ink bg, white Unbounded, 40s loop, pauses on hover |
+| "Siz o'shami?" | letter-by-letter "writing" (adapted from React Bits *BlurText*, ≤45ms/char), atlas flows down, shifts ±12px with cursor / scroll |
+| Marquee | brand phrases + ✦, ink bg, white Unbounded, 40s CSS transform loop (no JS per frame), pauses on hover |
 | Product card | stagger reveal; hover: front→back crossfade, zoom 1.04, sizes slide up |
 | Product page | gallery crossfade/slide, cursor zoom (desktop), swipe (touch); size chip spring; fly-to-cart; badge bounce; toast "Men o'sha." |
 | Catalog | `layout` animations + AnimatePresence popLayout on filter change |

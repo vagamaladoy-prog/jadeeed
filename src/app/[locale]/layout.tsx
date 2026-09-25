@@ -17,13 +17,11 @@ import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import "../globals.css";
 
 // Interface: neutral grotesque built for Cyrillic + Latin. Accent: Unbounded (see README).
-const onest = Onest({ subsets: ["latin", "latin-ext", "cyrillic"], variable: "--font-onest", display: "swap" });
-const unbounded = Unbounded({
-  subsets: ["latin", "latin-ext", "cyrillic"],
-  variable: "--font-unbounded",
-  display: "swap",
-  weight: ["300", "400", "500"],
-});
+// Both are variable fonts: one file per subset covers every weight we use (300–500).
+// Not preloaded: the banner image (LCP) gets the bandwidth first; text shows at once in a
+// metric-matched fallback and swaps; each subset loads only when its glyphs are used.
+const onest = Onest({ subsets: ["latin", "latin-ext", "cyrillic"], variable: "--font-onest", display: "swap", preload: false });
+const unbounded = Unbounded({ subsets: ["latin", "latin-ext", "cyrillic"], variable: "--font-unbounded", display: "swap", preload: false });
 
 export const revalidate = 300;
 

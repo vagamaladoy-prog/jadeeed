@@ -42,6 +42,12 @@ npm run db:seed             # тестовые данные: 12 футболок
 npm run dev                 # http://localhost:3000, админка — /admin
 ```
 
+**Без Supabase и Docker** можно поднять локальный Postgres (PGlite): `npm run db:local` в отдельном терминале, а в `.env` указать
+`DATABASE_URL` и `DIRECT_URL` = `postgresql://postgres:postgres@127.0.0.1:5433/postgres?sslmode=disable` и `DB_POOL_MAX="1"`.
+
+Проверки: `npm run selftest` (цены, акции, маска телефона, фильтры, подпись Telegram initData, текст уведомления) и
+`npm run test:order` (реальный заказ в БД: списание склада, акция −20%, отказ при нехватке, возврат склада при отмене).
+
 > В локальном `.env` Next.js подставляет переменные вида `$VAR`. Если кладёте туда bcrypt-хеш пароля, экранируйте каждый `$` как `\$` — или используйте локально обычный пароль. В Vercel экранировать не нужно.
 
 ## Переменные окружения
