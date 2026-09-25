@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "Jadeeed — futbolkalar",
+    "description": "Jadeeed — o'zbek brendi. Sokin, ishonchli, biroz sirli futbolkalar. Toshkent bo'ylab yetkazib berish.",
+    "catalogTitle": "Katalog",
+    "catalogDescription": "Jadeeed futbolkalari, oversayz, longsliv va xudilar.",
+    "cartTitle": "Savat",
+    "checkoutTitle": "Buyurtma berish",
+    "thanksTitle": "Rahmat",
+    "aboutTitle": "Brend haqida",
+    "deliveryTitle": "Yetkazib berish va to'lov",
+    "contactsTitle": "Aloqa",
+    "searchTitle": "Qidiruv",
+    "notFoundTitle": "Sahifa topilmadi"
+  },
+  "nav": {
+    "home": "Asosiy",
+    "catalog": "Katalog",
+    "search": "Qidiruv",
+    "cart": "Savat",
+    "contact": "Aloqa",
+    "about": "Brend haqida",
+    "delivery": "Yetkazib berish",
+    "contacts": "Aloqa",
+    "language": "Til",
+    "menu": "Menyu",
+    "back": "Orqaga",
+    "close": "Yopish",
+    "skipToContent": "Asosiy mazmunga o'tish",
+    "next": "Keyingisi",
+    "prev": "Oldingisi"
+  },
+  "price": {
+    "currency": "so'm",
+    "discount": "Chegirma",
+    "from": "dan"
+  },
+  "home": {
+    "new": "Yangi",
+    "newAll": "Hammasi",
+    "collections": "Kolleksiyalar",
+    "bestsellers": "Ko'p sotilganlar",
+    "about": "Brend haqida",
+    "aboutMore": "Batafsil",
+    "contacts": "Aloqa",
+    "toCatalog": "Katalogga",
+    "items": "{count, plural, one {# ta mahsulot} other {# ta mahsulot}}"
+  },
+  "product": {
+    "color": "Rang",
+    "size": "O'lcham",
+    "sizeChart": "O'lchamlar jadvali",
+    "chooseSize": "O'lchamni tanlang",
+    "addToCart": "Savatga",
+    "added": "Savatda",
+    "outOfStock": "Tugagan",
+    "lastItems": "Oxirgilari",
+    "question": "Savolingiz bormi? Yozing",
+    "description": "Tavsif",
+    "composition": "Tarkib",
+    "density": "Zichlik",
+    "densityValue": "{value} g/m²",
+    "care": "Parvarish",
+    "fit": "Bichim",
+    "similar": "O'xshash",
+    "photo": "Rasm {n}",
+    "front": "Old tomoni",
+    "back": "Orqa tomoni",
+    "new": "Yangi",
+    "bestseller": "Xit"
+  },
+  "fit": {
+    "OVERSIZE": "Oversayz",
+    "REGULAR": "Klassik",
+    "SLIM": "Slim"
+  },
+  "sizeChart": {
+    "title": "O'lchamlar jadvali",
+    "size": "O'lcham",
+    "width": "Kengligi",
+    "length": "Uzunligi",
+    "sleeve": "Yeng",
+    "unit": "sm",
+    "notFit": "O'lcham to'g'ri kelmayaptimi? Qo'llab-quvvatlashga yozing",
+    "empty": "Jadval hali qo'shilmagan"
+  },
+  "catalog": {
+    "title": "Katalog",
+    "filters": "Filtrlar",
+    "sort": "Saralash",
+    "category": "Kategoriya",
+    "all": "Hammasi",
+    "size": "O'lcham",
+    "color": "Rang",
+    "fit": "Bichim",
+    "price": "Narx",
+    "priceFrom": "dan",
+    "priceTo": "gacha",
+    "onSale": "Chegirmadagilar",
+    "apply": "Ko'rsatish",
+    "reset": "Tozalash",
+    "showMore": "Yana ko'rsatish",
+    "empty": "Hech narsa topilmadi",
+    "emptyHint": "Filtrlarni o'zgartirib ko'ring",
+    "results": "{count, plural, one {# ta} other {# ta}}",
+    "sortPopular": "Mashhur",
+    "sortNew": "Yangi",
+    "sortPriceAsc": "Arzonroq",
+    "sortPriceDesc": "Qimmatroq"
+  },
+  "search": {
+    "placeholder": "Futbolka, rang, kolleksiya",
+    "hint": "Nima qidiramiz?",
+    "empty": "Hech narsa topilmadi",
+    "popular": "Kolleksiyalar"
+  },
+  "cart": {
+    "title": "Savat",
+    "empty": "Savat bo'sh",
+    "continue": "Xaridni davom ettirish",
+    "total": "Jami",
+    "items": "{count, plural, one {# ta mahsulot} other {# ta mahsulot}}",
+    "checkout": "Buyurtma berish",
+    "remove": "O'chirish",
+    "quantity": "Soni",
+    "decrease": "Kamaytirish",
+    "increase": "Ko'paytirish",
+    "size": "O'lcham",
+    "color": "Rang",
+    "openPage": "Savat sahifasi",
+    "unavailable": "Mavjud emas",
+    "delivery": "Yetkazib berish narxi menejer bilan kelishiladi"
+  },
+  "checkout": {
+    "title": "Buyurtma berish",
+    "name": "Ism",
+    "namePlaceholder": "Ismingiz",
+    "phone": "Telefon",
+    "comment": "Izoh",
+    "commentPlaceholder": "Masalan: soat 18:00 dan keyin qo'ng'iroq qiling",
+    "optional": "ixtiyoriy",
+    "submit": "Buyurtma berish",
+    "sending": "Yuborilmoqda",
+    "shareContact": "Raqamni ulashish",
+    "summary": "Buyurtma",
+    "note": "Menejer tez orada bog'lanib, buyurtmani tasdiqlaydi.",
+    "errors": {
+      "name": "Ismingizni yozing",
+      "phone": "Telefon raqamini to'liq kiriting",
+      "empty": "Savat bo'sh",
+      "stock": "Ba'zi mahsulotlar tugab qoldi — savatni tekshiring",
+      "generic": "Xatolik yuz berdi. Qayta urinib ko'ring"
+    }
+  },
+  "thanks": {
+    "order": "Buyurtma #{number}",
+    "text": "Buyurtmangiz qabul qilindi. Menejer tez orada siz bilan bog'lanadi.",
+    "subscribe": "Kanalga obuna bo'ling",
+    "support": "Qo'llab-quvvatlash",
+    "home": "Bosh sahifa"
+  },
+  "contacts": {
+    "support": "Qo'llab-quvvatlash",
+    "supportText": "Savol, o'lcham, yetkazib berish — shu yerga yozing",
+    "channel": "Kanal",
+    "channelText": "Yangi kolleksiyalar va chegirmalar",
+    "instagram": "Instagram",
+    "instagramText": "Suratlar va obrazlar",
+    "phone": "Telefon",
+    "address": "Manzil",
+    "hours": "Ish vaqti",
+    "write": "Yozish"
+  },
+  "footer": {
+    "shop": "Do'kon",
+    "info": "Ma'lumot",
+    "rights": "© {year} Jadeeed"
+  },
+  "notFound": {
+    "text": "Bu sahifa yo'q. Balki boshqa joydadir.",
+    "home": "Bosh sahifaga"
+  },
+  "telegram": {
+    "openInTelegram": "Telegram'da ochish"
+  }
+}

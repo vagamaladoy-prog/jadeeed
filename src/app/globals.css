@@ -1,0 +1,246 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+/* mouse / trackpad devices — cursor effects only there (touch gets none) */
+@custom-variant can-hover (@media (hover: hover) and (pointer: fine));
+
+/* Tailwind theme = design tokens only. Default palette is removed so no off-brand colour can slip in. */
+@theme inline {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-white: var(--white);
+  --color-navy: var(--navy);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-on-ink: var(--line-on-ink);
+  --color-on-ink-muted: var(--on-ink-muted);
+  --color-overlay: var(--overlay);
+  --color-bar: var(--bar-bg);
+  --color-header: var(--header-bg);
+
+  --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-unbounded), var(--font-onest), ui-sans-serif, sans-serif;
+
+  --radius-*: initial;
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius: 4px;
+  --radius-pill: 999px;
+  --radius-sheet: 12px;
+
+  /* type scale (DESIGN.md §2) */
+  --text-micro: 11px;
+  --text-micro--line-height: 1;
+  --text-label: 12px;
+  --text-label--line-height: 1.4;
+  --text-label--letter-spacing: 0.1em;
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 1.45;
+  --text-body: 16px;
+  --text-body--line-height: 1.5;
+  --text-subheading: clamp(18px, 1.2vw + 13px, 20px);
+  --text-subheading--line-height: 1.35;
+  --text-heading: clamp(22px, 1.2vw + 17px, 28px);
+  --text-heading--line-height: 1.25;
+  --text-heading-lg: clamp(28px, 2vw + 20px, 40px);
+  --text-heading-lg--line-height: 1.15;
+  --text-display: clamp(36px, 4.2vw + 20px, 72px);
+  --text-display--line-height: 1;
+  --text-display-xl: clamp(44px, 8vw + 12px, 112px);
+  --text-display-xl--line-height: 0.95;
+  /* footer wordmark: "Jadeeed" spans the full viewport width */
+  --text-wordmark: 18.6vw;
+  --text-wordmark--line-height: 0.8;
+
+  --tracking-tightest: -0.04em;
+  --tracking-tighter: -0.03em;
+  --tracking-tight: -0.01em;
+  --tracking-wide: 0.1em;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-atlas-flow: atlas-flow var(--atlas-flow) linear infinite;
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-preloader-stitch: stitch 900ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+  --container-page: var(--container);
+  --spacing-tabbar: calc(var(--tabbar-h) + var(--safe-bottom));
+  --spacing-gutter: var(--gutter);
+  --spacing-section: var(--section);
+}
+
+@keyframes atlas-flow {
+  from {
+    transform: translate3d(0, calc(var(--atlas-tile-h, 960px) * -1), 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+@keyframes stitch {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  :focus-visible {
+    outline: 2px solid var(--navy);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--navy);
+    color: var(--white);
+  }
+  button,
+  [role="button"] {
+    cursor: pointer;
+  }
+  img {
+    user-select: none;
+  }
+}
+
+/* project utilities (usable with variants, e.g. lg:container-page) */
+@utility container-page {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+@utility label {
+  font-size: var(--text-label);
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+@utility phrase {
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+}
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+/* Reduced motion: kill every CSS animation/transition (Motion handles its own via MotionConfig) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* First-visit preloader (see components/layout/preloader.tsx) */
+html[data-preload] .preloader {
+  display: flex;
+  animation: preloader-out 250ms cubic-bezier(0.22, 1, 0.36, 1) 950ms forwards;
+}
+html[data-preload] body {
+  overflow: hidden;
+}
+@keyframes preloader-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-preload] .preloader {
+    display: none;
+  }
+}
+
+/* Telegram Mini App: respect Telegram's content safe area */
+html[data-tg] {
+  /* our logo strip is hidden in the Mini App (Telegram draws its own header) */
+  --topbar-h: var(--tg-content-top);
+  --safe-bottom: max(env(safe-area-inset-bottom, 0px), var(--tg-content-bottom));
+  --safe-top: max(env(safe-area-inset-top, 0px), var(--tg-content-top));
+}
+
+/* Home banner: gentle reveal (fade + scale 1.06 → 1) that runs from first paint, before JS */
+.banner-in > :first-child {
+  animation: banner-scale 1100ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.banner-veil {
+  animation: banner-veil 900ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes banner-scale {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes banner-veil {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes story-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@media (max-width: 1023px) {
+  html[data-tg] .tg-hide-mobile {
+    display: none;
+  }
+}

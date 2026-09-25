@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "Jadeeed — футболки",
+    "description": "Jadeeed — узбекский бренд. Спокойные, уверенные, немного загадочные футболки. Доставка по Ташкенту.",
+    "catalogTitle": "Каталог",
+    "catalogDescription": "Футболки Jadeeed, оверсайз, лонгсливы и худи.",
+    "cartTitle": "Корзина",
+    "checkoutTitle": "Оформление заказа",
+    "thanksTitle": "Спасибо",
+    "aboutTitle": "О бренде",
+    "deliveryTitle": "Доставка и оплата",
+    "contactsTitle": "Контакты",
+    "searchTitle": "Поиск",
+    "notFoundTitle": "Страница не найдена"
+  },
+  "nav": {
+    "home": "Главная",
+    "catalog": "Каталог",
+    "search": "Поиск",
+    "cart": "Корзина",
+    "contact": "Связь",
+    "about": "О бренде",
+    "delivery": "Доставка",
+    "contacts": "Контакты",
+    "language": "Язык",
+    "menu": "Меню",
+    "back": "Назад",
+    "close": "Закрыть",
+    "skipToContent": "Перейти к содержимому",
+    "next": "Далее",
+    "prev": "Назад"
+  },
+  "price": {
+    "currency": "сум",
+    "discount": "Скидка",
+    "from": "от"
+  },
+  "home": {
+    "new": "Новинки",
+    "newAll": "Все",
+    "collections": "Коллекции",
+    "bestsellers": "Бестселлеры",
+    "about": "О бренде",
+    "aboutMore": "Подробнее",
+    "contacts": "Связь",
+    "toCatalog": "В каталог",
+    "items": "{count, plural, one {# товар} few {# товара} many {# товаров} other {# товара}}"
+  },
+  "product": {
+    "color": "Цвет",
+    "size": "Размер",
+    "sizeChart": "Размерная сетка",
+    "chooseSize": "Выберите размер",
+    "addToCart": "В корзину",
+    "added": "В корзине",
+    "outOfStock": "Нет в наличии",
+    "lastItems": "Последние",
+    "question": "Есть вопрос? Напишите",
+    "description": "Описание",
+    "composition": "Состав",
+    "density": "Плотность",
+    "densityValue": "{value} г/м²",
+    "care": "Уход",
+    "fit": "Крой",
+    "similar": "Похожие",
+    "photo": "Фото {n}",
+    "front": "Спереди",
+    "back": "Сзади",
+    "new": "Новинка",
+    "bestseller": "Хит"
+  },
+  "fit": {
+    "OVERSIZE": "Оверсайз",
+    "REGULAR": "Классический",
+    "SLIM": "Слим"
+  },
+  "sizeChart": {
+    "title": "Размерная сетка",
+    "size": "Размер",
+    "width": "Ширина",
+    "length": "Длина",
+    "sleeve": "Рукав",
+    "unit": "см",
+    "notFit": "Размер не подходит? Напишите в поддержку",
+    "empty": "Таблица пока не добавлена"
+  },
+  "catalog": {
+    "title": "Каталог",
+    "filters": "Фильтры",
+    "sort": "Сортировка",
+    "category": "Категория",
+    "all": "Все",
+    "size": "Размер",
+    "color": "Цвет",
+    "fit": "Крой",
+    "price": "Цена",
+    "priceFrom": "от",
+    "priceTo": "до",
+    "onSale": "Со скидкой",
+    "apply": "Показать",
+    "reset": "Сбросить",
+    "showMore": "Показать ещё",
+    "empty": "Ничего не нашлось",
+    "emptyHint": "Попробуйте изменить фильтры",
+    "results": "{count, plural, one {# товар} few {# товара} many {# товаров} other {# товара}}",
+    "sortPopular": "Популярные",
+    "sortNew": "Новые",
+    "sortPriceAsc": "Дешевле",
+    "sortPriceDesc": "Дороже"
+  },
+  "search": {
+    "placeholder": "Футболка, цвет, коллекция",
+    "hint": "Что ищем?",
+    "empty": "Ничего не нашлось",
+    "popular": "Коллекции"
+  },
+  "cart": {
+    "title": "Корзина",
+    "empty": "Корзина пуста",
+    "continue": "Продолжить покупки",
+    "total": "Итого",
+    "items": "{count, plural, one {# товар} few {# товара} many {# товаров} other {# товара}}",
+    "checkout": "Оформить заказ",
+    "remove": "Удалить",
+    "quantity": "Количество",
+    "decrease": "Уменьшить",
+    "increase": "Увеличить",
+    "size": "Размер",
+    "color": "Цвет",
+    "openPage": "Страница корзины",
+    "unavailable": "Недоступно",
+    "delivery": "Стоимость доставки согласует менеджер"
+  },
+  "checkout": {
+    "title": "Оформление заказа",
+    "name": "Имя",
+    "namePlaceholder": "Ваше имя",
+    "phone": "Телефон",
+    "comment": "Комментарий",
+    "commentPlaceholder": "Например: позвонить после 18:00",
+    "optional": "необязательно",
+    "submit": "Оформить заказ",
+    "sending": "Отправляем",
+    "shareContact": "Поделиться номером",
+    "summary": "Заказ",
+    "note": "Менеджер скоро свяжется и подтвердит заказ.",
+    "errors": {
+      "name": "Напишите имя",
+      "phone": "Введите номер полностью",
+      "empty": "Корзина пуста",
+      "stock": "Некоторых товаров уже нет — проверьте корзину",
+      "generic": "Что-то пошло не так. Попробуйте ещё раз"
+    }
+  },
+  "thanks": {
+    "order": "Заказ #{number}",
+    "text": "Заказ принят. Менеджер скоро свяжется с вами.",
+    "subscribe": "Подписаться на канал",
+    "support": "Поддержка",
+    "home": "На главную"
+  },
+  "contacts": {
+    "support": "Поддержка",
+    "supportText": "Вопросы, размеры, доставка — пишите сюда",
+    "channel": "Канал",
+    "channelText": "Новые коллекции и скидки",
+    "instagram": "Instagram",
+    "instagramText": "Фото и образы",
+    "phone": "Телефон",
+    "address": "Адрес",
+    "hours": "Часы работы",
+    "write": "Написать"
+  },
+  "footer": {
+    "shop": "Магазин",
+    "info": "Информация",
+    "rights": "© {year} Jadeeed"
+  },
+  "notFound": {
+    "text": "Такой страницы нет. Возможно, она в другом месте.",
+    "home": "На главную"
+  },
+  "telegram": {
+    "openInTelegram": "Открыть в Telegram"
+  }
+}

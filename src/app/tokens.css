@@ -1,0 +1,55 @@
+/* Jadeeed design tokens — single source of truth (see DESIGN.md).
+   Components use them through Tailwind utilities generated in globals.css (@theme). */
+:root {
+  /* colour — brand */
+  --ink: #0b0b0c;
+  --paper: #f5f3ee;
+  --white: #ffffff;
+  --navy: #16224a;
+  /* colour — derived */
+  --muted: #5b5e66;
+  --line: #e4e2dc;
+  --navy-2: #2c3e7a; /* atlas pattern only */
+  --paper-2: #ece9e2;
+  --ink-2: #1a1a1c;
+  --on-ink-muted: #a9aab0;
+  --line-on-ink: rgb(255 255 255 / 0.14);
+  --overlay: rgb(11 11 12 / 0.4);
+  --bar-bg: rgb(255 255 255 / 0.86);
+  --header-bg: rgb(245 243 238 / 0.86);
+
+  /* radius: defined in globals.css @theme (--radius 4px, --radius-pill, --radius-sheet 12px) */
+
+  /* layout */
+  --container: 1440px;
+  --gutter: 16px;
+  --section: 64px;
+  --tabbar-h: 60px;
+  --topbar-h: 52px;
+  --header-h: 76px;
+  --header-h-compact: 60px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+  /* Telegram Mini App content insets (set at runtime by TelegramProvider) */
+  --tg-content-top: 0px;
+  --tg-content-bottom: 0px;
+
+  /* motion */
+  --dur-hover: 180ms;
+  --dur-in: 500ms;
+  --dur-scene: 1100ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* same literal as @theme */
+  --atlas-flow: 60s;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 24px;
+  }
+}
+@media (min-width: 1280px) {
+  :root {
+    --gutter: 48px;
+    --section: 96px;
+  }
+}
