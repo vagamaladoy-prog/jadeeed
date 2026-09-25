@@ -274,3 +274,14 @@ model LoginAttempt {
 
   @@index([ip, createdAt])
 }
+
+/// Who receives order notifications from the admin bot. Added in the admin panel by @username or
+/// numeric Telegram ID. A username gets its chatId when that person presses Start in the admin bot
+/// (a bot can't write to someone who never started it).
+model TelegramRecipient {
+  id        String   @id @default(cuid())
+  username  String?  @unique // lower-case, without @
+  chatId    BigInt?  @unique
+  name      String? // first name from Telegram, once known
+  createdAt DateTime @default(now())
+}

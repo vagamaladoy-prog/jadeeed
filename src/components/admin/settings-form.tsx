@@ -4,48 +4,12 @@ import { useRouter } from "next/navigation";
 import { useForm, type FieldPath } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { Loader2, Send } from "lucide-react";
 import { Input, Textarea } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { settingsSchema, type SettingsValues } from "@/lib/admin/schemas";
-import { saveSettings, sendTelegramTest } from "@/lib/admin/actions/settings";
-import { Field, Hint, Section } from "./ui";
+import { saveSettings } from "@/lib/admin/actions/settings";
+import { Field, Section } from "./ui";
 import { SaveBar } from "./save-bar";
 import { useUnsavedGuard } from "./use-unsaved";
-
-function TelegramTest() {
-  const [pending, startTransition] = useTransition();
-  const run = () =>
-    startTransition(async () => {
-      try {
-        const res = await sendTelegramTest();
-        if (!res.ok) {
-          toast.error("Сообщение не отправлено", { description: res.error });
-          return;
-        }
-        toast.success(`Отправлено в чатов: ${res.sent}`, {
-          description: res.errors.length ? `Ошибки: ${res.errors.join("; ")}` : undefined,
-        });
-      } catch {
-        toast.error("Нет связи с сервером");
-      }
-    });
-
-  return (
-    <Section
-      title="Уведомления в Telegram"
-      description="О каждом заказе бот пишет в чаты из TELEGRAM_ADMIN_CHAT_ID (переменные окружения на сервере)."
-    >
-      <div>
-        <Button type="button" variant="outline" size="sm" onClick={run} disabled={pending}>
-          {pending ? <Loader2 className="animate-spin" /> : <Send aria-hidden />}
-          Отправить тестовое сообщение в Telegram
-        </Button>
-        <Hint className="mt-2">Если сообщение не пришло — проверьте TELEGRAM_BOT_TOKEN и что каждый админ нажал «Start» у бота.</Hint>
-      </div>
-    </Section>
-  );
-}
 
 export function SettingsForm({ defaults }: { defaults: SettingsValues }) {
   const router = useRouter();
@@ -124,8 +88,6 @@ export function SettingsForm({ defaults }: { defaults: SettingsValues }) {
             {area("deliveryRu", "Текст (ru)", 10)}
           </div>
         </Section>
-
-        <TelegramTest />
 
         <SaveBar pending={pending} dirty={isDirty} />
       </form>

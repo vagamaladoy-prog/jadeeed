@@ -67,8 +67,9 @@ npm run dev                 # http://localhost:3000, админка — /admin
 | `ADMIN_PASSWORD` | пароль или (лучше) bcrypt-хеш | `npm run admin:hash -- "пароль"` |
 | `SESSION_SECRET` | ≥ 32 случайных символа для подписи сессии | `npm run secret` |
 | `TELEGRAM_BOT_TOKEN` | токен бота | @BotFather |
-| `TELEGRAM_ADMIN_CHAT_ID` | кому слать заказы (можно несколько через запятую) | см. ниже |
-| `TELEGRAM_WEBHOOK_SECRET` | защищает `/api/telegram/webhook` | `npm run secret` |
+| `TELEGRAM_ADMIN_BOT_TOKEN` | токен админ-бота (уведомления о заказах) | @BotFather |
+| `TELEGRAM_ADMIN_CHAT_ID` | (необязательно) дополнительные chat ID админов через запятую | @userinfobot |
+| `TELEGRAM_WEBHOOK_SECRET` | защищает webhook обоих ботов | `npm run secret` |
 
 ## Supabase
 
@@ -89,12 +90,13 @@ npm run dev                 # http://localhost:3000, админка — /admin
 2. Скопируйте токен в `TELEGRAM_BOT_TOKEN`.
 3. (Необязательно) `/setuserpic` — загрузите `public/brand/logo-light.png`.
 
-### Узнать свой chat ID
-Напишите боту **@userinfobot** — он ответит вашим ID. Впишите его в `TELEGRAM_ADMIN_CHAT_ID`; несколько админов — через запятую. **Каждый админ должен один раз нажать /start в вашем боте**, иначе Telegram не даст боту написать ему первым.
+### Два бота
+- **Клиентский** (`TELEGRAM_BOT_TOKEN`, @jadeeedrobot): приветствие, Mini App, кнопка меню «Do'kon».
+- **Админский** (`TELEGRAM_ADMIN_BOT_TOKEN`, @jadadminbot): присылает заказы. Кому — задаётся в админке: **Настройки → «Уведомления о заказах в Telegram»**, вставьте @username или числовой ID (узнать у @userinfobot). Telegram не даёт боту писать первым, поэтому каждый получатель один раз открывает админ-бота и нажимает Start — статус в админке сменится на «подключён». Кнопка «Отправить тестовое сообщение» там же.
 
 ### Что делает бот
 - Шлёт админам сообщение о каждом новом заказе (с сайта и из Mini App). Если Telegram не ответил, заказ всё равно сохраняется, клиент видит «Спасибо», ошибка пишется в лог Vercel.
-- На `/start` отвечает приветствием «Siz o'shami?» и кнопками «Do'konni ochish» (Mini App), «Qo'llab-quvvatlash», «Kanal». Другие сообщения игнорирует.
+- На `/start` каждый бот отвечает своим приветствием и двумя кнопками: открыть сайт (Mini App) и «Qo'llab-quvvatlash». Другие сообщения игнорируются.
 - Кнопка меню «Do'kon» открывает витрину прямо в Telegram (Mini App).
 
 ### Mini App

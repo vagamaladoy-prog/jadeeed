@@ -5,20 +5,40 @@ import { siteUrl } from "./site";
 
 const API = "https://api.telegram.org";
 
-function token() {
+/**
+ * Two bots:
+ *  - client bot (TELEGRAM_BOT_TOKEN): greets customers, opens the Mini App; its token signs Mini App initData;
+ *  - admin bot (TELEGRAM_ADMIN_BOT_TOKEN): sends order notifications to the shop's admins.
+ * Without an admin bot token, notifications go through the client bot (single-bot setup).
+ */
+export type Bot = "client" | "admin";
+
+function token(bot: Bot = "client") {
+  if (bot === "admin") return process.env.TELEGRAM_ADMIN_BOT_TOKEN || process.env.TELEGRAM_BOT_TOKEN || "";
   return process.env.TELEGRAM_BOT_TOKEN ?? "";
 }
 
-export function adminChatIds(): string[] {
-  return (process.env.TELEGRAM_ADMIN_CHAT_ID ?? "")
+/** Recipients from the admin panel (those with a known chat id) + optional TELEGRAM_ADMIN_CHAT_ID. */
+export async function adminChatIds(): Promise<string[]> {
+  const fromEnv = (process.env.TELEGRAM_ADMIN_CHAT_ID ?? "")
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean);
+  let fromDb: string[] = [];
+  try {
+    const { db } = await import("./db");
+    fromDb = (await db.telegramRecipient.findMany({ where: { chatId: { not: null } }, select: { chatId: true } })).map((c) =>
+      String(c.chatId),
+    );
+  } catch (e) {
+    console.error("[telegram] admin chats lookup failed", e);
+  }
+  return [...new Set([...fromEnv, ...fromDb])];
 }
 
-export async function callTelegram<T = unknown>(method: string, body: Record<string, unknown>, timeoutMs = 6000): Promise<T> {
-  if (!token()) throw new Error("TELEGRAM_BOT_TOKEN is not set");
-  const res = await fetch(`${API}/bot${token()}/${method}`, {
+export async function callTelegram<T = unknown>(method: string, body: Record<string, unknown>, timeoutMs = 6000, bot: Bot = "client"): Promise<T> {
+  if (!token(bot)) throw new Error(`Telegram ${bot} bot token is not set`);
+  const res = await fetch(`${API}/bot${token(bot)}/${method}`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(body),
@@ -34,17 +54,21 @@ const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
 
 /** Sends to every admin chat. Never throws — returns how many chats got it. */
 export async function notifyAdmins(html: string): Promise<{ sent: number; errors: string[] }> {
-  const ids = adminChatIds();
+  const ids = await adminChatIds();
   const errors: string[] = [];
   let sent = 0;
-  if (!token() || ids.length === 0) {
-    errors.push("TELEGRAM_BOT_TOKEN / TELEGRAM_ADMIN_CHAT_ID not configured");
+  if (!token("admin")) {
+    errors.push("TELEGRAM_ADMIN_BOT_TOKEN / TELEGRAM_BOT_TOKEN not configured");
+    return { sent, errors };
+  }
+  if (ids.length === 0) {
+    errors.push("Нет подключённых получателей: добавьте @username или ID в Настройках, и пусть получатель нажмёт Start в админ-боте");
     return { sent, errors };
   }
   await Promise.all(
     ids.map(async (chat_id) => {
       try {
-        await callTelegram("sendMessage", { chat_id, text: html, parse_mode: "HTML", link_preview_options: { is_disabled: true } });
+        await callTelegram("sendMessage", { chat_id, text: html, parse_mode: "HTML", link_preview_options: { is_disabled: true } }, 6000, "admin");
         sent++;
       } catch (e) {
         errors.push(`${chat_id}: ${(e as Error).message}`);
