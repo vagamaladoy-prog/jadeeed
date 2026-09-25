@@ -25,7 +25,7 @@
   --gutter: 16px;
   --section: 64px;
   --tabbar-h: 60px;
-  --topbar-h: 52px;
+  --topbar-h: 64px; /* phone logo strip (h-16) */
   --header-h: 76px;
   --header-h-compact: 60px;
   --safe-bottom: env(safe-area-inset-bottom, 0px);

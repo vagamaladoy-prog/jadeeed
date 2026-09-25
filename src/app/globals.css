@@ -221,8 +221,8 @@ html[data-preload] body {
 
 /* Telegram Mini App: respect Telegram's content safe area */
 html[data-tg] {
-  /* our logo strip is hidden in the Mini App (Telegram draws its own header) */
-  --topbar-h: var(--tg-content-top);
+  /* our logo strip stays visible in the Mini App too, below Telegram's own controls */
+  --topbar-h: calc(64px + var(--tg-content-top));
   --safe-bottom: max(env(safe-area-inset-bottom, 0px), var(--tg-content-bottom));
   --safe-top: max(env(safe-area-inset-top, 0px), var(--tg-content-top));
 }
@@ -253,10 +253,5 @@ html[data-tg] {
   }
   to {
     transform: scaleX(1);
-  }
-}
-@media (max-width: 1023px) {
-  html[data-tg] .tg-hide-mobile {
-    display: none;
   }
 }

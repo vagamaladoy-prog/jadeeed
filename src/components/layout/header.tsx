@@ -39,7 +39,8 @@ export function Header() {
   // only the desktop header lies over the banner; the phone strip is always solid (readable)
   const overBanner = desktop && pathname === "/" && atTop && bannerTone !== null;
   const tone: "light" | "dark" = overBanner && bannerTone === "DARK" ? "dark" : "light";
-  const hidden = dir === "down" && !atTop && !reduce;
+  // only the desktop header slides away on scroll; on phones the logo strip always stays visible
+  const hidden = desktop && dir === "down" && !atTop && !reduce;
   const compact = !atTop;
 
   const iconBtn = cn(
@@ -52,7 +53,7 @@ export function Header() {
       initial={false}
       animate={{ y: hidden ? "-100%" : compact && desktop ? -12 : 0 }}
       transition={T}
-      className="tg-hide-mobile fixed inset-x-0 top-0 z-40"
+      className="fixed inset-x-0 top-0 z-40 pt-(--tg-content-top) lg:pt-0"
     >
       {/* backing: fades in instead of animating background-color */}
       <motion.div
@@ -64,9 +65,9 @@ export function Header() {
       />
 
       {/* phone strip */}
-      <div className="container-page relative flex h-(--topbar-h) items-center justify-between lg:hidden">
-        <Link href="/" aria-label="Jadeeed" className="-ml-1 flex h-11 items-center px-1">
-          <Logo tone={tone} height={36} />
+      <div className="container-page relative flex h-16 items-center justify-between lg:hidden">
+        <Link href="/" aria-label="Jadeeed" className="-ml-1 flex h-14 items-center px-1">
+          <Logo tone={tone} height={50} />
         </Link>
         <LanguageSwitch tone={tone} />
       </div>
