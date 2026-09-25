@@ -35,11 +35,12 @@ export function Header() {
   const reduce = useReducedMotion();
   const bannerTone = useUi((s) => s.bannerTone);
 
-  const overBanner = pathname === "/" && atTop && bannerTone !== null;
+  const desktop = useDesktop();
+  // only the desktop header lies over the banner; the phone strip is always solid (readable)
+  const overBanner = desktop && pathname === "/" && atTop && bannerTone !== null;
   const tone: "light" | "dark" = overBanner && bannerTone === "DARK" ? "dark" : "light";
   const hidden = dir === "down" && !atTop && !reduce;
   const compact = !atTop;
-  const desktop = useDesktop();
 
   const iconBtn = cn(
     "relative grid size-11 place-items-center rounded transition-colors duration-[var(--dur-hover)]",

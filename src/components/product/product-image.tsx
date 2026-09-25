@@ -27,7 +27,7 @@ export function ProductImage({
   const svg = src.endsWith(".svg");
   return (
     <>
-      {!loaded && <AtlasPattern variant="loading" scale={0.5} />}
+      {!loaded && <AtlasPattern variant="loading" scale={0.6} />}
       <Image
         src={src}
         alt={alt}

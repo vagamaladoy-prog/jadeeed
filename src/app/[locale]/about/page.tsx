@@ -25,7 +25,7 @@ export default async function About({ params }: { params: Promise<{ locale: stri
         <PageHeader title={t("aboutTitle")} />
       </div>
       <section className="relative isolate overflow-hidden bg-ink py-20 md:py-28">
-        <AtlasPattern variant="dense" interactive scale={0.7} />
+        <AtlasPattern variant="dense" interactive />
         <div className="container-page relative flex justify-center">
           <div className="bg-ink px-6 py-8 md:px-14 md:py-12">
             <BrandPhrase text={phrases.slots.ABOUT} as="p" animate="write" className="text-display-xl tracking-tightest text-white" />

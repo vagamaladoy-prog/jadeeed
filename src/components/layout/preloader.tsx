@@ -1,7 +1,7 @@
 import { ATLAS_TILE } from "@/components/atlas/tiles";
 
 /**
- * First-visit preloader (≤ 1.2 s): an atlas strip "stitches" left→right, "Aylanib kelay..." below.
+ * First-visit preloader (≤ 1.2 s): an atlas strip "stitches" left→right, "Aylanib ketay..." below.
  * Rendered on the server but shown only when <html data-preload> is set by the inline boot
  * script (first visit in this session, not in the Telegram Mini App, motion allowed).
  * Pure CSS so it never blocks hydration or LCP.

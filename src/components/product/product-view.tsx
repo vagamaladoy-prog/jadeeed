@@ -15,7 +15,8 @@ import { cart, useCart } from "@/lib/cart-store";
 import { flyToCart, ui } from "@/lib/ui-store";
 import { formatPrice } from "@/lib/format";
 import { tr, type ProductDTO, type SizeCode } from "@/lib/types";
-import { SPRING } from "@/lib/motion";
+import { DUR, EASE_OUT, SPRING, TABBAR_H } from "@/lib/motion";
+import { useScrollDirection } from "@/hooks/use-scroll-direction";
 import { cn } from "@/lib/cn";
 
 // bottom sheets (vaul) load on first open — not needed for the first paint
@@ -50,6 +51,7 @@ export function ProductView({
   if ((sizeSheet && !sheetsUsed.size) || (chartOpen && !sheetsUsed.chart))
     setSheetsUsed({ size: sheetsUsed.size || sizeSheet, chart: sheetsUsed.chart || chartOpen });
   const items = useCart();
+  const { dir, atTop } = useScrollDirection();
   const name = tr(product.name, locale);
 
   const stockOf = (s: SizeCode) => color.stock.find((x) => x.size === s)?.qty ?? 0;
@@ -214,7 +216,7 @@ export function ProductView({
               {addButton(true)}
             </Magnet>
           </div>
-          <ExternalLink href={supportUrl} className="w-fit text-body-sm text-muted underline decoration-line underline-offset-4 hover:text-navy">
+          <ExternalLink href={supportUrl} className="flex min-h-11 w-fit items-center text-body-sm text-muted underline decoration-line underline-offset-4 hover:text-navy">
             {t("question")}
           </ExternalLink>
 
@@ -223,7 +225,12 @@ export function ProductView({
       </div>
 
       {/* phone: sticky purchase bar above the tab bar (synced with the size picker above) */}
-      <div className="fixed inset-x-0 bottom-[calc(var(--tabbar-h)+var(--safe-bottom))] z-30 border-t border-line bg-paper px-gutter py-2 lg:hidden">
+      <motion.div
+        initial={false}
+        animate={{ y: dir === "down" && !atTop ? TABBAR_H : 0 }}
+        transition={{ duration: DUR.in * 0.7, ease: EASE_OUT }}
+        className="fixed inset-x-0 bottom-[calc(var(--tabbar-h)+var(--safe-bottom))] z-30 border-t border-line bg-paper px-gutter py-2 lg:hidden"
+      >
         <div className="flex items-center gap-2">
           <div className="min-w-0 flex-1">
             <p className="truncate text-body font-medium tabular-nums">{formatPrice(product.pricing.price, locale)}</p>
@@ -242,7 +249,7 @@ export function ProductView({
           </button>
           {addButton()}
         </div>
-      </div>
+      </motion.div>
       <div className="h-16 lg:hidden" aria-hidden />
 
       {sheetsUsed.size && (

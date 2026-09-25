@@ -59,7 +59,7 @@ enum PhraseSlot {
   HOME_QUESTION // big block under the banner ("Siz o'shami?")
   ADD_TO_CART // confirmation after "add to cart" ("Men o'sha.")
   ABOUT // brand block on home + about page ("Men o'sha.")
-  WAITING // preloader, empty cart, 404, "continue shopping" ("Aylanib kelay...")
+  WAITING // preloader, empty cart, 404, "continue shopping" ("Aylanib ketay...")
   THANKS // thank-you page ("Ko'z tegmasin.")
   BADGE // badge on new / bestseller products ("Ko'z tegmasin.")
   ATLAS_BLOCK // large phrase block on atlas on home
@@ -185,7 +185,7 @@ model Promotion {
 
 model Banner {
   id           String     @id @default(cuid())
-  imageDesktop String // 2400×1000 (12:5)
+  imageDesktop String // 2400×1800 (4:3)
   imageMobile  String? // 1080×1350 (4:5)
   altUz        String // text that is inside the picture — goes to alt, never shown
   altRu        String

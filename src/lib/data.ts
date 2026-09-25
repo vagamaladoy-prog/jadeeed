@@ -22,7 +22,7 @@ export const DEFAULT_PHRASES: Record<PhraseSlotCode, string> = {
   HOME_QUESTION: "Siz o'shami?",
   ADD_TO_CART: "Men o'sha.",
   ABOUT: "Men o'sha.",
-  WAITING: "Aylanib kelay...",
+  WAITING: "Aylanib ketay...",
   THANKS: "Ko'z tegmasin.",
   BADGE: "Ko'z tegmasin.",
   ATLAS_BLOCK: "Ko'z tegmasin.",

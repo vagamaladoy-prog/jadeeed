@@ -8,10 +8,11 @@ import { useTelegram } from "@/components/telegram/telegram-provider";
 import { ui } from "@/lib/ui-store";
 import { tr, type BannerDTO } from "@/lib/types";
 import { DUR, EASE_OUT } from "@/lib/motion";
+import { cn } from "@/lib/cn";
 
 const INTERVAL = 5500;
 
-/** Art-directed <picture>: 4:5 phone image, 12:5 desktop image, AVIF/WebP via next/image. */
+/** Art-directed <picture>: 4:5 phone image, 4:3 desktop image, AVIF/WebP via next/image. */
 function BannerPicture({ banner, alt, priority }: { banner: BannerDTO; alt: string; priority: boolean }) {
   const common = { alt, fill: true, priority, fetchPriority: priority ? ("high" as const) : undefined };
   const desktop = getImageProps({ ...common, src: banner.imageDesktop, sizes: "100vw" }).props;
@@ -93,7 +94,7 @@ export function BannerCarousel({ banners }: { banners: BannerDTO[] }) {
       ref={ref}
       aria-roledescription="carousel"
       aria-label="Jadeeed"
-      className="relative aspect-4/5 w-full overflow-hidden bg-paper-2 md:aspect-12/5"
+      className="relative mt-(--topbar-h) aspect-4/5 w-full overflow-hidden bg-paper-2 md:aspect-4/3 lg:mt-0"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={(e) => (touch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY })}
@@ -131,7 +132,7 @@ export function BannerCarousel({ banners }: { banners: BannerDTO[] }) {
       <div aria-hidden className="banner-veil pointer-events-none absolute inset-0 bg-paper" />
 
       {count > 1 && (
-        <div className="absolute inset-x-0 bottom-0 z-10 flex gap-1.5 px-gutter pb-4 md:pb-6" role="tablist">
+        <div className="absolute inset-x-0 top-0 z-10 flex gap-1.5 px-gutter pt-2 lg:pt-[calc(var(--header-h)+4px)]" role="tablist">
           {banners.map((b, i) => (
             <button
               key={b.id}
@@ -142,10 +143,10 @@ export function BannerCarousel({ banners }: { banners: BannerDTO[] }) {
               onClick={() => setIndex(i)}
               className="group flex h-6 flex-1 items-center"
             >
-              <span className="relative block h-0.5 w-full overflow-hidden rounded-pill bg-white/40">
+              <span className={cn("relative block h-0.5 w-full overflow-hidden rounded-pill", current.headerTone === "LIGHT" ? "bg-ink/20" : "bg-white/40")}>
                 <span
                   key={i === index ? `${index}-${paused}` : undefined}
-                  className="absolute inset-0 origin-left rounded-pill bg-white"
+                  className={cn("absolute inset-0 origin-left rounded-pill", current.headerTone === "LIGHT" ? "bg-ink" : "bg-white")}
                   style={{
                     transform: i < index ? "scaleX(1)" : "scaleX(0)",
                     animation: i === index ? `story-progress ${INTERVAL}ms linear forwards` : undefined,

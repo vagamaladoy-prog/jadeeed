@@ -24,7 +24,7 @@ export function ThanksView({ phrase, number, channelUrl, supportUrl }: { phrase:
         animate={{ y: "0%" }}
         transition={{ duration: DUR.scene, ease: EASE_OUT }}
       >
-        <AtlasPattern variant="dense" scale={0.8} />
+        <AtlasPattern variant="dense" />
       </motion.div>
 
       <motion.div

@@ -63,7 +63,7 @@ export function BannersList({ rows }: { rows: BannerRow[] }) {
           <li key={b.id} className="flex flex-col gap-3 border-b border-line p-4 last:border-b-0 sm:flex-row sm:items-center sm:gap-4 sm:px-6">
             <div className="flex items-center gap-3">
               <span className="w-6 text-center text-body-sm text-muted">{i + 1}</span>
-              <Thumb src={b.imageDesktop} alt="" className="aspect-[12/5] w-36 shrink-0 rounded border border-line" />
+              <Thumb src={b.imageDesktop} alt="" className="aspect-4/3 w-36 shrink-0 rounded border border-line" />
               <Thumb src={b.imageMobile ?? b.imageDesktop} alt="" className="aspect-[4/5] w-12 shrink-0 rounded border border-line" />
             </div>
             <div className="min-w-0 flex-1">

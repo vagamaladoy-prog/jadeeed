@@ -2,7 +2,7 @@ import { Thumb } from "./ui";
 import { cn } from "@/lib/cn";
 
 /**
- * How the banner will look: desktop 12:5 edge-to-edge and phone 4:5 (360px mock).
+ * How the banner will look: desktop 4:3 edge-to-edge and phone 4:5 (360px mock).
  * Both use object-cover with a centred crop, exactly like the storefront.
  */
 export function BannerPreview({
@@ -23,8 +23,8 @@ export function BannerPreview({
   return (
     <div className="flex flex-col gap-6">
       <figure>
-        <figcaption className="mb-2 text-body-sm text-muted">ПК — 12:5, на всю ширину экрана</figcaption>
-        <div className="relative aspect-[12/5] w-full overflow-hidden rounded border border-line bg-paper-2">
+        <figcaption className="mb-2 text-body-sm text-muted">ПК — 4:3, на всю ширину экрана</figcaption>
+        <div className="relative aspect-4/3 w-full overflow-hidden rounded border border-line bg-paper-2">
           {desktop ? (
             <Thumb src={desktop} alt={alt} className="absolute inset-0 size-full" />
           ) : (

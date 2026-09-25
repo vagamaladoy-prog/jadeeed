@@ -19,6 +19,9 @@ const flopped = await sharp(orig).flop().toBuffer(); // mirrored left↔right
 const flipped = await sharp(orig).flip().toBuffer(); // mirrored top↕bottom
 const both = await sharp(orig).flip().flop().toBuffer();
 
+// displayed a bit larger than the source (≈ +30% vs. the first version): fewer, bigger motifs
+const DISPLAY = 800;
+
 // 2×2 seamless tile (pixel size 2w×2h, displayed at w×h CSS px → sharp on retina)
 const tile = await sharp({ create: { width: w * 2, height: h * 2, channels: 3, background: "#ffffff" } })
   .composite([
@@ -31,7 +34,7 @@ const tile = await sharp({ create: { width: w * 2, height: h * 2, channels: 3, b
   .toBuffer();
 // 2× file for high-density screens, 1× for everyone else (CSS image-set picks one)
 const tile2x = await sharp(tile).webp({ quality: 72 }).toBuffer();
-const tile1x = await sharp(tile).resize(w, h).webp({ quality: 78 }).toBuffer();
+const tile1x = await sharp(tile).resize(DISPLAY, Math.round((DISPLAY * h) / w)).webp({ quality: 78 }).toBuffer();
 writeFileSync(join(OUT, "ikat@2x.webp"), tile2x);
 writeFileSync(join(OUT, "ikat.webp"), tile1x);
 
@@ -47,7 +50,7 @@ const stripMeta = await sharp(strip).metadata();
 writeFileSync(join(OUT, "ikat-strip.webp"), strip);
 
 // display sizes in CSS px (the files are 2× for high-density screens)
-const TILE = { width: w, height: h, stripWidth: Math.round(stripMeta.width / 2), stripHeight: 16 };
+const TILE = { width: DISPLAY, height: Math.round((DISPLAY * h) / w), stripWidth: Math.round(stripMeta.width / 2), stripHeight: 16 };
 mkdirSync(join(root, "src/components/atlas"), { recursive: true });
 writeFileSync(
   join(root, "src/components/atlas/tiles.ts"),

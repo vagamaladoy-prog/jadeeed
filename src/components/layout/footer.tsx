@@ -32,11 +32,11 @@ export async function Footer({
     <footer className="relative overflow-hidden bg-ink text-white">
       {/* dense atlas band — decorative, no text on it */}
       <div className="relative h-24 md:h-32">
-        <AtlasPattern variant="dense" scale={0.6} interactive />
+        <AtlasPattern variant="dense" interactive />
       </div>
 
-      <div className="container-page grid gap-12 py-16 md:grid-cols-12 md:py-20">
-        <div className="md:col-span-5">
+      <div className="container-page grid grid-cols-2 gap-x-6 gap-y-12 py-16 md:grid-cols-12 md:py-20">
+        <div className="col-span-2 md:col-span-5">
           <p className="label text-on-ink-muted">{c("support")}</p>
           <ul className="mt-5 flex flex-col gap-1">
             {socials.map((s) => {

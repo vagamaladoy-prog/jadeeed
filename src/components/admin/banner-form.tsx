@@ -55,13 +55,13 @@ export function BannerForm({ id, defaults }: { id: string | null; defaults: Bann
             control={control}
             name="imageDesktop"
             render={({ field, fieldState }) => (
-              <Field label="Для ПК (обязательно)" error={fieldState.error?.message} hint="Рекомендуемый размер 2400×1000, пропорция 12:5">
+              <Field label="Для ПК (обязательно)" error={fieldState.error?.message} hint="Рекомендуемый размер 2400×1800, пропорция 4:3 (ширина : высота). Верхние ~15% оставьте без текста — там лежит шапка сайта">
                 <ImageUpload
                   value={field.value}
                   onChange={field.onChange}
                   folder="banners"
                   label="картинка для ПК"
-                  aspect="aspect-[12/5]"
+                  aspect="aspect-4/3"
                   invalid={!!fieldState.error}
                 />
               </Field>

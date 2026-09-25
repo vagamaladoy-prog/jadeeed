@@ -116,7 +116,7 @@ Rules — **use rarely so it stays special**:
 - ✅ banner-adjacent phrase block, section dividers, footer, thank-you page, image loading fill, plate behind brand phrases.
 - ❌ never on every card, never under body copy that must be read, never in admin.
 - Text on `dense` sits on a solid ink/paper plate or is Unbounded ≥ 32px with ≥ 4.5:1 against the darkest band.
-- The pattern **flows**: `translateY` loop over one tile height (736px) in 60s (linear, infinite), paused off-screen,
+- The pattern **flows**: `translateY` loop over one tile height (800px) in 60s (linear, infinite), paused off-screen,
   disabled under `prefers-reduced-motion`.
 
 ## 7. Motion
@@ -159,14 +159,14 @@ Inventory:
 | Tab bar | active indicator `layoutId` spring; cart icon bounce; hides on scroll down |
 | Language switch | segmented, sliding `layoutId` thumb |
 | Cart | desktop: right drawer; mobile: full-height bottom sheet, swipe down to close |
-| Preloader | first visit only, ≤ 1.2s: atlas strip "stitches" L→R (scaleX), "Aylanib kelay..." |
+| Preloader | first visit only, ≤ 1.2s: atlas strip "stitches" L→R (scaleX), "Aylanib ketay..." |
 | Thank-you | atlas rises bottom→top (translateY), then "Ko'z tegmasin." + order no. No confetti. |
 | Footer | giant "Jadeeed" wordmark rises from below when reached |
 
 ## 8. Voice
 
 Brand phrases are **always Uzbek, never translated**, stored in DB, rendered in Unbounded:
-`Siz o'shami?` · `Men o'sha.` · `Aylanib kelay...` · `Ko'z tegmasin.`
+`Siz o'shami?` · `Men o'sha.` · `Aylanib ketay...` · `Ko'z tegmasin.`
 UI copy is short, calm, no exclamation marks, no filler ("Добро пожаловать в мир стиля" is banned).
 
 ## 9. Forbidden ("AI design")

@@ -224,17 +224,17 @@ async function main() {
   await db.banner.createMany({
     data: [
       {
-        imageDesktop: "/seed/banners/jadeeed-26-1-desktop.webp",
-        imageMobile: "/seed/banners/jadeeed-26m-1-mobile.webp",
+        imageDesktop: "/seed/banners/jadeeed-43-1-desktop.webp",
+        imageMobile: "/seed/banners/jadeeed-43-1-mobile.webp",
         altUz: "Jadeeed, kuz 2026. Yangi kolleksiya. Katalogni ko'rish",
         altRu: "Jadeeed, осень 2026. Новая коллекция. Смотреть каталог",
         link: "/catalog?sort=new",
-        headerTone: "DARK",
+        headerTone: "LIGHT",
         sortOrder: 0,
       },
       {
-        imageDesktop: "/seed/banners/jadeeed-26-2-desktop.webp",
-        imageMobile: "/seed/banners/jadeeed-26m-2-mobile.webp",
+        imageDesktop: "/seed/banners/jadeeed-43-2-desktop.webp",
+        imageMobile: "/seed/banners/jadeeed-43-2-mobile.webp",
         altUz: "3 ta model −20% chegirma bilan",
         altRu: "3 модели со скидкой −20%",
         link: "/catalog?sale=1",
@@ -248,7 +248,7 @@ async function main() {
     data: [
       { text: "Siz o'shami?", slots: ["HOME_QUESTION"], sortOrder: 0 },
       { text: "Men o'sha.", slots: ["ADD_TO_CART", "ABOUT"], sortOrder: 1 },
-      { text: "Aylanib kelay...", slots: ["WAITING"], sortOrder: 2 },
+      { text: "Aylanib ketay...", slots: ["WAITING"], sortOrder: 2 },
       { text: "Ko'z tegmasin.", slots: ["THANKS", "BADGE", "ATLAS_BLOCK"], sortOrder: 3 },
     ],
   });
