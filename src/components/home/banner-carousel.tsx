@@ -13,7 +13,7 @@ const INTERVAL = 5500;
 
 /** Art-directed <picture>: 4:5 phone image, 12:5 desktop image, AVIF/WebP via next/image. */
 function BannerPicture({ banner, alt, priority }: { banner: BannerDTO; alt: string; priority: boolean }) {
-  const common = { alt, fill: true, priority, fetchPriority: priority ? ("high" as const) : undefined, quality: 80 };
+  const common = { alt, fill: true, priority, fetchPriority: priority ? ("high" as const) : undefined };
   const desktop = getImageProps({ ...common, src: banner.imageDesktop, sizes: "100vw" }).props;
   const mobile = getImageProps({ ...common, src: banner.imageMobile ?? banner.imageDesktop, sizes: "100vw" }).props;
   return (

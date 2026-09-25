@@ -1,4 +1,4 @@
-// npm run db:seed — fills an empty database with demo content.
+// npm run db:seed — fills an empty database with the Jadeeed demo catalogue (real photo shoot).
 // Safe to re-run: it wipes catalogue/orders first (never run it on production data).
 import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
@@ -7,27 +7,28 @@ import { PrismaClient, type Size } from "../src/generated/prisma/client";
 const db = new PrismaClient({ adapter: new PrismaPg({ connectionString: process.env.DIRECT_URL ?? process.env.DATABASE_URL! }) });
 
 const COLORS = {
-  black: { nameUz: "Qora", nameRu: "Чёрная", hex: "#141416" },
-  white: { nameUz: "Oq", nameRu: "Белая", hex: "#F7F6F2" },
-  navy: { nameUz: "To'q ko'k", nameRu: "Тёмно-синяя", hex: "#1C2A55" },
+  grey: { nameUz: "Kulrang", nameRu: "Серая", hex: "#8D8B8E" },
+  mocha: { nameUz: "Jigarrang", nameRu: "Коричневая", hex: "#7B5B4D" },
+  purple: { nameUz: "Binafsha", nameRu: "Фиолетовая", hex: "#8A5CA6" },
+  black: { nameUz: "Qora", nameRu: "Чёрная", hex: "#2A2A2C" },
 } as const;
 type ColorKey = keyof typeof COLORS;
 
 const SIZES: Size[] = ["S", "M", "L", "XL", "XXL"];
 
-const COMPOSITION = { uz: "100% paxta, penye", ru: "100% хлопок, пенье" };
+const COMPOSITION = { uz: "100% paxta, yuvilgan (washed) mato", ru: "100% хлопок, варёная (washed) ткань" };
 const CARE = {
-  uz: "30° da teskari holda yuving. Oqartirmang. Printni dazmollamang.",
-  ru: "Стирать при 30° наизнанку. Не отбеливать. Не гладить по принту.",
+  uz: "30° da teskari holda yuving. Oqartirmang. Printni dazmollamang. Yuvilgan mato har safar biroz boshqacha ko'rinadi — bu uning xususiyati.",
+  ru: "Стирать при 30° наизнанку. Не отбеливать. Не гладить по принту. Варёная ткань каждый раз немного другая — это её особенность.",
 };
 
 type SeedProduct = {
   slug: string;
   nameUz: string;
   nameRu: string;
-  category: "futbolkalar" | "oversayz" | "longsliv";
+  category: "futbolkalar" | "longsliv";
   fit: "OVERSIZE" | "REGULAR" | "SLIM";
-  colors: ColorKey[];
+  colors: { key: ColorKey; photos: string[] }[];
   density: number;
   descUz: string;
   descRu: string;
@@ -37,66 +38,68 @@ type SeedProduct = {
   sale?: boolean;
 };
 
+// photos: public/photos/<name>.webp (scripts/prepare-photos.mjs); first = front, second = back
 const PRODUCTS: SeedProduct[] = [
   {
-    slug: "siz-oshami", nameUz: 'Futbolka "Siz o\'shami?"', nameRu: 'Футболка "Siz o\'shami?"', category: "oversayz", fit: "OVERSIZE",
-    colors: ["black", "white"], density: 220, isNew: true, isFeatured: true,
-    descUz: "Orqasida savol. Javobni o'zingiz bilasiz.", descRu: "На спине — вопрос. Ответ вы знаете сами.",
+    slug: "men-osha",
+    nameUz: 'Futbolka "Men o\'sha"',
+    nameRu: 'Футболка "Men o\'sha"',
+    category: "futbolkalar",
+    fit: "OVERSIZE",
+    colors: [
+      { key: "mocha", photos: ["menosha-mocha-front", "menosha-mocha-back", "menosha-mocha-close", "menosha-mocha-look", "menosha-mocha-detail"] },
+      { key: "black", photos: ["menosha-black-front"] },
+    ],
+    density: 240,
+    isBestseller: true,
+    isFeatured: true,
+    descUz: "Old tomonda — javob: \"Men o'sha\". Orqada — Abdulla Qodiriy (1894–1938) xotirasiga naqsh. Keng yelka, erkin siluet.",
+    descRu: "Спереди — ответ: \"Men o'sha\". На спине — орнамент в память об Абдулле Кадыри (1894–1938). Широкое плечо, свободный силуэт.",
   },
   {
-    slug: "men-osha", nameUz: 'Futbolka "Men o\'sha"', nameRu: 'Футболка "Men o\'sha"', category: "futbolkalar", fit: "REGULAR",
-    colors: ["black", "white", "navy"], density: 200, isBestseller: true, isFeatured: true,
-    descUz: "Klassik bichim, zich paxta. Orqada — javob.", descRu: "Классический крой, плотный хлопок. На спине — ответ.",
+    slug: "siz-oshami",
+    nameUz: 'Futbolka "Siz o\'shami?"',
+    nameRu: 'Футболка "Siz o\'shami?"',
+    category: "futbolkalar",
+    fit: "OVERSIZE",
+    colors: [{ key: "purple", photos: ["sizoshami-purple-front", "sizoshami-purple-look"] }],
+    density: 240,
+    isNew: true,
+    isFeatured: true,
+    sale: true,
+    descUz: "Savol ko'krakda. Javobni o'zingiz bilasiz. Yuvilgan binafsha paxta, oversayz bichim.",
+    descRu: "Вопрос на груди. Ответ вы знаете сами. Варёный фиолетовый хлопок, крой оверсайз.",
   },
   {
-    slug: "aylanib-kelay", nameUz: 'Futbolka "Aylanib kelay"', nameRu: 'Футболка "Aylanib kelay"', category: "oversayz", fit: "OVERSIZE",
-    colors: ["white", "navy"], density: 220, isNew: true,
-    descUz: "Keng yelka, erkin siluet. Shoshilmaydiganlar uchun.", descRu: "Широкое плечо, свободный силуэт. Для тех, кто не спешит.",
+    slug: "aylanib-ketay",
+    nameUz: 'Futbolka "Aylanib ketay..."',
+    nameRu: 'Футболка "Aylanib ketay..."',
+    category: "futbolkalar",
+    fit: "OVERSIZE",
+    colors: [
+      { key: "grey", photos: ["aylanib-grey-front", "aylanib-grey-back", "aylanib-grey-close", "aylanib-grey-back-close"] },
+      { key: "mocha", photos: ["aylanib-mocha-front"] },
+      { key: "purple", photos: ["aylanib-purple-front"] },
+    ],
+    density: 240,
+    isNew: true,
+    isBestseller: true,
+    sale: true,
+    descUz: "Old tomonda — yozma harflar bilan \"Aylanib ketay...\". Orqada — \"Ko'z tegmasin\": gullar va isiriq tutuni.",
+    descRu: "Спереди — рукописное \"Aylanib ketay...\". На спине — \"Ko'z tegmasin\": цветы и дым исрыка.",
   },
   {
-    slug: "koz-tegmasin", nameUz: 'Futbolka "Ko\'z tegmasin"', nameRu: 'Футболка "Ko\'z tegmasin"', category: "futbolkalar", fit: "REGULAR",
-    colors: ["black", "white"], density: 200, isBestseller: true, isFeatured: true,
-    descUz: "Eng ko'p so'ralgan. Sokin va ishonchli.", descRu: "Самая спрашиваемая. Спокойная и уверенная.",
-  },
-  {
-    slug: "asos", nameUz: "Asos futbolka", nameRu: "Базовая футболка", category: "futbolkalar", fit: "REGULAR",
-    colors: ["black", "white", "navy"], density: 180, sale: true,
-    descUz: "Har kungi asos. Printsiz, ortiqcha narsasiz.", descRu: "База на каждый день. Без принта, без лишнего.",
-  },
-  {
-    slug: "sokin", nameUz: "Sokin futbolka", nameRu: "Футболка «Сокин»", category: "futbolkalar", fit: "SLIM",
-    colors: ["white", "navy"], density: 180,
-    descUz: "Tanaga yaqin bichim. Yengil va toza.", descRu: "Приталенный крой. Лёгкая и чистая.",
-  },
-  {
-    slug: "tun", nameUz: 'Oversayz "Tun"', nameRu: 'Оверсайз "Tun"', category: "oversayz", fit: "OVERSIZE",
-    colors: ["black", "navy"], density: 240, isNew: true,
-    descUz: "Tun rangi. Og'ir, zich mato.", descRu: "Цвет ночи. Тяжёлая плотная ткань.",
-  },
-  {
-    slug: "tong", nameUz: 'Oversayz "Tong"', nameRu: 'Оверсайз "Tong"', category: "oversayz", fit: "OVERSIZE",
-    colors: ["white"], density: 240, sale: true,
-    descUz: "Tong kabi oq. Keng va yumshoq.", descRu: "Белая, как рассвет. Свободная и мягкая.",
-  },
-  {
-    slug: "ip", nameUz: 'Longsliv "Ip"', nameRu: 'Лонгслив "Ip"', category: "longsliv", fit: "REGULAR",
-    colors: ["black", "white"], density: 210,
-    descUz: "Uzun yeng, kuz uchun.", descRu: "Длинный рукав — для осени.",
-  },
-  {
-    slug: "atlas", nameUz: 'Longsliv "Atlas"', nameRu: 'Лонгслив "Atlas"', category: "longsliv", fit: "REGULAR",
-    colors: ["navy", "black"], density: 210, isNew: true,
-    descUz: "Atlas ritmidagi sokin rang.", descRu: "Спокойный цвет в ритме атласа.",
-  },
-  {
-    slug: "jadeeed", nameUz: 'Futbolka "Jadeeed"', nameRu: 'Футболка "Jadeeed"', category: "futbolkalar", fit: "REGULAR",
-    colors: ["black", "white"], density: 200, isBestseller: true,
-    descUz: "Brend nomi orqada. Oddiy va aniq.", descRu: "Имя бренда на спине. Просто и точно.",
-  },
-  {
-    slug: "soya", nameUz: 'Slim "Soya"', nameRu: 'Слим "Soya"', category: "futbolkalar", fit: "SLIM",
-    colors: ["black", "navy"], density: 180, sale: true,
-    descUz: "Soya kabi yengil. Tanaga mos.", descRu: "Лёгкая, как тень. По фигуре.",
+    slug: "aylanib-ketay-longsliv",
+    nameUz: 'Longsliv "Aylanib ketay..."',
+    nameRu: 'Лонгслив "Aylanib ketay..."',
+    category: "longsliv",
+    fit: "REGULAR",
+    colors: [{ key: "grey", photos: ["longsliv-grey-front", "longsliv-grey-back", "longsliv-grey-side"] }],
+    density: 220,
+    isNew: true,
+    sale: true,
+    descUz: "Kuz uchun uzun yeng. Old tomonda — \"Aylanib ketay...\", orqada — \"Ko'z tegmasin\".",
+    descRu: "Длинный рукав на осень. Спереди — \"Aylanib ketay...\", на спине — \"Ko'z tegmasin\".",
   },
 ];
 
@@ -104,6 +107,7 @@ const PRODUCTS: SeedProduct[] = [
 let s = 42;
 const rnd = () => ((s = (s * 16807) % 2147483647) / 2147483647);
 const qty = () => (rnd() < 0.12 ? 0 : 2 + Math.floor(rnd() * 14));
+const photo = (name: string) => `/photos/${name}.webp`;
 
 async function main() {
   console.log("seeding…");
@@ -123,23 +127,9 @@ async function main() {
   ]);
 
   // size charts (cm)
-  const regularChart = await db.sizeChart.create({
-    data: {
-      name: "Futbolka — klassik",
-      rows: [
-        { size: "S", width: 50, length: 70, sleeve: 20 },
-        { size: "M", width: 53, length: 72, sleeve: 21 },
-        { size: "L", width: 56, length: 74, sleeve: 22 },
-        { size: "XL", width: 59, length: 76, sleeve: 23 },
-        { size: "XXL", width: 62, length: 78, sleeve: 24 },
-      ],
-      noteUz: "O'lchamlar tekis yotqizilgan mahsulotda olingan, ±1 sm.",
-      noteRu: "Замеры по изделию в разложенном виде, ±1 см.",
-    },
-  });
   const oversizeChart = await db.sizeChart.create({
     data: {
-      name: "Oversayz",
+      name: "Futbolka — oversayz",
       rows: [
         { size: "S", width: 56, length: 71, sleeve: 23 },
         { size: "M", width: 59, length: 73, sleeve: 24 },
@@ -147,38 +137,41 @@ async function main() {
         { size: "XL", width: 65, length: 77, sleeve: 26 },
         { size: "XXL", width: 68, length: 79, sleeve: 27 },
       ],
-      noteUz: "Oversayz: odatiy o'lchamingizni tanlang — keng o'tiradi.",
-      noteRu: "Оверсайз: берите свой обычный размер — сядет свободно.",
+      noteUz: "Oversayz: odatiy o'lchamingizni tanlang — keng o'tiradi. O'lchamlar tekis yotqizilgan mahsulotda, ±1 sm.",
+      noteRu: "Оверсайз: берите свой обычный размер — сядет свободно. Замеры по изделию в разложенном виде, ±1 см.",
     },
   });
   const longChart = await db.sizeChart.create({
     data: {
       name: "Longsliv",
       rows: [
-        { size: "S", width: 50, length: 70, sleeve: 62 },
-        { size: "M", width: 53, length: 72, sleeve: 63 },
-        { size: "L", width: 56, length: 74, sleeve: 64 },
-        { size: "XL", width: 59, length: 76, sleeve: 65 },
-        { size: "XXL", width: 62, length: 78, sleeve: 66 },
+        { size: "S", width: 52, length: 70, sleeve: 62 },
+        { size: "M", width: 55, length: 72, sleeve: 63 },
+        { size: "L", width: 58, length: 74, sleeve: 64 },
+        { size: "XL", width: 61, length: 76, sleeve: 65 },
+        { size: "XXL", width: 64, length: 78, sleeve: 66 },
       ],
+      noteUz: "O'lchamlar tekis yotqizilgan mahsulotda olingan, ±1 sm.",
+      noteRu: "Замеры по изделию в разложенном виде, ±1 см.",
     },
   });
 
   const categories = {
     futbolkalar: await db.category.create({
-      data: { slug: "futbolkalar", nameUz: "Futbolkalar", nameRu: "Футболки", sortOrder: 0, sizeChartId: regularChart.id,
-        descriptionUz: "Klassik va slim bichim", descriptionRu: "Классический и слим крой" },
-    }),
-    oversayz: await db.category.create({
-      data: { slug: "oversayz", nameUz: "Oversayz", nameRu: "Оверсайз", sortOrder: 1, sizeChartId: oversizeChart.id,
-        descriptionUz: "Keng yelka, erkin siluet", descriptionRu: "Широкое плечо, свободный силуэт" },
+      data: {
+        slug: "futbolkalar", nameUz: "Futbolkalar", nameRu: "Футболки", sortOrder: 0, sizeChartId: oversizeChart.id,
+        image: photo("menosha-mocha-front"),
+        descriptionUz: "Yuvilgan paxta, oversayz bichim", descriptionRu: "Варёный хлопок, крой оверсайз",
+      },
     }),
     longsliv: await db.category.create({
-      data: { slug: "longsliv", nameUz: "Longslivlar", nameRu: "Лонгсливы", sortOrder: 2, sizeChartId: longChart.id,
-        descriptionUz: "Uzun yeng", descriptionRu: "Длинный рукав" },
+      data: {
+        slug: "longsliv", nameUz: "Longslivlar", nameRu: "Лонгсливы", sortOrder: 1, sizeChartId: longChart.id,
+        image: photo("longsliv-grey-side"),
+        descriptionUz: "Uzun yeng — kuz uchun", descriptionRu: "Длинный рукав — на осень",
+      },
     }),
   };
-  await db.category.create({ data: { slug: "xudi", nameUz: "Xudilar", nameRu: "Худи", sortOrder: 3 } });
 
   const saleIds: string[] = [];
   for (const [i, p] of PRODUCTS.entries()) {
@@ -201,17 +194,12 @@ async function main() {
         isBestseller: !!p.isBestseller,
         isFeatured: !!p.isFeatured,
         sortOrder: i,
-        createdAt: new Date(Date.now() - (PRODUCTS.length - i) * 86_400_000 * (p.isNew ? 1 : 6)),
+        createdAt: new Date(Date.now() - (PRODUCTS.length - i) * 86_400_000),
         colors: {
           create: p.colors.map((c, ci) => ({
-            ...COLORS[c],
+            ...COLORS[c.key],
             sortOrder: ci,
-            images: {
-              create: [
-                { url: `/seed/products/${p.slug}-${c}-front.svg`, position: 0, width: 800, height: 1000 },
-                { url: `/seed/products/${p.slug}-${c}-back.svg`, position: 1, width: 800, height: 1000 },
-              ],
-            },
+            images: { create: c.photos.map((name, position) => ({ url: photo(name), position, width: 1200, height: 1500 })) },
             stock: { create: SIZES.map((size) => ({ size, quantity: qty() })) },
           })),
         },
@@ -236,17 +224,17 @@ async function main() {
   await db.banner.createMany({
     data: [
       {
-        imageDesktop: "/seed/banners/banner-1-desktop.webp",
-        imageMobile: "/seed/banners/banner-1-mobile.webp",
-        altUz: "Kuz 2026. Yangi kolleksiya",
-        altRu: "Осень 2026. Новая коллекция",
+        imageDesktop: "/seed/banners/jadeeed-26-1-desktop.webp",
+        imageMobile: "/seed/banners/jadeeed-26m-1-mobile.webp",
+        altUz: "Jadeeed, kuz 2026. Yangi kolleksiya. Katalogni ko'rish",
+        altRu: "Jadeeed, осень 2026. Новая коллекция. Смотреть каталог",
         link: "/catalog?sort=new",
         headerTone: "DARK",
         sortOrder: 0,
       },
       {
-        imageDesktop: "/seed/banners/banner-2-desktop.webp",
-        imageMobile: "/seed/banners/banner-2-mobile.webp",
+        imageDesktop: "/seed/banners/jadeeed-26-2-desktop.webp",
+        imageMobile: "/seed/banners/jadeeed-26m-2-mobile.webp",
         altUz: "3 ta model −20% chegirma bilan",
         altRu: "3 модели со скидкой −20%",
         link: "/catalog?sale=1",
@@ -269,9 +257,9 @@ async function main() {
     data: {
       id: 1,
       aboutUz:
-        "Jadeeed — o'zbek brendi. Biz baland ovozda gapirmaymiz: sokin rang, toza bichim, zich paxta.\n\nAtlas — bizning tilimiz. Uning to'lqinli iplari har bir kolleksiyada bor, lekin har joyda emas.\n\nFutbolkalarimiz — savol va javob. Siz o'shami? Men o'sha.",
+        "Jadeeed — o'zbek brendi. Biz baland ovozda gapirmaymiz: sokin rang, toza bichim, yuvilgan paxta.\n\nFutbolkalarimiz — savol va javob. Siz o'shami? Men o'sha.\n\nHar bir printning ortida — biz o'sgan so'zlar: \"Ko'z tegmasin\", \"Aylanib ketay\", Abdulla Qodiriy xotirasi.",
       aboutRu:
-        "Jadeeed — узбекский бренд. Мы не говорим громко: спокойный цвет, чистый крой, плотный хлопок.\n\nАтлас — наш язык. Его волнистые нити есть в каждой коллекции, но не везде.\n\nНаши футболки — вопрос и ответ. Siz o'shami? Men o'sha.",
+        "Jadeeed — узбекский бренд. Мы не говорим громко: спокойный цвет, чистый крой, варёный хлопок.\n\nНаши футболки — вопрос и ответ. Siz o'shami? Men o'sha.\n\nЗа каждым принтом — слова, с которыми мы выросли: \"Ko'z tegmasin\", \"Aylanib ketay\", память об Абдулле Кадыри.",
       deliveryUz:
         "Toshkent bo'ylab — 1–2 kun, kuryer orqali.\nViloyatlarga — 2–5 kun, pochta yoki BTS orqali.\n\nTo'lov — qabul qilganda naqd yoki kartaga o'tkazma (Click, Payme).\n\nBuyurtmadan so'ng menejer qo'ng'iroq qilib, manzil va vaqtni aniqlaydi.",
       deliveryRu:
@@ -280,7 +268,10 @@ async function main() {
   });
 
   // three demo orders in different statuses
-  const all = await db.product.findMany({ include: { colors: true }, take: 4, orderBy: { sortOrder: "asc" } });
+  const all = await db.product.findMany({
+    include: { colors: { orderBy: { sortOrder: "asc" }, include: { images: { orderBy: { position: "asc" }, take: 1 } } } },
+    orderBy: { sortOrder: "asc" },
+  });
   const item = (p: (typeof all)[number], size: Size, quantity: number) => ({
     productId: p.id,
     productName: p.nameUz,
@@ -289,14 +280,14 @@ async function main() {
     size,
     quantity,
     price: 250_000,
-    image: `/seed/products/${p.slug}-${Object.entries(COLORS).find(([, v]) => v.nameRu === p.colors[0].nameRu)?.[0]}-front.svg`,
+    image: p.colors[0].images[0]?.url ?? null,
   });
   // order numbers start at 1001
   await db.$executeRawUnsafe(`SELECT setval(pg_get_serial_sequence('"Order"', 'number'), 1000, true)`);
   const demo = [
-    { customerName: "Aziz", phone: "901234567", comment: "18:00 dan keyin qo'ng'iroq qiling", status: "NEW" as const, items: [item(all[1], "L", 1), item(all[3], "XL", 2)] },
-    { customerName: "Мадина", phone: "935550011", comment: null, status: "PROCESSING" as const, items: [item(all[0], "M", 1)], source: "TELEGRAM" as const, telegramUsername: "madina_demo", telegramId: BigInt(100000001) },
-    { customerName: "Bekzod", phone: "977771234", comment: "Chilonzor, 9-kvartal", status: "COMPLETED" as const, items: [item(all[2], "L", 1), item(all[1], "M", 1)] },
+    { customerName: "Aziz", phone: "901234567", comment: "18:00 dan keyin qo'ng'iroq qiling", status: "NEW" as const, items: [item(all[0], "L", 1), item(all[2], "XL", 2)] },
+    { customerName: "Мадина", phone: "935550011", comment: null, status: "PROCESSING" as const, items: [item(all[1], "M", 1)], source: "TELEGRAM" as const, telegramUsername: "madina_demo", telegramId: BigInt(100000001) },
+    { customerName: "Bekzod", phone: "977771234", comment: "Chilonzor, 9-kvartal", status: "COMPLETED" as const, items: [item(all[3], "L", 1), item(all[0], "M", 1)] },
   ];
   for (const [i, o] of demo.entries()) {
     const { items, ...rest } = o;

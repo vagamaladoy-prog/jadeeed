@@ -75,14 +75,9 @@ export function Header() {
         initial={false}
         animate={{ y: compact ? 6 : 0 }}
         transition={T}
-        className="container-page relative hidden h-(--header-h) items-center gap-10 lg:flex"
+        className="container-page relative hidden h-(--header-h) grid-cols-[1fr_auto_1fr] items-center gap-10 lg:grid"
       >
-        <Link href="/" aria-label="Jadeeed" className="flex h-11 items-center">
-          <motion.span initial={false} animate={{ scale: compact ? 0.84 : 1 }} transition={T} className="origin-left">
-            <Logo tone={tone} height={48} />
-          </motion.span>
-        </Link>
-        <nav aria-label={t("menu")} className="flex flex-1 items-center gap-8">
+        <nav aria-label={t("menu")} className="flex items-center gap-8">
           {NAV.map((n) => {
             const active = pathname === n.href || (n.href === "/catalog" && pathname.startsWith("/product"));
             return (
@@ -102,7 +97,13 @@ export function Header() {
             );
           })}
         </nav>
-        <div className="flex items-center gap-2">
+        {/* logo in the centre, as in editorial fashion stores */}
+        <Link href="/" aria-label="Jadeeed" className="flex h-11 items-center justify-self-center">
+          <motion.span initial={false} animate={{ scale: compact ? 0.84 : 1 }} transition={T} className="origin-center">
+            <Logo tone={tone} height={48} />
+          </motion.span>
+        </Link>
+        <div className="flex items-center justify-self-end gap-2">
           <button type="button" onClick={ui.openSearch} aria-label={t("search")} className={iconBtn}>
             <Search className="size-5" />
           </button>

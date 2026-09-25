@@ -5,8 +5,8 @@ import assert from "node:assert/strict";
 const { db } = await import("../src/lib/db.ts");
 const { placeOrder, changeOrderStatus } = await import("../src/lib/orders.ts");
 
-const sale = await db.product.findFirst({ where: { slug: "asos" }, include: { colors: { include: { stock: true } } } });
-assert(sale, "seed product 'asos' missing — run npm run db:seed");
+const sale = await db.product.findFirst({ where: { slug: "aylanib-ketay" }, include: { colors: { include: { stock: true } } } });
+assert(sale, "seed product 'aylanib-ketay' missing — run npm run db:seed");
 const color = sale.colors[0];
 const stock = color.stock.find((s) => s.quantity >= 2)!;
 console.log(`product ${sale.slug}, ${color.nameUz} ${stock.size}, stock ${stock.quantity}`);
