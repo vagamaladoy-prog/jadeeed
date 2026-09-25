@@ -1,7 +1,7 @@
 "use client";
 // Phone photos are often 5–15 MB, but a Vercel function accepts at most 4.5 MB per request.
 // Before uploading we shrink big images in the browser: long edge ≤ 2560 px, WebP ~0.86.
-// That keeps full quality for 2400×1800 banners and 4:5 product photos.
+// That keeps full quality for full-screen banners (long edge 2560) and 4:5 product photos.
 
 const MAX_EDGE = 2560;
 const TARGET_BYTES = 4 * 1024 * 1024;

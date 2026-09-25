@@ -224,17 +224,17 @@ async function main() {
   await db.banner.createMany({
     data: [
       {
-        imageDesktop: "/seed/banners/jadeeed-43-1-desktop.webp",
-        imageMobile: "/seed/banners/jadeeed-43-1-mobile.webp",
-        altUz: "Jadeeed, kuz 2026. Yangi kolleksiya. Katalogni ko'rish",
-        altRu: "Jadeeed, осень 2026. Новая коллекция. Смотреть каталог",
+        imageDesktop: "/photos/hero-bench-pair.jpg",
+        imageMobile: "/photos/hero-menosha.jpg",
+        altUz: "Jadeeed, kuz 2026: yangi kolleksiya",
+        altRu: "Jadeeed, осень 2026: новая коллекция",
         link: "/catalog?sort=new",
         headerTone: "LIGHT",
         sortOrder: 0,
       },
       {
-        imageDesktop: "/seed/banners/jadeeed-43-2-desktop.webp",
-        imageMobile: "/seed/banners/jadeeed-43-2-mobile.webp",
+        imageDesktop: "/photos/hero-bench-camera.jpg",
+        imageMobile: "/photos/hero-aylanib.jpg",
         altUz: "3 ta model −20% chegirma bilan",
         altRu: "3 модели со скидкой −20%",
         link: "/catalog?sale=1",

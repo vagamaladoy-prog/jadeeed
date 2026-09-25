@@ -12,6 +12,8 @@ const supabaseHost = (() => {
 const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
+    // 90 = full-screen home banner (must stay crisp); everything else uses the default 75
+    qualities: [75, 90],
     remotePatterns: [
       ...(supabaseHost ? [{ protocol: "https" as const, hostname: supabaseHost, pathname: "/storage/v1/object/public/**" }] : []),
       { protocol: "https", hostname: "*.supabase.co", pathname: "/storage/v1/object/public/**" },

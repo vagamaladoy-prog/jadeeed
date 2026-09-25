@@ -55,13 +55,13 @@ export function BannerForm({ id, defaults }: { id: string | null; defaults: Bann
             control={control}
             name="imageDesktop"
             render={({ field, fieldState }) => (
-              <Field label="Для ПК (обязательно)" error={fieldState.error?.message} hint="Рекомендуемый размер 2400×1800, пропорция 4:3 (ширина : высота). Верхние ~15% оставьте без текста — там лежит шапка сайта">
+              <Field label="Для ПК (обязательно)" error={fieldState.error?.message} hint="Горизонтальная, от 2400×1350 (16:9). Баннер занимает весь экран, края могут обрезаться — главное держите в центре, верх (~10%) без текста: там шапка">
                 <ImageUpload
                   value={field.value}
                   onChange={field.onChange}
                   folder="banners"
                   label="картинка для ПК"
-                  aspect="aspect-4/3"
+                  aspect="aspect-video"
                   invalid={!!fieldState.error}
                 />
               </Field>
@@ -73,10 +73,10 @@ export function BannerForm({ id, defaults }: { id: string | null; defaults: Bann
             render={({ field }) => (
               <Field
                 label="Для телефона (необязательно)"
-                hint="1080×1350, пропорция 4:5; если не загрузить — на телефоне покажется ПК-версия с обрезкой по центру"
+                hint="Вертикальная, от 1080×1920 (9:16). Если не загрузить — на телефоне покажется ПК-версия с обрезкой по центру"
               >
                 <div className="max-w-60">
-                  <ImageUpload value={field.value} onChange={field.onChange} folder="banners" label="картинка для телефона" aspect="aspect-[4/5]" />
+                  <ImageUpload value={field.value} onChange={field.onChange} folder="banners" label="картинка для телефона" aspect="aspect-9/16" />
                 </div>
               </Field>
             )}

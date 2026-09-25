@@ -88,7 +88,7 @@ export function Header() {
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "relative py-2 text-body-sm font-medium transition-colors duration-[var(--dur-hover)]",
-                  tone === "dark" ? "text-white/85 hover:text-white" : "text-muted hover:text-ink",
+                  tone === "dark" ? "text-white/85 hover:text-white" : overBanner ? "text-ink/80 hover:text-ink" : "text-muted hover:text-ink",
                   active && (tone === "dark" ? "text-white" : "text-ink"),
                 )}
               >

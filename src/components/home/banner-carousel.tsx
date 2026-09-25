@@ -8,18 +8,21 @@ import { useTelegram } from "@/components/telegram/telegram-provider";
 import { ui } from "@/lib/ui-store";
 import { tr, type BannerDTO } from "@/lib/types";
 import { DUR, EASE_OUT } from "@/lib/motion";
-import { cn } from "@/lib/cn";
 
 const INTERVAL = 5500;
 
-/** Art-directed <picture>: 4:5 phone image, 4:3 desktop image, AVIF/WebP via next/image. */
+/**
+ * Art-directed <picture>: portrait phone image, landscape desktop image (AVIF/WebP via next/image,
+ * quality 90). The banner is exactly one screen tall; the picture covers it (edges may crop).
+ */
 function BannerPicture({ banner, alt, priority }: { banner: BannerDTO; alt: string; priority: boolean }) {
-  const common = { alt, fill: true, priority, fetchPriority: priority ? ("high" as const) : undefined };
+  const common = { alt, fill: true, priority, quality: 90, fetchPriority: priority ? ("high" as const) : undefined };
   const desktop = getImageProps({ ...common, src: banner.imageDesktop, sizes: "100vw" }).props;
   const mobile = getImageProps({ ...common, src: banner.imageMobile ?? banner.imageDesktop, sizes: "100vw" }).props;
   return (
     <picture>
-      <source media="(min-width: 768px)" srcSet={desktop.srcSet} sizes="100vw" />
+      {/* landscape screens get the landscape picture, portrait screens (phones, tablets upright) the portrait one */}
+      <source media="(orientation: landscape)" srcSet={desktop.srcSet} sizes="100vw" />
       {/* eslint-disable-next-line jsx-a11y/alt-text -- alt is in props (text that is inside the picture) */}
       <img {...mobile} className="absolute inset-0 size-full object-cover object-center" />
     </picture>
@@ -94,7 +97,7 @@ export function BannerCarousel({ banners }: { banners: BannerDTO[] }) {
       ref={ref}
       aria-roledescription="carousel"
       aria-label="Jadeeed"
-      className="relative mt-(--topbar-h) aspect-4/5 w-full overflow-hidden bg-paper-2 md:aspect-4/3 lg:mt-0"
+      className="relative mt-(--topbar-h) h-[calc(100svh-var(--topbar-h))] w-full overflow-hidden bg-paper-2 lg:mt-0 lg:h-svh"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={(e) => (touch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY })}
@@ -131,8 +134,9 @@ export function BannerCarousel({ banners }: { banners: BannerDTO[] }) {
       {/* soft reveal on first paint (CSS, starts before hydration) */}
       <div aria-hidden className="banner-veil pointer-events-none absolute inset-0 bg-paper" />
 
+      {/* story bars: difference blend keeps them visible on light and dark photos alike */}
       {count > 1 && (
-        <div className="absolute inset-x-0 top-0 z-10 flex gap-1.5 px-gutter pt-2 lg:pt-[calc(var(--header-h)+4px)]" role="tablist">
+        <div className="absolute inset-x-0 top-0 z-10 flex gap-1.5 px-gutter pt-2 mix-blend-difference lg:pt-[calc(var(--header-h)+4px)]" role="tablist">
           {banners.map((b, i) => (
             <button
               key={b.id}
@@ -143,10 +147,10 @@ export function BannerCarousel({ banners }: { banners: BannerDTO[] }) {
               onClick={() => setIndex(i)}
               className="group flex h-6 flex-1 items-center"
             >
-              <span className={cn("relative block h-0.5 w-full overflow-hidden rounded-pill", current.headerTone === "LIGHT" ? "bg-ink/20" : "bg-white/40")}>
+              <span className="relative block h-0.5 w-full overflow-hidden rounded-pill bg-white/40">
                 <span
                   key={i === index ? `${index}-${paused}` : undefined}
-                  className={cn("absolute inset-0 origin-left rounded-pill", current.headerTone === "LIGHT" ? "bg-ink" : "bg-white")}
+                  className="absolute inset-0 origin-left rounded-pill bg-white"
                   style={{
                     transform: i < index ? "scaleX(1)" : "scaleX(0)",
                     animation: i === index ? `story-progress ${INTERVAL}ms linear forwards` : undefined,

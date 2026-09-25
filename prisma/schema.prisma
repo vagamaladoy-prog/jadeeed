@@ -185,8 +185,8 @@ model Promotion {
 
 model Banner {
   id           String     @id @default(cuid())
-  imageDesktop String // 2400×1800 (4:3)
-  imageMobile  String? // 1080×1350 (4:5)
+  imageDesktop String // landscape, ≥ 2400×1350 — shown full-screen (cover)
+  imageMobile  String? // portrait, ≥ 1080×1920 — shown full-screen on phones
   altUz        String // text that is inside the picture — goes to alt, never shown
   altRu        String
   link         String?
