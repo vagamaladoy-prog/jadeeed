@@ -24,6 +24,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("home");
+  const tNav = await getTranslations("nav");
 
   const [banners, products, categories, phrases, settings] = await Promise.all([
     getBanners(),
@@ -70,7 +71,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div className="container-page">
             <SectionHeading title={t("wardrobe")} eyebrow={t("wardrobeHint")} />
           </div>
-          <Wardrobe items={wardrobe} turnLabel={t("wardrobeTurn")} openLabel={t("wardrobeOpen")} />
+          <Wardrobe
+            items={wardrobe}
+            turnLabel={t("wardrobeTurn")}
+            openLabel={t("wardrobeOpen")}
+            prevLabel={tNav("prev")}
+            nextLabel={tNav("next")}
+          />
         </section>
       )}
 
