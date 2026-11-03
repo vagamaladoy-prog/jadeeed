@@ -230,7 +230,6 @@ function Shirt({
   const frontRot = useTransform(turn, [0.5, 1], [-90, 0]);
   const sideOp = useTransform(turn, [0.49, 0.5], [1, 0]);
   const frontOp = useTransform(turn, [0.5, 0.51], [0, 1]);
-  const hangerX = useTransform(turn, [0, 1], [0.12, 1]);
   const lift = useTransform(turn, [0, 0.5, 1], [1, 1.03, 1.05]);
 
   return (
@@ -250,7 +249,7 @@ function Shirt({
           animationPlayState: facing ? "paused" : undefined,
         }}
       >
-        {/* hook */}
+        {/* hook + the small triangular neck of the hanger; its base tucks into the collar */}
         <svg
           aria-hidden
           width="20"
@@ -258,30 +257,20 @@ function Shirt({
           viewBox={`0 0 20 ${HOOK}`}
           className="absolute left-1/2 top-0 -translate-x-1/2 text-ink/70"
         >
-          <path d={`M10 ${HOOK - 6} V10 a5 5 0 1 0 -5 -5`} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+          <path
+            d={`M10 ${HOOK - 13} V10 a5 5 0 1 0 -5 -5 M10 ${HOOK - 13} L3.5 ${HOOK - 3} H16.5 Z`}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
         <motion.span style={{ scale: lift }} className="absolute inset-x-0 block origin-top">
           <span
             className="absolute left-1/2 block -translate-x-1/2 [perspective:1100px]"
             style={{ top: HOOK - 6, width: frontW, height: H }}
           >
-            {/* shoulders of the hanger: seen edge-on when sideways */}
-            <motion.svg
-              aria-hidden
-              viewBox="0 0 100 12"
-              preserveAspectRatio="none"
-              style={{ scaleX: hangerX, height: H * 0.09 }}
-              className="absolute left-[21%] top-0 w-[58%] text-ink/70"
-            >
-              <path
-                d="M50 0.5 L2 11 H98 Z"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                strokeLinejoin="round"
-                vectorEffect="non-scaling-stroke"
-              />
-            </motion.svg>
             <motion.img
               src={item.side.src}
               alt=""
