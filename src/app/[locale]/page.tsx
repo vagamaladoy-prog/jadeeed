@@ -39,11 +39,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const best = products.filter((p) => p.isBestseller).slice(0, 8);
   const cats = categories.filter((c) => c.productCount > 0);
   const aboutText = tr(settings.about, locale);
-  // the rail: 5 hangers per product that has wardrobe shots (scripts/process-wardrobe.mjs)
-  const wardrobe = ["men-osha", "aylanib-ketay"].flatMap((slug) => {
+  // the rail: 2 hangers per shot pair (scripts/process-wardrobe.mjs); hoodies have no product yet → "Men o'sha"
+  const hoodie = locale === "ru" ? "Худи «Men o'sha»" : 'Xudi "Men o\'sha"';
+  const rail = [
+    { shot: "men-osha", slug: "men-osha" },
+    { shot: "aylanib-ketay", slug: "aylanib-ketay" },
+    { shot: "siz-oshami", slug: "siz-oshami" },
+    { shot: "men-osha-hoodie-black", slug: "men-osha", name: hoodie },
+    { shot: "men-osha-hoodie-grey", slug: "men-osha", name: hoodie },
+  ];
+  const wardrobe = rail.flatMap(({ shot, slug, name }) => {
     const p = products.find((x) => x.slug === slug);
-    const shots = WARDROBE_SHOTS[slug];
-    return p && shots ? Array.from({ length: 5 }, () => ({ slug, name: tr(p.name, locale), ...shots })) : [];
+    const shots = WARDROBE_SHOTS[shot];
+    return p && shots ? Array.from({ length: 2 }, () => ({ slug, name: name ?? tr(p.name, locale), ...shots })) : [];
   });
 
   return (

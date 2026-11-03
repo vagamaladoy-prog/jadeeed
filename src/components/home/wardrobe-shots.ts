@@ -21,5 +21,35 @@ export const WARDROBE_SHOTS: Record<string, { front: WardrobeShot; side: Wardrob
       "src": "/wardrobe/men-osha-side.webp",
       "ratio": 0.408
     }
+  },
+  "men-osha-hoodie-black": {
+    "front": {
+      "src": "/wardrobe/men-osha-hoodie-black-front.webp",
+      "ratio": 0.931
+    },
+    "side": {
+      "src": "/wardrobe/men-osha-hoodie-black-side.webp",
+      "ratio": 0.397
+    }
+  },
+  "men-osha-hoodie-grey": {
+    "front": {
+      "src": "/wardrobe/men-osha-hoodie-grey-front.webp",
+      "ratio": 0.883
+    },
+    "side": {
+      "src": "/wardrobe/men-osha-hoodie-grey-side.webp",
+      "ratio": 0.397
+    }
+  },
+  "siz-oshami": {
+    "front": {
+      "src": "/wardrobe/siz-oshami-front.webp",
+      "ratio": 0.953
+    },
+    "side": {
+      "src": "/wardrobe/siz-oshami-side.webp",
+      "ratio": 0.428
+    }
   }
 };
