@@ -44,6 +44,10 @@
     "aboutMore": "Batafsil",
     "contacts": "Aloqa",
     "toCatalog": "Katalogga",
+    "wardrobe": "Garderob",
+    "wardrobeHint": "Bosing — futbolka sizga buriladi. Yana bosing — ochiladi.",
+    "wardrobeTurn": "o'girish",
+    "wardrobeOpen": "ochish",
     "items": "{count, plural, one {# ta mahsulot} other {# ta mahsulot}}"
   },
   "product": {

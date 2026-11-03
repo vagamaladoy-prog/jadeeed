@@ -247,6 +247,25 @@ html[data-tg] {
     opacity: 0;
   }
 }
+/* Home wardrobe (components/home/wardrobe.tsx) */
+.wardrobe-metal {
+  background: linear-gradient(180deg, #d9d9dc 0%, #8e9096 45%, #c9cacd 70%, #6f7177 100%);
+}
+.wardrobe-metal-v {
+  background: linear-gradient(90deg, #8e9096 0%, #e2e2e5 40%, #6f7177 100%);
+}
+.wardrobe-sway {
+  animation: wardrobe-sway 5.5s ease-in-out infinite alternate;
+}
+@keyframes wardrobe-sway {
+  from {
+    transform: rotate(-0.8deg);
+  }
+  to {
+    transform: rotate(0.8deg);
+  }
+}
+
 @keyframes story-progress {
   from {
     transform: scaleX(0);

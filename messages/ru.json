@@ -44,6 +44,10 @@
     "aboutMore": "Подробнее",
     "contacts": "Связь",
     "toCatalog": "В каталог",
+    "wardrobe": "Гардероб",
+    "wardrobeHint": "Нажмите — футболка повернётся к вам. Ещё раз — откроется.",
+    "wardrobeTurn": "повернуть",
+    "wardrobeOpen": "открыть",
     "items": "{count, plural, one {# товар} few {# товара} many {# товаров} other {# товара}}"
   },
   "product": {

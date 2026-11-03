@@ -10,6 +10,7 @@ import { ProductRail } from "@/components/home/product-rail";
 import { Collections } from "@/components/home/collections";
 import { AtlasPhraseBlock } from "@/components/home/atlas-phrase-block";
 import { AboutBlock } from "@/components/home/about-block";
+import { Wardrobe } from "@/components/home/wardrobe";
 import { AtlasStrip } from "@/components/atlas/atlas-pattern";
 import { ProductGrid } from "@/components/catalog/product-grid";
 import { ContactList } from "@/components/contact/contact-list";
@@ -36,6 +37,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const best = products.filter((p) => p.isBestseller).slice(0, 8);
   const cats = categories.filter((c) => c.productCount > 0);
   const aboutText = tr(settings.about, locale);
+  // test rail: one shot pair (public/wardrobe/test-*) on every hanger, linked to real products in turn
+  const wardrobe = Array.from({ length: products.length ? 10 : 0 }, (_, i) => {
+    const p = products[i % products.length];
+    return { slug: p.slug, name: tr(p.name, locale), front: "/wardrobe/test-front.webp", side: "/wardrobe/test-side.webp" };
+  });
 
   return (
     <>
@@ -56,6 +62,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div className="lg:container-page">
             <ProductRail products={fresh} badgePhrase={phrases.slots.BADGE} />
           </div>
+        </section>
+      )}
+
+      {wardrobe.length > 0 && (
+        <section className="overflow-hidden py-section">
+          <div className="container-page">
+            <SectionHeading title={t("wardrobe")} eyebrow={t("wardrobeHint")} />
+          </div>
+          <Wardrobe items={wardrobe} turnLabel={t("wardrobeTurn")} openLabel={t("wardrobeOpen")} />
         </section>
       )}
 
