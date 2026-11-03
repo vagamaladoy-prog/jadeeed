@@ -6,17 +6,17 @@ import { useMedia } from "@/hooks/use-media";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { EASE_OUT } from "@/lib/motion";
 import { cn } from "@/lib/cn";
+import type { WardrobeShot } from "./wardrobe-shots";
 
+// cut-out shots (scripts/process-wardrobe.mjs) are trimmed to the same height;
+// side shots face left (chest on the left), so the turn brings the left edge towards you
 export type WardrobeItem = {
   slug: string;
   name: string;
-  front: string;
-  side: string;
+  front: WardrobeShot;
+  side: WardrobeShot;
 };
 
-// cut-out shots (scripts/process-wardrobe.mjs) are trimmed to the same height; width / height:
-const FRONT_RATIO = 851 / 1000;
-const SIDE_RATIO = 397 / 1000;
 const HOOK = 34; // rail → hanger shoulders
 const TURN_S = 0.9;
 
@@ -47,8 +47,9 @@ export function Wardrobe({
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const H = md ? 300 : 200; // shirt height
-  const frontW = Math.round(H * FRONT_RATIO);
-  const sideW = Math.round(H * SIDE_RATIO);
+  // the rail is laid out for the widest shots
+  const frontW = Math.round(H * Math.max(...items.map((it) => it.front.ratio)));
+  const sideW = Math.round(H * Math.max(...items.map((it) => it.side.ratio)));
   const gap = md ? 72 : 40;
   const step = sideW + gap; // distance between hangers when sideways
   const extra = Math.max(0, frontW - step + gap); // extra room the facing shirt needs
@@ -148,8 +149,8 @@ export function Wardrobe({
                     index={i}
                     facing={i === active}
                     H={H}
-                    frontW={frontW}
-                    sideW={sideW}
+                    frontW={Math.round(H * item.front.ratio)}
+                    sideW={Math.round(H * item.side.ratio)}
                     reduce={!!reduce}
                     label={i === active ? `${item.name} — ${openLabel}` : `${item.name} — ${turnLabel}`}
                     onPress={() => (i === active ? router.push(`/product/${item.slug}`) : setActive(i))}
@@ -215,7 +216,7 @@ function Shirt({
   label: string;
   onPress: () => void;
 }) {
-  // 0 = sideways, 1 = facing; side photo turns 0 → -90°, then the front photo comes in from 90° → 0
+  // 0 = sideways, 1 = facing; side photo turns 0 → 90°, then the front photo comes in from -90° → 0
   const turn = useMotionValue(facing ? 1 : 0);
   useEffect(() => {
     const c = animate(turn, facing ? 1 : 0, {
@@ -225,8 +226,8 @@ function Shirt({
     return () => c.stop();
   }, [facing, reduce, turn]);
 
-  const sideRot = useTransform(turn, [0, 0.5], [0, -90]);
-  const frontRot = useTransform(turn, [0.5, 1], [90, 0]);
+  const sideRot = useTransform(turn, [0, 0.5], [0, 90]);
+  const frontRot = useTransform(turn, [0.5, 1], [-90, 0]);
   const sideOp = useTransform(turn, [0.49, 0.5], [1, 0]);
   const frontOp = useTransform(turn, [0.5, 0.51], [0, 1]);
   const hangerX = useTransform(turn, [0, 1], [0.12, 1]);
@@ -282,7 +283,7 @@ function Shirt({
               />
             </motion.svg>
             <motion.img
-              src={item.side}
+              src={item.side.src}
               alt=""
               draggable={false}
               decoding="async"
@@ -296,7 +297,7 @@ function Shirt({
               className="absolute left-1/2 top-0 max-w-none -translate-x-1/2 drop-shadow-[0_10px_14px_rgb(11_11_12/0.18)] transition-[filter] duration-[var(--dur-hover)] can-hover:group-hover:brightness-[1.04]"
             />
             <motion.img
-              src={item.front}
+              src={item.front.src}
               alt=""
               draggable={false}
               decoding="async"

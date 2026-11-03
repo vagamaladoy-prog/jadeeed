@@ -1,10 +1,11 @@
-// Cuts the wardrobe t-shirt shots (front + side) out of their grey studio background and
+// Cuts the wardrobe t-shirt shots (front + side) out of their plain studio background and
 // normalises them to the same height so the "turn" animation swaps them without a jump.
 //   node scripts/process-wardrobe.mjs
-// in:  assets/wardrobe/<name>-front.png, <name>-side.png
-// out: public/wardrobe/<name>-front.webp, <name>-side.webp (transparent, trimmed, 2× for retina)
+// in:  assets/wardrobe/<slug>-front.(png|jpg|webp), <slug>-side.*   (<slug> = product slug)
+// out: public/wardrobe/<slug>-front.webp, <slug>-side.webp (transparent, trimmed, 2× for retina)
+//      src/components/home/wardrobe-shots.ts (sizes, used for layout)
 import sharp from "sharp";
-import { mkdirSync, readdirSync } from "node:fs";
+import { mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -12,6 +13,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SRC = join(root, "assets/wardrobe");
 const OUT = join(root, "public/wardrobe");
 const HEIGHT = 1000; // output shirt height in px (displayed ≤ 500 CSS px)
+const TOL = 16; // how far (in luminance) a pixel may differ from the background and still count as background
 mkdirSync(OUT, { recursive: true });
 
 async function cutOut(file) {
@@ -20,7 +22,7 @@ async function cutOut(file) {
   const lum = new Float32Array(W * H);
   for (let i = 0; i < W * H; i++) lum[i] = 0.2126 * data[i * 3] + 0.7152 * data[i * 3 + 1] + 0.0722 * data[i * 3 + 2];
 
-  // background luminance per row = median of the 6 outermost pixels on each side (vertical gradient)
+  // background luminance per row = median of the 6 outermost pixels on each side (handles vertical gradients)
   const bgRow = new Float32Array(H);
   for (let y = 0; y < H; y++) {
     const s = [];
@@ -28,13 +30,14 @@ async function cutOut(file) {
     s.sort((a, b) => a - b);
     bgRow[y] = s[s.length >> 1];
   }
-  const isBgLike = (i) => lum[i] <= bgRow[(i / W) | 0] + 16;
+  // works for light shirts on grey and dark shirts on white alike
+  const diff = (i) => Math.abs(lum[i] - bgRow[(i / W) | 0]);
 
   // flood fill from the borders through background-like pixels
   const bg = new Uint8Array(W * H);
   const stack = [];
   const push = (i) => {
-    if (!bg[i] && isBgLike(i)) {
+    if (!bg[i] && diff(i) <= TOL) {
       bg[i] = 1;
       stack.push(i);
     }
@@ -50,15 +53,14 @@ async function cutOut(file) {
     if (y < H - 1) push(i + W);
   }
 
-  // alpha: shirt = 255, background = 0; soft 1px edge from luminance contrast
+  // alpha: shirt = 255, background = 0; soft 1px edge from contrast with the background
   const rgba = Buffer.alloc(W * H * 4);
   for (let i = 0; i < W * H; i++) {
     let a = bg[i] ? 0 : 255;
     if (bg[i]) {
-      // background pixel touching the shirt: partial alpha by how much brighter than the bg it is
       const x = i % W, y = (i / W) | 0;
       const nearShirt = (x > 0 && !bg[i - 1]) || (x < W - 1 && !bg[i + 1]) || (y > 0 && !bg[i - W]) || (y < H - 1 && !bg[i + W]);
-      if (nearShirt) a = Math.max(0, Math.min(255, ((lum[i] - bgRow[y]) / 16) * 255));
+      if (nearShirt) a = Math.max(0, Math.min(255, (diff(i) / TOL) * 255));
     }
     rgba[i * 4] = data[i * 3];
     rgba[i * 4 + 1] = data[i * 3 + 1];
@@ -68,18 +70,30 @@ async function cutOut(file) {
   return sharp(rgba, { raw: { width: W, height: H, channels: 4 } }).png().toBuffer();
 }
 
-const names = [...new Set(readdirSync(SRC).map((f) => f.replace(/-(front|side)\.(png|jpe?g|webp)$/i, "")))];
-for (const name of names) {
+const files = readdirSync(SRC);
+const slugs = [...new Set(files.map((f) => f.replace(/-(front|side)\.(png|jpe?g|webp)$/i, "")))].sort();
+const shots = {};
+for (const slug of slugs) {
   for (const view of ["front", "side"]) {
-    const file = readdirSync(SRC).find((f) => f.startsWith(`${name}-${view}.`));
-    if (!file) continue;
+    const file = files.find((f) => f.startsWith(`${slug}-${view}.`));
+    if (!file) throw new Error(`missing ${slug}-${view}`);
     const cut = await cutOut(join(SRC, file));
     const trimmed = await sharp(cut).trim({ threshold: 1 }).toBuffer();
     const out = await sharp(trimmed)
       .resize({ height: HEIGHT, kernel: "lanczos3" })
       .webp({ quality: 88, alphaQuality: 90 })
       .toBuffer({ resolveWithObject: true });
-    await sharp(out.data).toFile(join(OUT, `${name}-${view}.webp`));
-    console.log(`${name}-${view}: ${out.info.width}×${out.info.height}, ${(out.data.length / 1024).toFixed(0)} KB`);
+    await sharp(out.data).toFile(join(OUT, `${slug}-${view}.webp`));
+    (shots[slug] ??= {})[view] = { src: `/wardrobe/${slug}-${view}.webp`, ratio: +(out.info.width / out.info.height).toFixed(4) };
+    console.log(`${slug}-${view}: ${out.info.width}×${out.info.height}, ${(out.data.length / 1024).toFixed(0)} KB`);
   }
 }
+
+writeFileSync(
+  join(root, "src/components/home/wardrobe-shots.ts"),
+  `// generated by scripts/process-wardrobe.mjs — do not edit
+export type WardrobeShot = { src: string; ratio: number }; // ratio = width / height
+
+export const WARDROBE_SHOTS: Record<string, { front: WardrobeShot; side: WardrobeShot }> = ${JSON.stringify(shots, null, 2)};
+`,
+);
