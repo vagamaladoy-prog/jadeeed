@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { useUrlParam } from "@/hooks/use-url-param";
 import { AnimatePresence, motion } from "motion/react";
-import { Ruler } from "lucide-react";
+import { PersonStanding, Ruler } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { ProductGallery } from "./product-gallery";
 import { Price } from "./price";
@@ -22,6 +22,7 @@ import { cn } from "@/lib/cn";
 // bottom sheets (vaul) load on first open — not needed for the first paint
 const Sheet = dynamic(() => import("@/components/ui/sheet").then((m) => m.Sheet), { ssr: false });
 const SizeChartSheet = dynamic(() => import("./size-chart-sheet").then((m) => m.SizeChartSheet), { ssr: false });
+const FitSheet = dynamic(() => import("./fit-sheet").then((m) => m.FitSheet), { ssr: false });
 
 export function ProductView({
   product,
@@ -35,6 +36,7 @@ export function ProductView({
   supportUrl: string;
 }) {
   const t = useTranslations("product");
+  const tFit = useTranslations("fitting");
   const locale = useLocale();
   const { haptic } = useTelegram();
   // ?color=… from a catalogue card (read on the client so the page stays static)
@@ -47,9 +49,10 @@ export function ProductView({
   const [chartOpen, setChartOpen] = useState(false);
   const [sizeSheet, setSizeSheet] = useState(false);
   // mount a sheet the first time it opens, keep it mounted so it can animate closed
-  const [sheetsUsed, setSheetsUsed] = useState({ size: false, chart: false });
-  if ((sizeSheet && !sheetsUsed.size) || (chartOpen && !sheetsUsed.chart))
-    setSheetsUsed({ size: sheetsUsed.size || sizeSheet, chart: sheetsUsed.chart || chartOpen });
+  const [fitOpen, setFitOpen] = useState(false);
+  const [sheetsUsed, setSheetsUsed] = useState({ size: false, chart: false, fit: false });
+  if ((sizeSheet && !sheetsUsed.size) || (chartOpen && !sheetsUsed.chart) || (fitOpen && !sheetsUsed.fit))
+    setSheetsUsed({ size: sheetsUsed.size || sizeSheet, chart: sheetsUsed.chart || chartOpen, fit: sheetsUsed.fit || fitOpen });
   const items = useCart();
   const { dir, atTop } = useScrollDirection();
   const name = tr(product.name, locale);
@@ -125,6 +128,16 @@ export function ProductView({
     </div>
   );
 
+  const fitButton = (
+    <button
+      type="button"
+      onClick={() => setFitOpen(true)}
+      className="flex min-h-11 w-fit items-center gap-2 text-body-sm text-navy underline underline-offset-4"
+    >
+      <PersonStanding className="size-4" /> {tFit("open")}
+    </button>
+  );
+
   const addButton = (full?: boolean) => (
     <Button
       size="lg"
@@ -195,6 +208,7 @@ export function ProductView({
               </button>
             </div>
             {sizeChips()}
+            <div className="mt-2">{fitButton}</div>
             <AnimatePresence>
               {needSize && (
                 <motion.p
@@ -256,15 +270,31 @@ export function ProductView({
         <Sheet open={sizeSheet} onOpenChange={setSizeSheet} title={t("chooseSize")}>
           <div className="flex flex-col gap-6 pb-2">
             {sizeChips(true)}
-            <button type="button" onClick={() => setChartOpen(true)} className="flex min-h-11 w-fit items-center gap-2 text-body-sm text-navy underline underline-offset-4">
-              <Ruler className="size-4" /> {t("sizeChart")}
-            </button>
+            <div className="flex flex-col">
+              {fitButton}
+              <button type="button" onClick={() => setChartOpen(true)} className="flex min-h-11 w-fit items-center gap-2 text-body-sm text-navy underline underline-offset-4">
+                <Ruler className="size-4" /> {t("sizeChart")}
+              </button>
+            </div>
             {addButton(true)}
           </div>
         </Sheet>
       )}
       {sheetsUsed.chart && (
         <SizeChartSheet open={chartOpen} onOpenChange={setChartOpen} chart={product.sizeChart} supportUrl={supportUrl} highlight={size} />
+      )}
+      {sheetsUsed.fit && (
+        <FitSheet
+          open={fitOpen}
+          onOpenChange={setFitOpen}
+          fit={product.fit}
+          chart={product.sizeChart}
+          stock={color.stock}
+          onPick={(s) => {
+            pickSize(s);
+            setFitOpen(false);
+          }}
+        />
       )}
     </>
   );

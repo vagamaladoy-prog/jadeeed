@@ -78,6 +78,31 @@
     "REGULAR": "Klassik",
     "SLIM": "Slim"
   },
+  "fitting": {
+    "open": "Fitting — o'lcham tanlash",
+    "title": "Fitting",
+    "height": "Bo'y",
+    "weight": "Vazn",
+    "shoulders": "Kenglik",
+    "shouldersHint": "yelkadan yelkagacha",
+    "cm": "sm",
+    "kg": "kg",
+    "result": "Taxminiy o'lchamingiz",
+    "between": "{small} tanaga yaqinroq, {large} kengroq turadi",
+    "below": "Eng kichik o'lcham ham mo'ljaldagidan kengroq turadi",
+    "above": "Eng katta o'lcham ham mo'ljaldagidan torroq turadi",
+    "tryOn": "O'lchamni kiyib ko'rish",
+    "verdict": {
+      "tight": "Tor bo'ladi",
+      "snug": "Tanaga yaqinroq",
+      "ideal": "Mo'ljaldagidek",
+      "loose": "Kengroq",
+      "tooLoose": "Juda keng"
+    },
+    "pick": "{size} o'lchamni tanlash",
+    "soldOut": "{size} o'lcham tugagan",
+    "disclaimer": "Bo'y, vazn, kenglik va shu model o'lchamlari bo'yicha taxminiy hisob."
+  },
   "sizeChart": {
     "title": "O'lchamlar jadvali",
     "size": "O'lcham",
