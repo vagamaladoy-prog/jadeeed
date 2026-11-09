@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { animate, motion, useMotionValue, useReducedMotion, useTransform } from "motion/react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { animate, motion, useMotionValue, useReducedMotion, useTransform, useVelocity } from "motion/react";
 import { useRouter } from "@/i18n/navigation";
 import { useMedia } from "@/hooks/use-media";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -18,13 +18,15 @@ export type WardrobeItem = {
 };
 
 const HOOK = 34; // rail → hanger shoulders
-const TURN_S = 0.9;
+const TURN_S = 0.55; // quick, but eased — the shirt never snaps
+const SLIDE_S = 0.6; // neighbours making room
+const MAX_BLUR = 3; // px, at full speed
 
 /**
  * A clothes rail with shirts hanging sideways, like in a real shop.
  * 1st tap: the shirt turns to face you (two photos — side, then front — on a rotateY "card" turn);
  * 2nd tap on the facing shirt: opens its product page. Tap elsewhere / Esc: it turns back.
- * Neighbours slide apart with transforms only (no layout animation).
+ * Neighbours slide apart with transforms only (no layout animation), motion-blurred while moving.
  */
 export function Wardrobe({
   items,
@@ -50,7 +52,7 @@ export function Wardrobe({
   // the rail is laid out for the widest shots
   const frontW = Math.round(H * Math.max(...items.map((it) => it.front.ratio)));
   const sideW = Math.round(H * Math.max(...items.map((it) => it.side.ratio)));
-  const gap = md ? 72 : 40;
+  const gap = md ? 14 : 8; // packed close, like on a real rail
   const step = sideW + gap; // distance between hangers when sideways
   const extra = Math.max(0, frontW - step + gap); // extra room the facing shirt needs
   const pad = Math.round(sideW / 2) + (md ? 16 : 8); // rail end → first hanger (plus extra / 2)
@@ -133,17 +135,7 @@ export function Wardrobe({
               const base = pad + extra / 2 + i * step + step / 2;
               const shift = active === null || i === active ? 0 : i < active ? -extra / 2 : extra / 2;
               return (
-                <motion.div
-                  key={i}
-                  className="absolute top-2"
-                  style={{ left: base, zIndex: i === active ? 100 : 10 + i }}
-                  initial={false}
-                  animate={{ x: shift }}
-                  transition={{
-                    duration: reduce ? 0 : TURN_S * 0.8,
-                    ease: EASE_OUT,
-                  }}
-                >
+                <Slot key={i} left={base} shift={shift} zIndex={i === active ? 100 : 10 + i} reduce={!!reduce}>
                   <Shirt
                     item={item}
                     index={i}
@@ -155,7 +147,7 @@ export function Wardrobe({
                     label={i === active ? `${item.name} — ${openLabel}` : `${item.name} — ${turnLabel}`}
                     onPress={() => (i === active ? router.push(`/product/${item.slug}`) : setActive(i))}
                   />
-                </motion.div>
+                </Slot>
               );
             })}
           </div>
@@ -195,6 +187,37 @@ export function Wardrobe({
   );
 }
 
+/** A hanger's place on the rail: slides to make room, motion-blurred by its own speed. */
+function Slot({
+  left,
+  shift,
+  zIndex,
+  reduce,
+  children,
+}: {
+  left: number;
+  shift: number;
+  zIndex: number;
+  reduce: boolean;
+  children: ReactNode;
+}) {
+  const x = useMotionValue(shift);
+  useEffect(() => {
+    const c = animate(x, shift, { duration: reduce ? 0 : SLIDE_S, ease: EASE_OUT });
+    return () => c.stop();
+  }, [shift, reduce, x]);
+  const speed = useVelocity(x); // px/s
+  const filter = useTransform(speed, (v) => {
+    const blur = Math.min(Math.abs(v) / 300, MAX_BLUR);
+    return blur < 0.2 ? "none" : `blur(${blur.toFixed(1)}px)`;
+  });
+  return (
+    <motion.div className="absolute top-2" style={{ left, zIndex, x, filter }}>
+      {children}
+    </motion.div>
+  );
+}
+
 function Shirt({
   item,
   index,
@@ -231,6 +254,9 @@ function Shirt({
   const sideOp = useTransform(turn, [0.49, 0.5], [1, 0]);
   const frontOp = useTransform(turn, [0.5, 0.51], [0, 1]);
   const lift = useTransform(turn, [0, 0.5, 1], [1, 1.03, 1.05]);
+  // blurred while it spins, sharpest at rest (edge-on at 0.5, where the photos swap)
+  const spinBlur = useTransform(turn, [0, 0.15, 0.5, 0.85, 1], [0, 1.2, 2.5, 1.2, 0], { clamp: true });
+  const filter = useTransform(spinBlur, (b) => (b < 0.2 ? "none" : `blur(${b.toFixed(1)}px)`));
 
   return (
     <button
@@ -266,7 +292,7 @@ function Shirt({
             strokeLinejoin="round"
           />
         </svg>
-        <motion.span style={{ scale: lift }} className="absolute inset-x-0 block origin-top">
+        <motion.span style={{ scale: lift, filter }} className="absolute inset-x-0 block origin-top">
           <span
             className="absolute left-1/2 block -translate-x-1/2 [perspective:1100px]"
             style={{ top: HOOK - 6, width: frontW, height: H }}
