@@ -321,9 +321,9 @@ function breeze(index: number): CSSProperties {
     h = Math.imul(h ^ (h >>> 13), 3266489909) >>> 0;
     return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
   };
-  const duration = 6 + rand() * 5; // 6–11 s
+  const duration = 3.5 + rand() * 2.5; // 3.5–6 s
   return {
-    ["--sway" as string]: `${(1.3 + rand() * 1).toFixed(2)}deg`, // 1.3–2.3°
+    ["--sway" as string]: `${(1.9 + rand() * 0.6).toFixed(2)}deg`, // ~2° (1.9–2.5°)
     animationDuration: `${duration.toFixed(2)}s`,
     animationDelay: `${(-rand() * duration).toFixed(2)}s`,
     animationDirection: rand() < 0.5 ? "normal" : "reverse",
@@ -381,7 +381,7 @@ function Shirt({
     >
       {/* sways on its hook in a light breeze — sideways and while facing you */}
       <span
-        className="wardrobe-sway absolute inset-0 block origin-top"
+        className="wardrobe-sway pointer-events-none absolute inset-0 block origin-top"
         style={breeze(index)}
       >
         {/* grey steel hook; its stem runs down into the wooden neck */}
