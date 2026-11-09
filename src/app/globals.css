@@ -254,15 +254,34 @@ html[data-tg] {
 .wardrobe-metal-v {
   background: linear-gradient(90deg, #8e9096 0%, #e2e2e5 40%, #6f7177 100%);
 }
+/* light breeze: an uneven swing, amplitude / tempo / phase set per hanger (--sway, duration, delay) */
 .wardrobe-sway {
-  animation: wardrobe-sway 5.5s ease-in-out infinite alternate;
+  animation: wardrobe-sway 8s ease-in-out infinite;
 }
 @keyframes wardrobe-sway {
-  from {
-    transform: rotate(-0.8deg);
+  0%,
+  100% {
+    transform: rotate(0deg);
   }
-  to {
-    transform: rotate(0.8deg);
+  17% {
+    transform: rotate(calc(var(--sway, 2deg) * 0.9));
+  }
+  34% {
+    transform: rotate(calc(var(--sway, 2deg) * -0.45));
+  }
+  50% {
+    transform: rotate(calc(var(--sway, 2deg) * 0.6));
+  }
+  68% {
+    transform: rotate(calc(var(--sway, 2deg) * -1));
+  }
+  85% {
+    transform: rotate(calc(var(--sway, 2deg) * 0.3));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wardrobe-sway {
+    animation: none;
   }
 }
 

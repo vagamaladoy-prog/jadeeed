@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { animate, motion, useMotionValue, useReducedMotion, useTransform, useVelocity, type MotionValue } from "motion/react";
 import { useRouter } from "@/i18n/navigation";
 import { useMedia } from "@/hooks/use-media";
@@ -313,6 +313,23 @@ function Hanger({ turn, top, W, H }: { turn: MotionValue<number>; top: number[];
   );
 }
 
+/** Each hanger gets its own swing (amplitude, tempo, phase, direction) — stable per position, so SSR and client agree. */
+function breeze(index: number): CSSProperties {
+  let h = (index + 1) * 2654435761;
+  const rand = () => {
+    h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0;
+    h = Math.imul(h ^ (h >>> 13), 3266489909) >>> 0;
+    return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+  };
+  const duration = 6 + rand() * 5; // 6–11 s
+  return {
+    ["--sway" as string]: `${(1.3 + rand() * 1).toFixed(2)}deg`, // 1.3–2.3°
+    animationDuration: `${duration.toFixed(2)}s`,
+    animationDelay: `${(-rand() * duration).toFixed(2)}s`,
+    animationDirection: rand() < 0.5 ? "normal" : "reverse",
+  };
+}
+
 function Shirt({
   item,
   index,
@@ -362,13 +379,10 @@ function Shirt({
       className="group absolute -translate-x-1/2 cursor-pointer rounded-sm outline-offset-4"
       style={{ width: facing ? frontW : sideW, height: HOOK + H }}
     >
-      {/* sway on its hook; stops while facing */}
+      {/* sways on its hook in a light breeze — sideways and while facing you */}
       <span
         className="wardrobe-sway absolute inset-0 block origin-top"
-        style={{
-          animationDelay: `${-index * 0.7}s`,
-          animationPlayState: facing ? "paused" : undefined,
-        }}
+        style={breeze(index)}
       >
         {/* grey steel hook; its stem runs down into the wooden neck */}
         <svg aria-hidden width="20" height={HOOK} viewBox={`0 0 20 ${HOOK}`} className="absolute left-1/2 top-0 -translate-x-1/2">
