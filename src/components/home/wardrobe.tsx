@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import { animate, motion, useMotionValue, useReducedMotion, useTransform, useVelocity } from "motion/react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { animate, motion, useMotionValue, useReducedMotion, useTransform, useVelocity, type MotionValue } from "motion/react";
 import { useRouter } from "@/i18n/navigation";
 import { useMedia } from "@/hooks/use-media";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -218,6 +218,53 @@ function Slot({
   );
 }
 
+/**
+ * Wooden hanger, drawn front-on. Sideways it's seen edge-on (a thin strip of wood);
+ * it opens up together with the front photo, so it's never wider than what the shirt shows.
+ */
+function Hanger({ turn, width, top }: { turn: MotionValue<number>; width: number; top: number }) {
+  const id = "hg" + useId().replace(/[^\w-]/g, "");
+  const thin = Math.min(1, 6 / width);
+  const scaleX = useTransform(turn, (t) => (t <= 0.5 ? thin : Math.max(thin, Math.sin((t - 0.5) * Math.PI))));
+  return (
+    <span aria-hidden className="absolute left-1/2 block" style={{ top, width, marginLeft: -width / 2 }}>
+      <motion.svg
+        viewBox="0 0 200 44"
+        width={width}
+        height={Math.round(width * 0.22)}
+        className="block overflow-visible"
+        style={{ scaleX }}
+      >
+        <defs>
+          <linearGradient id={`${id}w`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#a8733f" />
+            <stop offset="0.55" stopColor="#7d4f2a" />
+            <stop offset="1" stopColor="#5a371c" />
+          </linearGradient>
+          <linearGradient id={`${id}m`} x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stopColor="#62676d" />
+            <stop offset="0.5" stopColor="#d3d6da" />
+            <stop offset="1" stopColor="#62676d" />
+          </linearGradient>
+        </defs>
+        {/* shoulders */}
+        <path
+          d="M100 7 C70 9 30 20 6 31 Q1 34 4 38 Q8 41 13 39 C36 30 72 18 100 17 C128 18 164 30 187 39 Q192 41 196 38 Q199 34 194 31 C170 20 130 9 100 7 Z"
+          fill={`url(#${id}w)`}
+          stroke="#4a2c15"
+          strokeWidth="0.8"
+          strokeLinejoin="round"
+        />
+        {/* grain highlight along the top edge */}
+        <path d="M12 32 C38 21 72 11 100 9.5 C128 11 162 21 188 32" fill="none" stroke="#d5a271" strokeWidth="1" opacity="0.55" />
+        {/* neck block + steel ferrule where the hook goes in */}
+        <path d="M93 3 h14 q2 0 2 2 v12 h-18 v-12 q0-2 2-2 Z" fill={`url(#${id}w)`} stroke="#4a2c15" strokeWidth="0.8" />
+        <rect x="96" y="0" width="8" height="4" rx="1" fill={`url(#${id}m)`} />
+      </motion.svg>
+    </span>
+  );
+}
+
 function Shirt({
   item,
   index,
@@ -275,24 +322,14 @@ function Shirt({
           animationPlayState: facing ? "paused" : undefined,
         }}
       >
-        {/* hook + the small triangular neck of the hanger; its base tucks into the collar */}
-        <svg
-          aria-hidden
-          width="20"
-          height={HOOK}
-          viewBox={`0 0 20 ${HOOK}`}
-          className="absolute left-1/2 top-0 -translate-x-1/2 text-ink/70"
-        >
-          <path
-            d={`M10 ${HOOK - 13} V10 a5 5 0 1 0 -5 -5 M10 ${HOOK - 13} L3.5 ${HOOK - 3} H16.5 Z`}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+        {/* grey steel hook; its stem runs down into the wooden neck */}
+        <svg aria-hidden width="20" height={HOOK} viewBox={`0 0 20 ${HOOK}`} className="absolute left-1/2 top-0 -translate-x-1/2">
+          <path d={`M10 ${HOOK - 4} V10 a5 5 0 1 0 -5 -5`} fill="none" stroke="#6f747b" strokeWidth="2.2" strokeLinecap="round" />
+          <path d={`M9.4 ${HOOK - 4} V10 a4.4 4.4 0 1 0 -4.4 -4.4`} fill="none" stroke="#c9cdd2" strokeWidth="0.7" strokeLinecap="round" />
         </svg>
         <motion.span style={{ scale: lift, filter }} className="absolute inset-x-0 block origin-top">
+          {/* wooden hanger behind the shirt: narrower than the garment, so it never sticks out or cuts it */}
+          <Hanger turn={turn} width={Math.round(frontW * 0.7)} top={HOOK - 11} />
           <span
             className="absolute left-1/2 block -translate-x-1/2 [perspective:1100px]"
             style={{ top: HOOK - 6, width: frontW, height: H }}
