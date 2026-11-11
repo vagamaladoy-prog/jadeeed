@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import {
   BadgePercent,
+  CalendarClock,
   Image as ImageIcon,
   LogOut,
   MessageSquareQuote,
@@ -23,6 +24,7 @@ type Item = { href: string; label: string; icon: LucideIcon };
 
 const ITEMS: Item[] = [
   { href: "/admin/orders", label: "Заказы", icon: Package },
+  { href: "/admin/preorders", label: "Предзаказы", icon: CalendarClock },
   { href: "/admin/products", label: "Товары", icon: Shirt },
   { href: "/admin/promotions", label: "Акции", icon: BadgePercent },
   { href: "/admin/banners", label: "Баннеры", icon: ImageIcon },
@@ -69,7 +71,7 @@ function LogoutButton({ className }: { className?: string }) {
 }
 
 /** Desktop (≥1024px): fixed left sidebar. */
-export function AdminSidebar({ newOrders }: { newOrders: number }) {
+export function AdminSidebar({ newOrders, newPreorders = 0 }: { newOrders: number; newPreorders?: number }) {
   const pathname = usePathname();
   return (
     <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 flex-col border-r border-line bg-white lg:flex">
@@ -94,8 +96,11 @@ export function AdminSidebar({ newOrders }: { newOrders: number }) {
                 >
                   <Icon className="size-4.5 shrink-0" aria-hidden />
                   <span className="flex-1">{item.label}</span>
-                  {item.href === "/admin/orders" && (
-                    <Counter value={newOrders} className={active ? "bg-white text-ink" : undefined} />
+                  {(item.href === "/admin/orders" || item.href === "/admin/preorders") && (
+                    <Counter
+                      value={item.href === "/admin/orders" ? newOrders : newPreorders}
+                      className={active ? "bg-white text-ink" : undefined}
+                    />
                   )}
                 </Link>
               </li>
@@ -119,7 +124,7 @@ export function AdminSidebar({ newOrders }: { newOrders: number }) {
 }
 
 /** Phone / tablet (<1024px): bottom tab bar + "Ещё" sheet. */
-export function AdminTabBar({ newOrders }: { newOrders: number }) {
+export function AdminTabBar({ newOrders, newPreorders = 0 }: { newOrders: number; newPreorders?: number }) {
   const pathname = usePathname();
   const [more, setMore] = useState(false);
   const tabs = ITEMS.filter((i) => TAB_HREFS.includes(i.href));
@@ -159,6 +164,7 @@ export function AdminTabBar({ newOrders }: { newOrders: number }) {
             <button type="button" onClick={() => setMore(true)} aria-haspopup="dialog" className={tabClass(moreActive)}>
               <MoreHorizontal className="size-6" strokeWidth={moreActive ? 2 : 1.6} aria-hidden />
               Ещё
+              {newPreorders > 0 && <span aria-hidden className="absolute right-[calc(50%-18px)] top-2 size-2 rounded-pill bg-ink" />}
               {moreActive && <span aria-hidden className="absolute bottom-1 size-1 rounded-pill bg-navy" />}
             </button>
           </li>
@@ -182,7 +188,8 @@ export function AdminTabBar({ newOrders }: { newOrders: number }) {
                   )}
                 >
                   <Icon className="size-5" aria-hidden />
-                  {item.label}
+                  <span className="flex-1">{item.label}</span>
+                  {item.href === "/admin/preorders" && <Counter value={newPreorders} className={active ? "bg-white text-ink" : undefined} />}
                 </Link>
               </li>
             );

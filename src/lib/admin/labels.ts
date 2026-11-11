@@ -62,3 +62,18 @@ export function checkUploadFile(file: File): string | null {
   if (file.size > UPLOAD_MAX_BYTES) return `«${file.name}»: файл больше 30 МБ`;
   return null;
 }
+
+// ─── pre-booking of the next batch ───────────────────────────────────────────
+export const PREORDER_STATUSES = ["NEW", "CONFIRMED", "ARRIVED", "COMPLETED", "CANCELLED"] as const;
+export type PreorderStatusCode = (typeof PREORDER_STATUSES)[number];
+
+export const PREORDER_STATUS_LABELS: Record<PreorderStatusCode, string> = {
+  NEW: "Новый",
+  CONFIRMED: "Подтверждён",
+  ARRIVED: "Партия пришла",
+  COMPLETED: "Выдан",
+  CANCELLED: "Отменён",
+};
+
+/** Pre-bookings still waiting for the batch — counted in the batch summary. */
+export const PREORDER_OPEN: PreorderStatusCode[] = ["NEW", "CONFIRMED"];

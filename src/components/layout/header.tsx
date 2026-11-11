@@ -15,6 +15,7 @@ import { cn } from "@/lib/cn";
 
 const NAV = [
   { href: "/catalog", key: "catalog" },
+  { href: "/preorder", key: "preorder" },
   { href: "/about", key: "about" },
   { href: "/delivery", key: "delivery" },
   { href: "/contacts", key: "contacts" },

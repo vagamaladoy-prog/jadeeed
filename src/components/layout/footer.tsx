@@ -65,6 +65,11 @@ export async function Footer({
                 {nav("catalog")}
               </Link>
             </li>
+            <li>
+              <Link href="/preorder" className="flex min-h-11 items-center text-body hover:underline hover:underline-offset-4">
+                {nav("preorder")}
+              </Link>
+            </li>
             {categories.map((cat) => (
               <li key={cat.id}>
                 <Link

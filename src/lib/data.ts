@@ -212,5 +212,6 @@ export const getSettings = cache(async (): Promise<SettingsDTO> => {
     workHours: pair(s.workHoursUz, s.workHoursRu),
     about: { uz: s.aboutUz, ru: s.aboutRu },
     delivery: { uz: s.deliveryUz, ru: s.deliveryRu },
+    preorder: { enabled: s.preorderEnabled, note: { uz: s.preorderNoteUz, ru: s.preorderNoteRu } },
   };
 });

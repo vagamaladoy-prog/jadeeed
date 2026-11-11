@@ -91,9 +91,9 @@ export type OrderForMessage = {
   items: { productName: string; colorName: string; size: string; quantity: number; price: number }[];
 };
 
-export function orderMessage(o: OrderForMessage): string {
+export function orderMessage(o: OrderForMessage, kind: "order" | "preorder" = "order"): string {
   const lines = [
-    `<b>Yangi buyurtma #${o.number}</b>`,
+    kind === "preorder" ? `<b>⏳ Предзаказ #${o.number}</b> — следующая партия` : `<b>Yangi buyurtma #${o.number}</b>`,
     formatDateTime(o.createdAt),
     "",
     `Имя: ${esc(o.customerName)}`,
@@ -110,7 +110,7 @@ export function orderMessage(o: OrderForMessage): string {
       `• ${esc(i.productName)} — ${esc(i.colorName.toLocaleLowerCase("ru"))} — ${i.size} — ${i.quantity} шт — ${groupDigits(i.price * i.quantity)} сум`,
     );
   }
-  lines.push("", `<b>Итого: ${groupDigits(o.total)} сум</b>`, "", `Открыть в админке: ${siteUrl()}/admin/orders/${o.number}`);
+  lines.push("", `<b>${kind === "preorder" ? "Примерно" : "Итого"}: ${groupDigits(o.total)} сум</b>`, "", `Открыть в админке: ${siteUrl()}/admin/${kind === "preorder" ? "preorders" : "orders"}/${o.number}`);
   return lines.join("\n");
 }
 

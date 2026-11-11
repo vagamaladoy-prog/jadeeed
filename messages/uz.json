@@ -11,7 +11,9 @@
     "deliveryTitle": "Yetkazib berish va to'lov",
     "contactsTitle": "Aloqa",
     "searchTitle": "Qidiruv",
-    "notFoundTitle": "Sahifa topilmadi"
+    "notFoundTitle": "Sahifa topilmadi",
+    "preorderTitle": "Keyingi partiyaga oldindan buyurtma",
+    "preorderDescription": "Jadeeed futbolka va xudilarini keyingi partiyadan band qiling — tugaganlarini ham."
   },
   "nav": {
     "home": "Asosiy",
@@ -28,7 +30,8 @@
     "close": "Yopish",
     "skipToContent": "Asosiy mazmunga o'tish",
     "next": "Keyingisi",
-    "prev": "Oldingisi"
+    "prev": "Oldingisi",
+    "preorder": "Oldindan buyurtma"
   },
   "price": {
     "currency": "so'm",
@@ -211,5 +214,43 @@
   },
   "telegram": {
     "openInTelegram": "Telegram'da ochish"
+  },
+  "preorder": {
+    "title": "Oldindan buyurtma",
+    "eyebrow": "Keyingi partiya",
+    "lead": "Keyingi partiyadan kiyimlarni band qiling — hozir tugaganlarini ham. Oldindan to'lov shart emas: menejer qo'ng'iroq qilib tasdiqlaydi va partiya kelganini xabar qiladi.",
+    "closed": "Hozircha oldindan buyurtma yopiq. Kanalimizdagi yangiliklarni kuzating.",
+    "channel": "Jadeeed kanali",
+    "soldOut": "Mavjud emas",
+    "inStock": "Mavjud",
+    "pick": "Tanlash",
+    "add": "Buyurtmaga qo'shish",
+    "color": "Rang",
+    "size": "O'lcham",
+    "qty": "Soni",
+    "less": "Kamroq",
+    "more": "Ko'proq",
+    "step1": "Kiyimlarni tanlang",
+    "step2": "Sizning buyurtmangiz",
+    "empty": "Yuqoridan kiyimlarni tanlang — ular shu yerda paydo bo'ladi.",
+    "remove": "Olib tashlash",
+    "estimate": "Taxminan",
+    "priceNote": "Partiya kelguncha narx o'zgarishi mumkin — menejer telefon orqali tasdiqlaydi.",
+    "submit": "Oldindan buyurtma berish",
+    "sending": "Yuborilmoqda",
+    "toForm": "Rasmiylashtirish",
+    "count": "{count} dona",
+    "doneTitle": "Oldindan buyurtma #{number} qabul qilindi",
+    "doneText": "Menejer siz bilan bog'lanadi va partiya kelganini xabar qiladi.",
+    "again": "Yana bittasini berish",
+    "home": "Bosh sahifa",
+    "productLink": "Keyingi partiyaga oldindan buyurtma",
+    "productLinkSoldOut": "Tugadimi? Oldindan buyurtma bering",
+    "errors": {
+      "empty": "Kamida bitta kiyim qo'shing",
+      "closed": "Hozircha oldindan buyurtma yopiq",
+      "gone": "Ayrim mahsulotlar endi yo'q — sahifani yangilang",
+      "generic": "Nimadir xato ketdi. Qaytadan urinib ko'ring"
+    }
   }
 }

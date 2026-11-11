@@ -13,11 +13,20 @@ export default async function Thanks({
   searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ order?: string }>;
+  searchParams: Promise<{ order?: string; preorder?: string }>;
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const [{ order }, phrases, settings] = await Promise.all([searchParams, getPhrases(), getSettings()]);
-  const number = order && /^\d{1,9}$/.test(order) ? Number(order) : null;
-  return <ThanksView phrase={phrases.slots.THANKS} number={number} channelUrl={settings.channelUrl} supportUrl={settings.supportUrl} />;
+  const [{ order, preorder }, phrases, settings] = await Promise.all([searchParams, getPhrases(), getSettings()]);
+  const ref = preorder ?? order;
+  const number = ref && /^\d{1,9}$/.test(ref) ? Number(ref) : null;
+  return (
+    <ThanksView
+      phrase={phrases.slots.THANKS}
+      number={number}
+      channelUrl={settings.channelUrl}
+      supportUrl={settings.supportUrl}
+      preorder={preorder !== undefined}
+    />
+  );
 }

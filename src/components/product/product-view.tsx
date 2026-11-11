@@ -3,7 +3,8 @@ import { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { useUrlParam } from "@/hooks/use-url-param";
 import { AnimatePresence, motion } from "motion/react";
-import { PersonStanding, Ruler } from "lucide-react";
+import { CalendarClock, PersonStanding, Ruler } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { ProductGallery } from "./product-gallery";
 import { Price } from "./price";
@@ -29,14 +30,18 @@ export function ProductView({
   addedPhrase,
   badgePhrase,
   supportUrl,
+  preorder,
 }: {
   product: ProductDTO;
   addedPhrase: string;
   badgePhrase: string;
   supportUrl: string;
+  /** pre-booking of the next batch is open */
+  preorder?: boolean;
 }) {
   const t = useTranslations("product");
   const tFit = useTranslations("fitting");
+  const tPre = useTranslations("preorder");
   const locale = useLocale();
   const { haptic } = useTelegram();
   // ?color=… from a catalogue card (read on the client so the page stays static)
@@ -230,6 +235,17 @@ export function ProductView({
               {addButton(true)}
             </Magnet>
           </div>
+          {preorder && (
+            <Link
+              href={{ pathname: "/preorder", query: { product: product.slug, color: color.id } }}
+              className={cn(
+                "-mt-3 flex min-h-11 w-fit items-center gap-2 text-body-sm underline underline-offset-4",
+                soldOut ? "font-medium text-navy" : "text-muted hover:text-navy",
+              )}
+            >
+              <CalendarClock className="size-4" aria-hidden /> {soldOut ? tPre("productLinkSoldOut") : tPre("productLink")}
+            </Link>
+          )}
           <ExternalLink href={supportUrl} className="flex min-h-11 w-fit items-center text-body-sm text-muted underline decoration-line underline-offset-4 hover:text-navy">
             {t("question")}
           </ExternalLink>

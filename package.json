@@ -21,6 +21,7 @@
     "selftest": "tsx --conditions=react-server scripts/selftest.mts",
     "db:local": "node scripts/local-db.mjs",
     "test:order": "tsx --conditions=react-server scripts/test-order.mts",
+    "test:preorder": "tsx --conditions=react-server scripts/test-preorder.mts",
     "photos": "node scripts/prepare-photos.mjs"
   },
   "dependencies": {

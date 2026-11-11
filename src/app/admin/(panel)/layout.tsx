@@ -6,7 +6,10 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminPanelLayout({ children }: { children: React.ReactNode }) {
   await requireAdmin();
-  const newOrders = await db.order.count({ where: { status: "NEW" } }).catch(() => 0);
+  const [newOrders, newPreorders] = await Promise.all([
+    db.order.count({ where: { status: "NEW" } }).catch(() => 0),
+    db.preorder.count({ where: { status: "NEW" } }).catch(() => 0),
+  ]);
 
   return (
     <>
@@ -16,11 +19,11 @@ export default async function AdminPanelLayout({ children }: { children: React.R
       >
         К содержимому
       </a>
-      <AdminSidebar newOrders={newOrders} />
+      <AdminSidebar newOrders={newOrders} newPreorders={newPreorders} />
       <main id="admin-main" className="min-h-dvh pb-[calc(var(--tabbar-h)+var(--safe-bottom)+24px)] lg:pb-12 lg:pl-60">
         <div className="mx-auto w-full max-w-6xl px-4 pt-6 sm:px-6 lg:px-10 lg:pt-10">{children}</div>
       </main>
-      <AdminTabBar newOrders={newOrders} />
+      <AdminTabBar newOrders={newOrders} newPreorders={newPreorders} />
     </>
   );
 }

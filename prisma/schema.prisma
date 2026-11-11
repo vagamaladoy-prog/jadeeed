@@ -34,6 +34,15 @@ enum OrderStatus {
   CANCELLED
 }
 
+/// Pre-booking of the next batch: nothing is reserved from stock.
+enum PreorderStatus {
+  NEW // just placed
+  CONFIRMED // manager called and confirmed
+  ARRIVED // batch arrived — customer told to pick up / delivery arranged
+  COMPLETED // handed over
+  CANCELLED
+}
+
 enum OrderSource {
   WEB
   TELEGRAM
@@ -66,21 +75,21 @@ enum PhraseSlot {
 }
 
 model Category {
-  id            String     @id @default(cuid())
-  slug          String     @unique
+  id            String      @id @default(cuid())
+  slug          String      @unique
   nameUz        String
   nameRu        String
   descriptionUz String?
   descriptionRu String?
   image         String?
-  sortOrder     Int        @default(0)
-  isVisible     Boolean    @default(true)
+  sortOrder     Int         @default(0)
+  isVisible     Boolean     @default(true)
   sizeChartId   String?
-  sizeChart     SizeChart? @relation(fields: [sizeChartId], references: [id], onDelete: SetNull)
+  sizeChart     SizeChart?  @relation(fields: [sizeChartId], references: [id], onDelete: SetNull)
   products      Product[]
   promotions    Promotion[]
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 }
 
 /// rows: [{ size: "M", width: 54, length: 72, sleeve: 22 }] — centimetres
@@ -123,6 +132,7 @@ model Product {
   colors        ProductColor[]
   promotions    Promotion[]
   orderItems    OrderItem[]
+  preorderItems PreorderItem[]
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
 
@@ -245,6 +255,46 @@ model OrderItem {
   @@index([orderId])
 }
 
+/// Pre-booking for the next batch (any product, colour and size — even sold out). Does not touch stock.
+model Preorder {
+  id               String         @id @default(cuid())
+  number           Int            @unique @default(autoincrement())
+  customerName     String
+  phone            String
+  comment          String?
+  status           PreorderStatus @default(NEW)
+  total            Int // estimate at the prices of the moment
+  source           OrderSource    @default(WEB)
+  telegramId       BigInt?
+  telegramUsername String?
+  locale           String         @default("uz")
+  notifiedAt       DateTime?
+  adminNote        String?
+  items            PreorderItem[]
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@index([status, createdAt])
+}
+
+model PreorderItem {
+  id          String   @id @default(cuid())
+  preorderId  String
+  preorder    Preorder @relation(fields: [preorderId], references: [id], onDelete: Cascade)
+  productId   String?
+  product     Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  productName String
+  colorName   String
+  colorId     String?
+  size        Size
+  quantity    Int
+  price       Int
+  image       String?
+
+  @@index([preorderId])
+  @@index([productId])
+}
+
 /// Singleton (id = 1): contacts, socials, static page texts.
 model Settings {
   id                Int      @id @default(1)
@@ -263,6 +313,9 @@ model Settings {
   aboutRu           String   @default("")
   deliveryUz        String   @default("")
   deliveryRu        String   @default("")
+  preorderEnabled   Boolean  @default(true)
+  preorderNoteUz    String   @default("") // e.g. "next batch — early December"
+  preorderNoteRu    String   @default("")
   updatedAt         DateTime @updatedAt
 }
 

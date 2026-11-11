@@ -75,6 +75,8 @@ export type SettingsDTO = {
   workHours: L10n | null;
   about: L10n;
   delivery: L10n;
+  /** pre-booking of the next batch */
+  preorder: { enabled: boolean; note: L10n };
 };
 
 export type PhraseSlotCode =

@@ -10,8 +10,22 @@ import { ExternalLink } from "@/components/contact/external-link";
 import { DUR, EASE_OUT } from "@/lib/motion";
 
 /** Atlas rises from the bottom, then "Ko'z tegmasin." and the order number. No confetti. */
-export function ThanksView({ phrase, number, channelUrl, supportUrl }: { phrase: string; number: number | null; channelUrl: string; supportUrl: string }) {
+export function ThanksView({
+  phrase,
+  number,
+  channelUrl,
+  supportUrl,
+  preorder,
+}: {
+  phrase: string;
+  number: number | null;
+  channelUrl: string;
+  supportUrl: string;
+  /** a next-batch pre-booking rather than an order */
+  preorder?: boolean;
+}) {
   const t = useTranslations("thanks");
+  const tp = useTranslations("preorder");
   const reduce = useReducedMotion();
   const after = reduce ? 0 : DUR.scene * 0.8;
 
@@ -35,9 +49,9 @@ export function ThanksView({ phrase, number, channelUrl, supportUrl }: { phrase:
       >
         <BrandPhrase text={phrase} as="h1" animate="write" delay={after} className="text-display tracking-tighter" />
         {number && (
-          <p className="mt-6 font-display text-heading font-light tabular-nums text-navy">{t("order", { number })}</p>
+          <p className="mt-6 font-display text-heading font-light tabular-nums text-navy">{preorder ? tp("doneTitle", { number }) : t("order", { number })}</p>
         )}
-        <p className="mx-auto mt-4 max-w-sm text-body text-muted">{t("text")}</p>
+        <p className="mx-auto mt-4 max-w-sm text-body text-muted">{preorder ? tp("doneText") : t("text")}</p>
         <div className="mt-8 flex flex-col items-center gap-3">
           <Button asChild size="lg" className="w-full sm:w-auto">
             <ExternalLink href={channelUrl}>

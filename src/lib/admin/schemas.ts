@@ -2,7 +2,7 @@
 // Input type == output type everywhere (no transforms/defaults), so `useForm<z.infer<…>>` just works.
 import { z } from "zod";
 import { FITS, SIZES } from "@/lib/types";
-import { DISCOUNT_TYPES, HEADER_TONES, ORDER_STATUSES, PHRASE_SLOTS, PROMOTION_SCOPES } from "./labels";
+import { DISCOUNT_TYPES, HEADER_TONES, ORDER_STATUSES, PHRASE_SLOTS, PREORDER_STATUSES, PROMOTION_SCOPES } from "./labels";
 
 const required = (msg: string, max = 200) => z.string().trim().min(1, msg).max(max, `Не длиннее ${max} символов`);
 const text = (max = 10_000) => z.string().trim().max(max, `Не длиннее ${max} символов`);
@@ -208,3 +208,21 @@ export const newColor = (): ColorValues => ({
   images: [],
   stock: Object.fromEntries(SIZES.map((s) => [s, null])) as ColorValues["stock"],
 });
+
+// ─── pre-booking ─────────────────────────────────────────────────────────────
+export const preorderStatusSchema = z.object({
+  preorderId: z.string().min(1),
+  status: z.enum(PREORDER_STATUSES),
+});
+
+export const preorderNoteSchema = z.object({
+  preorderId: z.string().min(1),
+  note: z.string().trim().max(1000, "Не длиннее 1000 символов"),
+});
+
+export const preorderSettingsSchema = z.object({
+  enabled: z.boolean(),
+  noteUz: z.string().trim().max(120, "Не длиннее 120 символов"),
+  noteRu: z.string().trim().max(120, "Не длиннее 120 символов"),
+});
+export type PreorderSettingsValues = z.infer<typeof preorderSettingsSchema>;

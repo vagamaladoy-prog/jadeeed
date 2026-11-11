@@ -88,6 +88,7 @@ export default async function ProductPage({ params }: Props) {
           addedPhrase={phrases.slots.ADD_TO_CART}
           badgePhrase={phrases.slots.BADGE}
           supportUrl={settings.supportUrl}
+          preorder={settings.preorder.enabled}
         />
       </div>
 
