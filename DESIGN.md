@@ -19,13 +19,13 @@ Three brand colours. Everything else is derived.
 | Token | Hex | Role |
 |---|---|---|
 | `--ink` | `#0B0B0C` | primary text, dark sections, footer, primary buttons |
-| `--paper` | `#F5F3EE` | storefront canvas (warm white) |
+| `--paper` | `#E6E1BF` | storefront canvas: 75% white, 10% yellow, 5% orange, 10% black |
 | `--white` | `#FFFFFF` | surfaces on paper, text on dark |
 | `--navy` | `#16224A` | **Atlas navy** — active states, links, badges, selected size, atlas pattern |
 | `--muted` | `#5B5E66` | secondary text (5.85:1 on paper — AA) |
 | `--line` | `#E4E2DC` | hairline borders, dividers |
 | `--navy-2` | `#2C3E7A` | lighter navy — **only inside the atlas pattern** |
-| `--paper-2` | `#ECE9E2` | derived: alternating section / image well (paper darkened 3%) |
+| `--paper-2` | `#DDD7B3` | derived: alternating section / image well (paper darkened 3%) |
 | `--ink-2` | `#1A1A1C` | derived: raised surface on dark |
 | `--on-ink-muted` | `#A9AAB0` | derived: secondary text on ink (8.5:1 — AA) |
 
