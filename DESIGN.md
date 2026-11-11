@@ -14,49 +14,44 @@ All tokens live in `src/app/tokens.css` (CSS variables) and are exposed to Tailw
 
 ## 1. Colour
 
-Three brand colours. Everything else is derived.
+Concept: **"a Jadid manuscript that came alive in streetwear"** — a rare 1920s Turkestan book with a cinematic edge.
+Colours are pulled from the brand photos (brick, carved wood, suzani, pomegranate, the teal door).
+Proportions: ~70% Siyoh + Qog'oz · 20% Anor + Firuza · 10% Za'faron (tiny highlights only).
 
-| Token | Hex | Role |
-|---|---|---|
-| `--ink` | `#0B0B0C` | primary text, dark sections, footer, primary buttons |
-| `--paper` | `#E6E1BF` | storefront canvas: 75% white, 10% yellow, 5% orange, 10% black |
-| `--white` | `#FFFFFF` | surfaces on paper, text on dark |
-| `--navy` | `#16224A` | **Atlas navy** — active states, links, badges, selected size, atlas pattern |
-| `--muted` | `#5B5E66` | secondary text (5.85:1 on paper — AA) |
-| `--line` | `#E4E2DC` | hairline borders, dividers |
-| `--navy-2` | `#2C3E7A` | lighter navy — **only inside the atlas pattern** |
-| `--paper-2` | `#DDD7B3` | derived: alternating section / image well (paper darkened 3%) |
-| `--ink-2` | `#1A1A1C` | derived: raised surface on dark |
-| `--on-ink-muted` | `#A9AAB0` | derived: secondary text on ink (8.5:1 — AA) |
+| Token | Name | Hex | Role |
+|---|---|---|---|
+| `--ink` | Siyoh (ink) | `#141012` | dark base: text, dark sections, footer |
+| `--paper` | Qog'oz (old paper) | `#EEE4D0` | light base: storefront canvas |
+| `--anor` | Anor (pomegranate) | `#9B1D2E` | main accent: primary buttons, hover, active states, links, selected size |
+| `--firuza` | Firuza (Samarkand teal) | `#1E7F80` | second accent: "new" badges, Qodiriy moments |
+| `--zafaron` | Za'faron (saffron) | `#E2A23B` | highlight — only stars, dots, underlines |
+| `--gisht` | G'isht (brick) | `#C27A45` | warm neutral (decor) |
+| `--qaymoq` | Qaymoq (sage) | `#7F9170` | soft neutral (decor) |
+| `--white` | — | `#FFFFFF` | surfaces on paper, text on dark |
+| `--muted` | — | `#5E5650` | secondary text (5.69:1 on paper) |
+| `--line` | — | `#DCCFB5` | hairline borders |
+| `--paper-2` | — | `#E4D7BD` | alternating section / image well |
+| `--ink-2` | — | `#201A1C` | raised surface on dark |
+| `--on-ink-muted` | — | `#A99F95` | secondary text on ink (7.26:1) |
+| `--navy-2` | — | `#2C3E7A` | only inside the atlas pattern |
 
-Contrast (WCAG AA ≥ 4.5:1 for body):
-ink/paper 17.7:1 · muted/paper 5.85:1 · muted/paper-2 5.35:1 · navy/paper 13.9:1 · white/navy 15.4:1 · white/ink 19.7:1 (computed, WCAG 2.1).
+Contrast: ink/paper 14.96:1 · white/anor 8.05:1 · anor/paper 6.38:1 · white/firuza 4.77:1 · ink/za'faron 8.51:1.
+Firuza on paper is 3.78:1 — use it for fills with white text or large type, never for small text on paper.
+Za'faron is never a text colour on paper.
 
-Forbidden: any other bright hue, gradients, neon, glow, glass blur panels
-(the only blur allowed is the functional header/tab-bar backdrop on scroll).
-Product colours (a t-shirt can be any colour) are content, not UI palette.
-
-Admin uses ink / white / muted / line only (+ status tints derived from ink opacity).
+Alternating sections: dark ink sections with paper text, then paper sections with ink text — like turning pages.
+A paper-grain / acid-wash noise layer sits over the whole storefront (`body.grain::after`, 9%, no clicks).
 
 ## 2. Typography
 
-| Role | Font | Why |
+| Role | Font | Utility |
 |---|---|---|
-| Accent: brand phrases, display headings, footer wordmark | **Unbounded** (variable 200–900) | wide geometric grotesque with character; echoes the heavy geometric "J" of the logo; full Latin-Ext + Cyrillic incl. `oʻ gʻ ʼ` |
-| Interface: body, buttons, forms, labels | **Onest** (variable 100–900) | neutral grotesque designed for Cyrillic + Latin together; excellent at small sizes |
+| Quotes, big headlines | **Playfair Display** (variable 400–900) — echoes the "Men o'sha" print | `font-display`, `phrase` |
+| Emotional accents ("Aylanib ketay…") | **Great Vibes** script | `script` |
+| Small labels, dates | **Cormorant SC** (500/600) — Art-Deco feel of the "Abdulla Qodiriy" back print | `deco` |
+| Body, buttons, forms | **Manrope** (variable) | `font-sans` |
 
-Display is set **light (300)** as in the reference, never heavier than 500.
-
-| Token | Size (mobile → desktop) | LH | Tracking | Font / weight |
-|---|---|---|---|---|
-| `display-xl` | 44 → 112px (`clamp`) | 0.95 | -0.04em | Unbounded 300 |
-| `display` | 36 → 72px | 1.0 | -0.03em | Unbounded 300 |
-| `heading-lg` | 28 → 40px | 1.15 | -0.02em | Unbounded 300 |
-| `heading` | 22 → 28px | 1.25 | -0.01em | Unbounded 400 |
-| `subheading` | 18 → 20px | 1.35 | -0.01em | Onest 500 |
-| `body` | 16px | 1.5 | -0.01em | Onest 400 |
-| `body-sm` | 14px | 1.45 | 0 | Onest 400 |
-| `label` | 12px uppercase | 1.4 | 0.1em | Onest 500 (replaces SaansMono labels) |
+All four cover Latin-Ext + Cyrillic (o', g', ʻ). Display is set at 400, tracking −0.02em (serif — never tighter).
 
 ## 3. Spacing & layout
 
@@ -78,18 +73,18 @@ Display is set **light (300)** as in the reference, never heavier than 500.
 
 ## 5. Components (shadcn/ui re-skinned)
 
-- **Button primary**: ink bg, white text, 48px tall (44 min), 4px radius, Onest 500 15px, hover → navy (150ms).
+- **Button primary**: anor bg, white text, 48px tall (44 min), 4px radius, Manrope 500, hover → ink (150ms). Variant `ink`: ink bg, hover → anor.
 - **Button outline**: transparent, 1px ink border, ink text; hover → ink bg / white text.
-- **Button ghost / link**: navy text, underline offset 4px.
-- **Input**: 48px, white bg, 1px line border, focus = 2px navy ring (outline, not shadow).
-- **Size chip**: 44×44 min, pill, 1px line border; selected = navy bg + white text, spring scale.
-- **Badge** (`Ko'z tegmasin.`): navy bg, white, Unbounded 10–11px, pill.
-- **Discount badge**: ink bg, white, Onest 500 12px.
+- **Button ghost / link**: anor text, underline offset 4px.
+- **Input**: 48px, white bg, 1px line border, focus = 2px anor ring (outline, not shadow).
+- **Size chip**: 44×44 min, pill, 1px line border; selected = anor bg + white text, spring scale.
+- **Badge** (`Ko'z tegmasin.`): firuza bg, white, Playfair Display 10–11px, pill.
+- **Discount badge**: ink bg, white, Manrope 500 12px.
 - **Product card**: no border, no shadow; image well paper-2 at 4:5; title body-sm, price body 500.
-- **Tabs / segmented (uz|ru)**: 2px ink underline or sliding pill (navy) — motion `layoutId`.
+- **Tabs / segmented (uz|ru)**: 2px ink underline or sliding pill (anor) — motion `layoutId`.
 - **Bottom sheet**: vaul drawer, paper bg, 12px top radius, grabber 36×4 line colour, swipe-down to close.
-- **Tab bar (mobile)**: white 85% + backdrop blur 12px, 1px top line, active = ink icon + navy dot.
-- **Toast** (`Men o'sha.`): ink bg, white Unbounded text, bottom-center above tab bar.
+- **Tab bar (mobile)**: white 85% + backdrop blur 12px, 1px top line, active = ink icon + anor dot.
+- **Toast** (`Men o'sha.`): ink bg, white Playfair Display text, bottom-center above tab bar.
 
 ## 6. Atlas pattern
 
@@ -107,7 +102,7 @@ Variants:
 
 | Variant | Where | Spec |
 |---|---|---|
-| `dense` | "Siz o'shami?" block, footer, "Rahmat" page, brand-phrase plate | full-contrast navy / ink / paper bands |
+| `dense` | "Siz o'shami?" block, footer, "Rahmat" page, brand-phrase plate | full-contrast ikat bands (the fabric's own dyes) |
 | `light` | section backgrounds | same tile, **opacity 0.04–0.08** on paper |
 | `strip` | divider between big sections, preloader | 16px band cut through a row of motifs, repeated along x |
 | `loading` | product image placeholder (instead of grey skeleton) | `light` tile at 0.12 + slow flow |
@@ -115,7 +110,7 @@ Variants:
 Rules — **use rarely so it stays special**:
 - ✅ banner-adjacent phrase block, section dividers, footer, thank-you page, image loading fill, plate behind brand phrases.
 - ❌ never on every card, never under body copy that must be read, never in admin.
-- Text on `dense` sits on a solid ink/paper plate or is Unbounded ≥ 32px with ≥ 4.5:1 against the darkest band.
+- Text on `dense` sits on a solid ink/paper plate or is Playfair Display ≥ 32px with ≥ 4.5:1 against the darkest band.
 - The pattern **flows**: `translateY` loop over one tile height (800px) in 60s (linear, infinite), paused off-screen,
   disabled under `prefers-reduced-motion`.
 
@@ -151,7 +146,7 @@ Inventory:
 |---|---|
 | Banner | fade-in + scale 1.06→1 (1.1s); parallax 0.25 on scroll; crossfade every 5.5s; swipe; story-style progress bars |
 | "Siz o'shami?" | letter-by-letter "writing" (adapted from React Bits *BlurText*, ≤45ms/char), atlas flows down, shifts ±12px with cursor / scroll |
-| Marquee | brand phrases + ✦, ink bg, white Unbounded, 40s CSS transform loop (no JS per frame), pauses on hover |
+| Marquee | brand phrases + ✦, ink bg, white Playfair Display, 40s CSS transform loop (no JS per frame), pauses on hover |
 | Product card | stagger reveal; hover: front→back crossfade, zoom 1.04, sizes slide up |
 | Product page | gallery crossfade/slide, cursor zoom (desktop), swipe (touch); size chip spring; fly-to-cart; badge bounce; toast "Men o'sha." |
 | Catalog | `layout` animations + AnimatePresence popLayout on filter change |
@@ -165,7 +160,7 @@ Inventory:
 
 ## 8. Voice
 
-Brand phrases are **always Uzbek, never translated**, stored in DB, rendered in Unbounded:
+Brand phrases are **always Uzbek, never translated**, stored in DB, rendered in Playfair Display:
 `Siz o'shami?` · `Men o'sha.` · `Aylanib ketay...` · `Ko'z tegmasin.`
 UI copy is short, calm, no exclamation marks, no filler ("Добро пожаловать в мир стиля" is banned).
 

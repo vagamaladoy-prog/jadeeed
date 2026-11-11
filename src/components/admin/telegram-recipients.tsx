@@ -61,7 +61,7 @@ export function TelegramRecipients({ recipients, botUsername }: { recipients: Re
           {botLink && (
             <>
               {" "}
-              <a href={botLink} target="_blank" rel="noopener noreferrer" className="text-navy underline underline-offset-4">
+              <a href={botLink} target="_blank" rel="noopener noreferrer" className="text-anor underline underline-offset-4">
                 @{botUsername}
               </a>
             </>
@@ -92,7 +92,7 @@ export function TelegramRecipients({ recipients, botUsername }: { recipients: Re
         {botLink ? (
           <>
             {" "}
-            <a href={botLink} target="_blank" rel="noopener noreferrer" className="text-navy underline underline-offset-4">
+            <a href={botLink} target="_blank" rel="noopener noreferrer" className="text-anor underline underline-offset-4">
               админ-бота
             </a>
           </>

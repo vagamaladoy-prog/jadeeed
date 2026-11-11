@@ -198,7 +198,7 @@ export function PreorderView({
   return (
     <>
       {note && (
-        <p className="mb-8 flex w-fit items-center gap-2 rounded-pill bg-navy px-4 py-2 text-body-sm text-white">
+        <p className="mb-8 flex w-fit items-center gap-2 rounded-pill bg-anor px-4 py-2 text-body-sm text-white">
           <CalendarClock className="size-4 shrink-0" aria-hidden /> <span className="label">{t("eyebrow")}:</span> {note}
         </p>
       )}
@@ -229,7 +229,7 @@ export function PreorderView({
                         <span className="absolute left-2 top-2 rounded-pill bg-paper/90 px-2.5 py-1 text-label text-ink backdrop-blur">{t("soldOut")}</span>
                       )}
                       {picked > 0 && (
-                        <span className="absolute right-2 top-2 grid h-7 min-w-7 place-items-center rounded-pill bg-navy px-2 text-label font-medium text-white tabular-nums">
+                        <span className="absolute right-2 top-2 grid h-7 min-w-7 place-items-center rounded-pill bg-anor px-2 text-label font-medium text-white tabular-nums">
                           {picked}
                         </span>
                       )}
@@ -486,7 +486,7 @@ function PickSheet({
                   }}
                   className={cn(
                     "relative size-13 overflow-hidden rounded border bg-paper-2 transition-colors duration-[var(--dur-hover)]",
-                    c.id === color.id ? "border-navy outline outline-2 outline-offset-1 outline-navy" : "border-line hover:border-ink",
+                    c.id === color.id ? "border-anor outline outline-2 outline-offset-1 outline-anor" : "border-line hover:border-ink",
                   )}
                 >
                   <span className="absolute inset-2 rounded-pill border border-line" style={{ backgroundColor: c.hex }} />
@@ -512,7 +512,7 @@ function PickSheet({
                   }}
                   className={cn(
                     "relative grid h-12 min-w-13 place-items-center rounded-pill border px-3 text-body-sm font-medium transition-colors duration-[var(--dur-hover)]",
-                    s === size ? "border-navy bg-navy text-white" : "border-line bg-white text-ink hover:border-ink",
+                    s === size ? "border-anor bg-anor text-white" : "border-line bg-white text-ink hover:border-ink",
                   )}
                 >
                   {s}
@@ -521,7 +521,7 @@ function PickSheet({
               ))}
             </div>
             {needSize && (
-              <p role="alert" className="mt-3 text-body-sm font-medium text-navy">
+              <p role="alert" className="mt-3 text-body-sm font-medium text-anor">
                 {tp("chooseSize")}
               </p>
             )}

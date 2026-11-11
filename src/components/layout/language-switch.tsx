@@ -50,7 +50,7 @@ export function LanguageSwitch({ tone = "light", className }: { tone?: "light" |
             )}
           >
             {active && (
-              <motion.span layoutId={`lang-${id}`} transition={SPRING} className="absolute inset-0 -z-10 rounded-pill bg-navy" />
+              <motion.span layoutId={`lang-${id}`} transition={SPRING} className="absolute inset-0 -z-10 rounded-pill bg-anor" />
             )}
             {l}
           </button>

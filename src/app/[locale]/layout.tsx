@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Onest, Unbounded } from "next/font/google";
+import { Cormorant_SC, Great_Vibes, Manrope, Playfair_Display } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -16,12 +16,14 @@ import { Preloader, BOOT_SCRIPT } from "@/components/layout/preloader";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import "../globals.css";
 
-// Interface: neutral grotesque built for Cyrillic + Latin. Accent: Unbounded (see README).
-// Both are variable fonts: one file per subset covers every weight we use (300–500).
-// Not preloaded: the banner image (LCP) gets the bandwidth first; text shows at once in a
-// metric-matched fallback and swaps; each subset loads only when its glyphs are used.
-const onest = Onest({ subsets: ["latin", "latin-ext", "cyrillic"], variable: "--font-onest", display: "swap", preload: false });
-const unbounded = Unbounded({ subsets: ["latin", "latin-ext", "cyrillic"], variable: "--font-unbounded", display: "swap", preload: false });
+// "Jadid manuscript" type (DESIGN.md §2): Manrope body, Playfair Display headlines/quotes,
+// Great Vibes script for emotional accents ("Aylanib ketay…"), Cormorant SC for small Art-Deco labels and dates.
+// All cover Latin-Ext + Cyrillic. Not preloaded: the banner image (LCP) gets the bandwidth first;
+// text shows at once in a metric-matched fallback and swaps; each subset loads only when used.
+const manrope = Manrope({ subsets: ["latin", "latin-ext", "cyrillic"], variable: "--font-manrope", display: "swap", preload: false });
+const playfair = Playfair_Display({ subsets: ["latin", "latin-ext", "cyrillic"], variable: "--font-playfair", display: "swap", preload: false });
+const script = Great_Vibes({ subsets: ["latin", "latin-ext", "cyrillic"], weight: "400", variable: "--font-script-face", display: "swap", preload: false });
+const cormorant = Cormorant_SC({ subsets: ["latin", "latin-ext", "cyrillic"], weight: ["500", "600"], variable: "--font-cormorant", display: "swap", preload: false });
 
 export const revalidate = 300;
 
@@ -30,7 +32,7 @@ export function generateStaticParams() {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#E6E1BF",
+  themeColor: "#EEE4D0",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -72,12 +74,12 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   };
 
   return (
-    <html lang={locale} className={`${onest.variable} ${unbounded.variable}`} suppressHydrationWarning>
+    <html lang={locale} className={`${manrope.variable} ${playfair.variable} ${script.variable} ${cormorant.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </head>
-      <body className="min-h-dvh bg-paper font-sans text-ink">
+      <body className="grain min-h-dvh bg-paper font-sans text-ink">
         <a
           href="#main"
           className="sr-only z-[100] rounded bg-ink px-4 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"

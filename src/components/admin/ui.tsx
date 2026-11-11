@@ -93,7 +93,7 @@ export function Select({ className, children, ...props }: ComponentProps<"select
     <div className="relative">
       <select
         className={cn(
-          "h-12 w-full appearance-none rounded border border-line bg-white pl-4 pr-10 text-body text-ink outline-none transition-colors duration-150 focus-visible:border-navy focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-navy aria-[invalid=true]:border-ink disabled:opacity-50",
+          "h-12 w-full appearance-none rounded border border-line bg-white pl-4 pr-10 text-body text-ink outline-none transition-colors duration-150 focus-visible:border-anor focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-anor aria-[invalid=true]:border-ink disabled:opacity-50",
           className,
         )}
         {...props}
@@ -177,7 +177,7 @@ export function Badge({
   className,
 }: {
   children: ReactNode;
-  tone?: "solid" | "outline" | "muted" | "navy";
+  tone?: "solid" | "outline" | "muted" | "anor";
   className?: string;
 }) {
   return (
@@ -185,7 +185,7 @@ export function Badge({
       className={cn(
         "inline-flex h-6 items-center whitespace-nowrap rounded-pill px-2.5 text-micro font-medium",
         tone === "solid" && "bg-ink text-white",
-        tone === "navy" && "bg-navy text-white",
+        tone === "anor" && "bg-anor text-white",
         tone === "outline" && "border border-ink text-ink",
         tone === "muted" && "border border-line bg-paper text-muted",
         className,

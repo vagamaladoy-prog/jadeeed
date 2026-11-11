@@ -55,10 +55,10 @@ export function FitMannequin({ body, row, unit }: { body: BodyParams; row: FitRo
             </text>
           </g>
         ))}
-        <line x1="-56" x2="0" y1={top} y2={top} strokeDasharray="2 2" className="text-navy" />
+        <line x1="-56" x2="0" y1={top} y2={top} strokeDasharray="2 2" className="text-anor" />
         <line x1="-85" x2="85" y1={FOOT} y2={FOOT} />
       </g>
-      <text x="-54" y={top - 1.5} fontSize="7.5" fontWeight="500" className="fill-navy tabular-nums">
+      <text x="-54" y={top - 1.5} fontSize="7.5" fontWeight="500" className="fill-anor tabular-nums">
         {h} {unit}
       </text>
 
@@ -94,5 +94,5 @@ function Garment({ row, height, shoulderY, headR }: { row: FitRow; height: numbe
   const right = pts([[neck, y0], [halfW, shoulder], outer, inner, armpit, [halfW, hem]]);
   const left = pts([[-halfW, hem], [-armpit[0], armpit[1]], [-inner[0], inner[1]], [-outer[0], outer[1]], [-halfW, shoulder], [-neck, y0]]);
   const d = `M${right.join(" L")} L${left.join(" L")} Q0 ${(y0 + neck * 1.4).toFixed(1)} ${neck.toFixed(1)} ${y0.toFixed(1)} Z`;
-  return <path d={d} className="fill-navy/25 stroke-navy" strokeWidth="1.2" strokeLinejoin="round" />;
+  return <path d={d} className="fill-anor/25 stroke-anor" strokeWidth="1.2" strokeLinejoin="round" />;
 }

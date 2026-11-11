@@ -74,7 +74,7 @@ export function TabBar() {
                 <motion.span
                   layoutId="tab-dot"
                   transition={SPRING}
-                  className="absolute bottom-1 size-1 rounded-pill bg-navy"
+                  className="absolute bottom-1 size-1 rounded-pill bg-anor"
                   aria-hidden
                 />
               )}

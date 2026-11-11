@@ -29,7 +29,7 @@ export function CartPage({ waitingPhrase }: { waitingPhrase: string }) {
 
   const continueLink = (
     <Link href="/catalog" className="group inline-flex min-h-11 flex-col items-start gap-0.5">
-      <span className="phrase text-heading text-ink transition-colors duration-[var(--dur-hover)] group-hover:text-navy">{waitingPhrase}</span>
+      <span className="phrase text-heading text-ink transition-colors duration-[var(--dur-hover)] group-hover:text-anor">{waitingPhrase}</span>
       <span className="text-body-sm text-muted underline underline-offset-4">{t("continue")}</span>
     </Link>
   );

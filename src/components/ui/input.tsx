@@ -3,7 +3,7 @@ import type { ComponentProps } from "react";
 import { cn } from "@/lib/cn";
 
 const field =
-  "w-full rounded border border-line bg-white px-4 text-body text-ink placeholder:text-muted/80 transition-colors duration-[var(--dur-hover)] outline-none focus-visible:border-navy focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-navy aria-[invalid=true]:border-ink disabled:opacity-50";
+  "w-full rounded border border-line bg-white px-4 text-body text-ink placeholder:text-muted/80 transition-colors duration-[var(--dur-hover)] outline-none focus-visible:border-anor focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-anor aria-[invalid=true]:border-ink disabled:opacity-50";
 
 export function Input({ className, ...props }: ComponentProps<"input">) {
   return <input className={cn(field, "h-12", className)} {...props} />;
@@ -21,7 +21,7 @@ export function FieldError({ children }: { children?: string }) {
   if (!children) return null;
   return (
     <p role="alert" className="mt-2 text-body-sm text-ink">
-      <span className="mr-1 inline-block size-1.5 translate-y-[-2px] rounded-pill bg-navy" aria-hidden />
+      <span className="mr-1 inline-block size-1.5 translate-y-[-2px] rounded-pill bg-anor" aria-hidden />
       {children}
     </p>
   );

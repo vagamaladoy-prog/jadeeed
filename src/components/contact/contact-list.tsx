@@ -29,12 +29,12 @@ export function ContactList({ settings, variant = "cards" }: { settings: Setting
               variant === "cards"
                 ? cn(
                     "rounded border p-6",
-                    c.main ? "border-ink bg-ink text-white hover:bg-navy md:col-span-2 md:p-8" : "border-line bg-white hover:border-ink",
+                    c.main ? "border-ink bg-ink text-white hover:bg-anor md:col-span-2 md:p-8" : "border-line bg-white hover:border-ink",
                   )
                 : "border-b border-line py-4",
             )}
           >
-            <Icon className={cn("mt-1 size-6 shrink-0", c.main && variant === "cards" ? "text-white" : "text-navy")} />
+            <Icon className={cn("mt-1 size-6 shrink-0", c.main && variant === "cards" ? "text-white" : "text-anor")} />
             <span className="flex min-w-0 flex-1 flex-col gap-1">
               <span className={cn("font-display font-light tracking-tight", c.main && variant === "cards" ? "text-heading-lg" : "text-heading")}>
                 {c.title}
@@ -49,8 +49,8 @@ export function ContactList({ settings, variant = "cards" }: { settings: Setting
       {(settings.phone || settings.address) && (
         <div className={cn("flex flex-col gap-3 text-body", variant === "cards" ? "rounded border border-line p-6 md:col-span-2" : "py-4")}>
           {settings.phone && (
-            <a href={`tel:${settings.phone.replace(/[^\d+]/g, "")}`} className="flex min-h-11 items-center gap-3 hover:text-navy">
-              <Phone className="size-5 text-navy" />
+            <a href={`tel:${settings.phone.replace(/[^\d+]/g, "")}`} className="flex min-h-11 items-center gap-3 hover:text-anor">
+              <Phone className="size-5 text-anor" />
               <span>
                 <span className="sr-only">{t("phone")}: </span>
                 {settings.phone}
@@ -59,7 +59,7 @@ export function ContactList({ settings, variant = "cards" }: { settings: Setting
           )}
           {settings.address && (
             <p className="flex items-start gap-3">
-              <MapPin className="mt-0.5 size-5 shrink-0 text-navy" />
+              <MapPin className="mt-0.5 size-5 shrink-0 text-anor" />
               <span>
                 {tr(settings.address, locale)}
                 {settings.workHours && <span className="block text-body-sm text-muted">{tr(settings.workHours, locale)}</span>}

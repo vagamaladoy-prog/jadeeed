@@ -101,7 +101,7 @@ export function FitSheet({
         <div>
           <div className="mb-3 flex items-baseline justify-between gap-3">
             <p className="text-body-sm text-muted">{t("tryOn")}</p>
-            {verdict && <p className="text-body-sm font-medium text-navy">{t(`verdict.${verdict}`)}</p>}
+            {verdict && <p className="text-body-sm font-medium text-anor">{t(`verdict.${verdict}`)}</p>}
           </div>
           <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={t("tryOn")}>
             {rows.map((r) => {
@@ -115,7 +115,7 @@ export function FitSheet({
                   onClick={() => setChosen(r.size)}
                   className={cn(
                     "h-11 min-w-12 rounded-pill border px-3 text-body-sm font-medium transition-colors duration-[var(--dur-hover)]",
-                    r.size === size ? "border-navy bg-navy text-white" : "border-line bg-white hover:border-ink",
+                    r.size === size ? "border-anor bg-anor text-white" : "border-line bg-white hover:border-ink",
                     out && "line-through",
                   )}
                 >
@@ -186,7 +186,7 @@ function Scale({
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
           aria-label={label}
-          className="h-11 min-w-0 flex-1 cursor-pointer accent-navy"
+          className="h-11 min-w-0 flex-1 cursor-pointer accent-anor"
         />
         <button type="button" onClick={() => step(1)} disabled={value >= limits.max} aria-label={`${label} +1`} className={stepBtn}>
           <Plus className="size-4" />

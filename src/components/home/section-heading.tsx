@@ -24,7 +24,7 @@ export function SectionHeading({
       {link && (
         <Link
           href={link.href}
-          className="group flex min-h-11 shrink-0 items-center gap-2 text-body-sm font-medium text-navy underline-offset-4 hover:underline"
+          className="group flex min-h-11 shrink-0 items-center gap-2 text-body-sm font-medium text-anor underline-offset-4 hover:underline"
         >
           {link.label}
           <ArrowRight className="size-4 transition-transform duration-[var(--dur-hover)] group-hover:translate-x-1" />

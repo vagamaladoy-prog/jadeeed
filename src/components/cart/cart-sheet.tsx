@@ -48,7 +48,7 @@ export function CartSheet({ waitingPhrase }: { waitingPhrase: string }) {
                 {t("checkout")}
               </Link>
             </Button>
-            <Link href="/cart" onClick={() => cartUi.close()} className="self-center py-2 text-body-sm text-navy underline underline-offset-4">
+            <Link href="/cart" onClick={() => cartUi.close()} className="self-center py-2 text-body-sm text-anor underline underline-offset-4">
               {t("openPage")}
             </Link>
           </div>

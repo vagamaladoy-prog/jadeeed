@@ -71,7 +71,7 @@ export const useTelegram = () => useContext(TelegramContext);
 const SDK = "https://telegram.org/js/telegram-web-app.js";
 const FLAG = "jd-tg";
 const INK = "#0B0B0C";
-const PAPER = "#E6E1BF";
+const PAPER = "#EEE4D0";
 
 function launchedInTelegram() {
   try {

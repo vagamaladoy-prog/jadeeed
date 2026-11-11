@@ -37,7 +37,7 @@ export function ImageUpload({
   };
 
   return (
-    <div className="rounded has-[input:focus-visible]:outline-2 has-[input:focus-visible]:outline-offset-2 has-[input:focus-visible]:outline-navy">
+    <div className="rounded has-[input:focus-visible]:outline-2 has-[input:focus-visible]:outline-offset-2 has-[input:focus-visible]:outline-anor">
       <input
         ref={inputRef}
         id={id}

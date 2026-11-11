@@ -63,7 +63,7 @@ export function CartLine({ item, compact }: { item: CartItem; compact?: boolean 
                 onClick={() => cart.changeSize(item.key, s.size)}
                 className={cn(
                   "h-8 min-w-10 rounded-pill border px-2 text-label font-medium transition-colors duration-[var(--dur-hover)]",
-                  active ? "border-navy bg-navy text-white" : "border-line bg-white text-ink hover:border-ink",
+                  active ? "border-anor bg-anor text-white" : "border-line bg-white text-ink hover:border-ink",
                   disabled && !active && "cursor-not-allowed text-muted line-through opacity-50",
                 )}
               >

@@ -161,7 +161,7 @@ export function CheckoutForm() {
         {serverError && (
           <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} role="alert" className="rounded border border-ink bg-white p-4 text-body-sm">
             {serverError}{" "}
-            <Link href="/cart" className="text-navy underline underline-offset-4">
+            <Link href="/cart" className="text-anor underline underline-offset-4">
               {tc("title")}
             </Link>
           </motion.div>

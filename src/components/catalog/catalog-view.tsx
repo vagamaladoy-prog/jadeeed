@@ -88,7 +88,7 @@ export function CatalogView({
   const chip = (on: boolean) =>
     cn(
       "flex h-11 min-w-11 items-center justify-center gap-2 rounded-pill border px-4 text-body-sm font-medium transition-colors duration-[var(--dur-hover)]",
-      on ? "border-navy bg-navy text-white" : "border-line bg-white text-ink hover:border-ink",
+      on ? "border-anor bg-anor text-white" : "border-line bg-white text-ink hover:border-ink",
     );
 
   const panel = (
@@ -176,7 +176,7 @@ export function CatalogView({
                   const d = e.target.value.replace(/\D/g, "");
                   update({ [k]: d ? Number(d) : null } as Partial<Filters>);
                 }}
-                className="h-11 w-full rounded border border-line bg-white px-3 text-body-sm outline-none focus-visible:border-navy focus-visible:outline-2 focus-visible:outline-navy"
+                className="h-11 w-full rounded border border-line bg-white px-3 text-body-sm outline-none focus-visible:border-anor focus-visible:outline-2 focus-visible:outline-anor"
               />
             </label>
           ))}
@@ -190,7 +190,7 @@ export function CatalogView({
           role="switch"
           aria-checked={filters.sale}
           onClick={() => update({ sale: !filters.sale })}
-          className={cn("relative h-7 w-12 rounded-pill transition-colors duration-[var(--dur-hover)]", filters.sale ? "bg-navy" : "bg-line")}
+          className={cn("relative h-7 w-12 rounded-pill transition-colors duration-[var(--dur-hover)]", filters.sale ? "bg-anor" : "bg-line")}
         >
           <motion.span
             layout
@@ -217,7 +217,7 @@ export function CatalogView({
             className="flex min-h-12 w-full items-center justify-between border-b border-line text-left text-body"
           >
             {t(SORT_LABEL[s])}
-            {filters.sort === s && <Check className="size-5 text-navy" />}
+            {filters.sort === s && <Check className="size-5 text-anor" />}
           </button>
         </li>
       ))}
@@ -230,7 +230,7 @@ export function CatalogView({
       <aside className="hidden lg:col-span-3 lg:block">
         <div className="sticky top-24">{panel}</div>
         {active > 0 && (
-          <button type="button" onClick={() => update({ ...EMPTY_FILTERS, sort: filters.sort })} className="mt-6 min-h-11 text-body-sm text-navy underline underline-offset-4">
+          <button type="button" onClick={() => update({ ...EMPTY_FILTERS, sort: filters.sort })} className="mt-6 min-h-11 text-body-sm text-anor underline underline-offset-4">
             {t("reset")}
           </button>
         )}
@@ -246,7 +246,7 @@ export function CatalogView({
             <select
               value={filters.sort}
               onChange={(e) => update({ sort: e.target.value as SortKey })}
-              className="h-11 rounded border border-line bg-white px-3 text-body-sm outline-none focus-visible:outline-2 focus-visible:outline-navy"
+              className="h-11 rounded border border-line bg-white px-3 text-body-sm outline-none focus-visible:outline-2 focus-visible:outline-anor"
             >
               {SORTS.map((s) => (
                 <option key={s} value={s}>

@@ -65,7 +65,7 @@ export function SearchSheet({ categories }: { categories: CategoryDTO[] }) {
         placeholder={t("placeholder")}
         aria-label={t("hint")}
         enterKeyHint="search"
-        className="h-13 w-full rounded border border-line bg-white pl-12 pr-4 text-body outline-none focus-visible:border-navy focus-visible:outline-2 focus-visible:outline-navy"
+        className="h-13 w-full rounded border border-line bg-white pl-12 pr-4 text-body outline-none focus-visible:border-anor focus-visible:outline-2 focus-visible:outline-anor"
       />
     </form>
   );

@@ -49,7 +49,7 @@ export function ThanksView({
       >
         <BrandPhrase text={phrase} as="h1" animate="write" delay={after} className="text-display tracking-tighter" />
         {number && (
-          <p className="mt-6 font-display text-heading font-light tabular-nums text-navy">{preorder ? tp("doneTitle", { number }) : t("order", { number })}</p>
+          <p className="mt-6 font-display text-heading font-light tabular-nums text-anor">{preorder ? tp("doneTitle", { number }) : t("order", { number })}</p>
         )}
         <p className="mx-auto mt-4 max-w-sm text-body text-muted">{preorder ? tp("doneText") : t("text")}</p>
         <div className="mt-8 flex flex-col items-center gap-3">
@@ -58,7 +58,7 @@ export function ThanksView({
               <Send /> {t("subscribe")}
             </ExternalLink>
           </Button>
-          <ExternalLink href={supportUrl} className="flex min-h-11 items-center text-body-sm text-navy underline underline-offset-4">
+          <ExternalLink href={supportUrl} className="flex min-h-11 items-center text-body-sm text-anor underline underline-offset-4">
             {t("support")}
           </ExternalLink>
           <Link href="/" className="flex min-h-11 items-center text-body-sm text-muted hover:text-ink">

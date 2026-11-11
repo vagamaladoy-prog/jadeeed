@@ -17,7 +17,7 @@ export function AboutBlock({ phrase, title, text, more }: { phrase: string; titl
         </div>
         <Reveal className="flex flex-col gap-6 lg:col-span-6 lg:col-start-7 lg:pt-10" delay={0.15}>
           <p className="text-subheading leading-relaxed text-ink">{first}</p>
-          <Link href="/about" className="group flex min-h-11 w-fit items-center gap-2 text-body font-medium text-navy underline-offset-4 hover:underline">
+          <Link href="/about" className="group flex min-h-11 w-fit items-center gap-2 text-body font-medium text-anor underline-offset-4 hover:underline">
             {more}
             <ArrowRight className="size-4 transition-transform duration-[var(--dur-hover)] group-hover:translate-x-1" />
           </Link>

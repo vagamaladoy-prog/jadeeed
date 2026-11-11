@@ -9,13 +9,14 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-ink text-white hover:bg-navy",
-        navy: "bg-navy text-white hover:bg-ink",
+        primary: "bg-anor text-white hover:bg-ink",
+        ink: "bg-ink text-white hover:bg-anor",
+        anor: "bg-anor text-white hover:bg-ink",
         outline: "border border-ink bg-transparent text-ink hover:bg-ink hover:text-white",
         "outline-light": "border border-white/70 bg-transparent text-white hover:bg-white hover:text-ink",
         light: "bg-white text-ink hover:bg-paper",
         ghost: "bg-transparent text-ink hover:bg-paper-2",
-        link: "h-auto px-0 text-navy underline decoration-1 underline-offset-4 hover:decoration-2",
+        link: "h-auto px-0 text-anor underline decoration-1 underline-offset-4 hover:decoration-2",
       },
       size: {
         sm: "h-11 px-4 text-body-sm",

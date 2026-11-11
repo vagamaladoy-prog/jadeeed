@@ -32,7 +32,7 @@ export function SourceLabel({ source, username }: { source: "WEB" | "TELEGRAM"; 
             target="_blank"
             rel="noopener noreferrer"
             onClick={stop}
-            className="text-navy underline underline-offset-4"
+            className="text-anor underline underline-offset-4"
           >
             @{username}
           </a>

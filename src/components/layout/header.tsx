@@ -95,7 +95,7 @@ export function Header() {
                 )}
               >
                 {t(n.key)}
-                {active && <span className="absolute inset-x-0 -bottom-0.5 h-0.5 bg-navy" aria-hidden />}
+                {active && <span className="absolute inset-x-0 -bottom-0.5 h-0.5 bg-anor" aria-hidden />}
               </Link>
             );
           })}

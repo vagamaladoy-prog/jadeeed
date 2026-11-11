@@ -119,13 +119,13 @@ export function ProductView({
             className={cn(
               "relative grid min-w-13 place-items-center rounded-pill border px-3 text-body-sm font-medium transition-colors duration-[var(--dur-hover)]",
               big ? "h-13" : "h-12",
-              active ? "border-navy bg-navy text-white" : "border-line bg-white text-ink hover:border-ink",
+              active ? "border-anor bg-anor text-white" : "border-line bg-white text-ink hover:border-ink",
               out && "cursor-not-allowed border-line bg-transparent text-muted line-through",
             )}
           >
             {s}
             {!out && qty <= 3 && (
-              <span className={cn("absolute -top-1.5 right-0 size-2 rounded-pill", active ? "bg-white ring-2 ring-navy" : "bg-navy")} aria-hidden />
+              <span className={cn("absolute -top-1.5 right-0 size-2 rounded-pill", active ? "bg-white ring-2 ring-anor" : "bg-anor")} aria-hidden />
             )}
           </motion.button>
         );
@@ -137,7 +137,7 @@ export function ProductView({
     <button
       type="button"
       onClick={() => setFitOpen(true)}
-      className="flex min-h-11 w-fit items-center gap-2 text-body-sm text-navy underline underline-offset-4"
+      className="flex min-h-11 w-fit items-center gap-2 text-body-sm text-anor underline underline-offset-4"
     >
       <PersonStanding className="size-4" /> {tFit("open")}
     </button>
@@ -165,7 +165,7 @@ export function ProductView({
         <div className="flex flex-col gap-7 lg:col-span-5 lg:pt-4">
           <div className="flex flex-col gap-3">
             {(product.isNew || product.isBestseller) && (
-              <span className="phrase w-fit rounded-pill bg-navy px-3 py-1 text-label text-white">{badgePhrase}</span>
+              <span className="phrase w-fit rounded-pill bg-anor px-3 py-1 text-label text-white">{badgePhrase}</span>
             )}
             <h1 className="font-display text-heading-lg font-light tracking-tighter">{name}</h1>
             <Price pricing={product.pricing} size="lg" />
@@ -191,7 +191,7 @@ export function ProductView({
                   }}
                   className={cn(
                     "relative size-13 overflow-hidden rounded border bg-paper-2 transition-colors duration-[var(--dur-hover)]",
-                    c.id === colorId ? "border-navy outline outline-2 outline-offset-1 outline-navy" : "border-line hover:border-ink",
+                    c.id === colorId ? "border-anor outline outline-2 outline-offset-1 outline-anor" : "border-line hover:border-ink",
                   )}
                 >
                   <span className="absolute inset-2 rounded-pill border border-line" style={{ backgroundColor: c.hex }} />
@@ -207,7 +207,7 @@ export function ProductView({
               <button
                 type="button"
                 onClick={() => setChartOpen(true)}
-                className="-mr-2 flex min-h-11 items-center gap-2 px-2 text-body-sm text-navy underline underline-offset-4"
+                className="-mr-2 flex min-h-11 items-center gap-2 px-2 text-body-sm text-anor underline underline-offset-4"
               >
                 <Ruler className="size-4" /> {t("sizeChart")}
               </button>
@@ -222,7 +222,7 @@ export function ProductView({
                   initial={{ opacity: 0, y: -4 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  className="mt-3 text-body-sm font-medium text-navy"
+                  className="mt-3 text-body-sm font-medium text-anor"
                 >
                   {t("chooseSize")}
                 </motion.p>
@@ -240,13 +240,13 @@ export function ProductView({
               href={{ pathname: "/preorder", query: { product: product.slug, color: color.id } }}
               className={cn(
                 "-mt-3 flex min-h-11 w-fit items-center gap-2 text-body-sm underline underline-offset-4",
-                soldOut ? "font-medium text-navy" : "text-muted hover:text-navy",
+                soldOut ? "font-medium text-anor" : "text-muted hover:text-anor",
               )}
             >
               <CalendarClock className="size-4" aria-hidden /> {soldOut ? tPre("productLinkSoldOut") : tPre("productLink")}
             </Link>
           )}
-          <ExternalLink href={supportUrl} className="flex min-h-11 w-fit items-center text-body-sm text-muted underline decoration-line underline-offset-4 hover:text-navy">
+          <ExternalLink href={supportUrl} className="flex min-h-11 w-fit items-center text-body-sm text-muted underline decoration-line underline-offset-4 hover:text-anor">
             {t("question")}
           </ExternalLink>
 
@@ -271,7 +271,7 @@ export function ProductView({
             onClick={() => setSizeSheet(true)}
             className={cn(
               "h-12 min-w-13 rounded-pill border px-4 text-body-sm font-medium",
-              size ? "border-navy bg-navy text-white" : needSize ? "border-navy text-navy" : "border-line bg-white",
+              size ? "border-anor bg-anor text-white" : needSize ? "border-anor text-anor" : "border-line bg-white",
             )}
             aria-label={t("size")}
           >
@@ -288,7 +288,7 @@ export function ProductView({
             {sizeChips(true)}
             <div className="flex flex-col">
               {fitButton}
-              <button type="button" onClick={() => setChartOpen(true)} className="flex min-h-11 w-fit items-center gap-2 text-body-sm text-navy underline underline-offset-4">
+              <button type="button" onClick={() => setChartOpen(true)} className="flex min-h-11 w-fit items-center gap-2 text-body-sm text-anor underline underline-offset-4">
                 <Ruler className="size-4" /> {t("sizeChart")}
               </button>
             </div>

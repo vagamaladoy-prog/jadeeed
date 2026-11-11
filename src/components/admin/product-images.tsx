@@ -123,7 +123,7 @@ export function ProductImages({ value, onChange }: { value: string[]; onChange: 
             <li>
               <label
                 htmlFor={inputId}
-                className="flex aspect-[4/5] cursor-pointer flex-col items-center justify-center gap-2 rounded border border-dashed border-muted bg-white p-2 text-center text-body-sm text-muted transition-colors duration-150 hover:border-ink hover:text-ink focus-within:outline-2 focus-within:outline-navy"
+                className="flex aspect-[4/5] cursor-pointer flex-col items-center justify-center gap-2 rounded border border-dashed border-muted bg-white p-2 text-center text-body-sm text-muted transition-colors duration-150 hover:border-ink hover:text-ink focus-within:outline-2 focus-within:outline-anor"
               >
                 <ImagePlus className="size-6" aria-hidden />
                 Добавить фото

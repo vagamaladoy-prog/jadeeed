@@ -155,7 +155,7 @@ export function AdminTabBar({ newOrders, newPreorders = 0 }: { newOrders: number
                     {item.href === "/admin/orders" && <Counter value={newOrders} className="absolute -right-3 -top-1.5" />}
                   </span>
                   {item.label}
-                  {active && <span aria-hidden className="absolute bottom-1 size-1 rounded-pill bg-navy" />}
+                  {active && <span aria-hidden className="absolute bottom-1 size-1 rounded-pill bg-anor" />}
                 </Link>
               </li>
             );
@@ -165,7 +165,7 @@ export function AdminTabBar({ newOrders, newPreorders = 0 }: { newOrders: number
               <MoreHorizontal className="size-6" strokeWidth={moreActive ? 2 : 1.6} aria-hidden />
               Ещё
               {newPreorders > 0 && <span aria-hidden className="absolute right-[calc(50%-18px)] top-2 size-2 rounded-pill bg-ink" />}
-              {moreActive && <span aria-hidden className="absolute bottom-1 size-1 rounded-pill bg-navy" />}
+              {moreActive && <span aria-hidden className="absolute bottom-1 size-1 rounded-pill bg-anor" />}
             </button>
           </li>
         </ul>

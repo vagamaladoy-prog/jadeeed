@@ -11,7 +11,7 @@ import { savePreorderNote, savePreorderSettings, updatePreorderStatus } from "@/
 import type { ActionResult } from "@/lib/admin/action";
 
 export function PreorderStatusBadge({ status }: { status: PreorderStatusCode }) {
-  const tone = status === "NEW" ? "solid" : status === "ARRIVED" ? "navy" : status === "CANCELLED" || status === "COMPLETED" ? "muted" : "outline";
+  const tone = status === "NEW" ? "solid" : status === "ARRIVED" ? "anor" : status === "CANCELLED" || status === "COMPLETED" ? "muted" : "outline";
   return <Badge tone={tone}>{PREORDER_STATUS_LABELS[status]}</Badge>;
 }
 

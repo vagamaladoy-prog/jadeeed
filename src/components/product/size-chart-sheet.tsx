@@ -38,7 +38,7 @@ export function SizeChartSheet({
             </thead>
             <tbody>
               {chart.rows.map((r) => (
-                <tr key={r.size} className={cn("border-b border-line", highlight === r.size && "bg-navy text-white")}>
+                <tr key={r.size} className={cn("border-b border-line", highlight === r.size && "bg-anor text-white")}>
                   <th scope="row" className="py-3 pl-2 pr-2 font-medium">{r.size}</th>
                   <td className="py-3 pr-2">{r.width ?? "—"}</td>
                   <td className="py-3 pr-2">{r.length ?? "—"}</td>
@@ -52,7 +52,7 @@ export function SizeChartSheet({
       ) : (
         <p className="py-6 text-body text-muted">{t("empty")}</p>
       )}
-      <ExternalLink href={supportUrl} className="mt-6 flex min-h-11 items-center text-body-sm text-navy underline underline-offset-4">
+      <ExternalLink href={supportUrl} className="mt-6 flex min-h-11 items-center text-body-sm text-anor underline underline-offset-4">
         {t("notFit")}
       </ExternalLink>
     </Sheet>

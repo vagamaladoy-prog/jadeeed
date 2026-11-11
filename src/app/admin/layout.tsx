@@ -1,17 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Onest, Unbounded } from "next/font/google";
+import { Manrope, Playfair_Display } from "next/font/google";
 import { Toaster } from "sonner";
 import "../globals.css";
 
 // Admin is its own root layout (the storefront root layout lives in [locale]).
-const onest = Onest({ subsets: ["latin", "latin-ext", "cyrillic"], variable: "--font-onest", display: "swap" });
-// accent font — only for brand-phrase previews
-const unbounded = Unbounded({
-  subsets: ["latin", "latin-ext", "cyrillic"],
-  variable: "--font-unbounded",
-  display: "swap",
-  weight: ["300", "400"],
-});
+const manrope = Manrope({ subsets: ["latin", "latin-ext", "cyrillic"], variable: "--font-manrope", display: "swap" });
+// accent font — only for headings and brand-phrase previews
+const playfair = Playfair_Display({ subsets: ["latin", "latin-ext", "cyrillic"], variable: "--font-playfair", display: "swap" });
 
 export const metadata: Metadata = {
   title: "Jadeeed — админка",
@@ -27,7 +22,7 @@ export const viewport: Viewport = {
 
 export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru" className={`${onest.variable} ${unbounded.variable}`}>
+    <html lang="ru" className={`${manrope.variable} ${playfair.variable}`}>
       <body className="min-h-dvh bg-paper font-sans text-ink">
         {children}
         <Toaster

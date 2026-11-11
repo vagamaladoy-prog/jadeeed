@@ -18,7 +18,7 @@ export function CartCount({ className }: { className?: string }) {
           exit={{ scale: 0, opacity: 0 }}
           transition={{ ...SPRING, stiffness: 500, damping: 18 }}
           className={cn(
-            "pointer-events-none grid h-4.5 min-w-4.5 place-items-center rounded-pill bg-navy px-1 text-micro font-semibold text-white",
+            "pointer-events-none grid h-4.5 min-w-4.5 place-items-center rounded-pill bg-anor px-1 text-micro font-semibold text-white",
             className,
           )}
           aria-hidden

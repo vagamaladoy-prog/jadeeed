@@ -52,7 +52,7 @@ export function ProductCard({
           {/* badges */}
           <div className="absolute left-2 top-2 flex flex-col items-start gap-1.5 md:left-3 md:top-3">
             {(product.isNew || product.isBestseller) && (
-              <span className="phrase rounded-pill bg-navy px-2.5 py-1 text-micro text-white">{badgePhrase}</span>
+              <span className="phrase rounded-pill bg-firuza px-2.5 py-1 text-micro text-white">{badgePhrase}</span>
             )}
             {product.pricing.discountPercent ? (
               <span className="rounded-pill bg-ink px-2.5 py-1 text-micro font-medium text-white">−{product.pricing.discountPercent}%</span>
@@ -106,7 +106,7 @@ export function ProductCard({
                 <motion.span
                   className={cn(
                     "block size-4 rounded-pill border",
-                    c.id === color?.id ? "border-navy ring-2 ring-navy ring-offset-2 ring-offset-paper" : "border-line",
+                    c.id === color?.id ? "border-anor ring-2 ring-anor ring-offset-2 ring-offset-paper" : "border-line",
                   )}
                   style={{ backgroundColor: c.hex }}
                   whileTap={{ scale: 0.85 }}
