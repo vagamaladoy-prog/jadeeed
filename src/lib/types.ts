@@ -54,15 +54,6 @@ export type CategoryDTO = {
   productCount: number;
 };
 
-export type BannerDTO = {
-  id: string;
-  imageDesktop: string;
-  imageMobile: string | null;
-  alt: L10n;
-  link: string | null;
-  headerTone: "LIGHT" | "DARK";
-};
-
 export type SettingsDTO = {
   supportUsername: string;
   supportUrl: string;

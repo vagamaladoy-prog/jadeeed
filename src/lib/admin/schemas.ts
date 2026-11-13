@@ -2,7 +2,7 @@
 // Input type == output type everywhere (no transforms/defaults), so `useForm<z.infer<…>>` just works.
 import { z } from "zod";
 import { FITS, SIZES } from "@/lib/types";
-import { DISCOUNT_TYPES, HEADER_TONES, ORDER_STATUSES, PHRASE_SLOTS, PREORDER_STATUSES, PROMOTION_SCOPES } from "./labels";
+import { DISCOUNT_TYPES, ORDER_STATUSES, PHRASE_SLOTS, PREORDER_STATUSES, PROMOTION_SCOPES } from "./labels";
 
 const required = (msg: string, max = 200) => z.string().trim().min(1, msg).max(max, `Не длиннее ${max} символов`);
 const text = (max = 10_000) => z.string().trim().max(max, `Не длиннее ${max} символов`);
@@ -16,12 +16,6 @@ export const slugSchema = z
   .min(1, "Укажите адрес (slug)")
   .max(80, "Адрес не длиннее 80 символов")
   .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Адрес: только латиница в нижнем регистре, цифры и дефис");
-
-const linkSchema = z
-  .string()
-  .trim()
-  .max(500, "Ссылка слишком длинная")
-  .refine((v) => v === "" || /^(https?:\/\/\S+|\/\S*)$/.test(v), "Ссылка должна начинаться с / или https://");
 
 const urlSchema = (msg: string) =>
   z
@@ -108,18 +102,6 @@ export const promotionSchema = z
       ctx.addIssue({ code: "custom", path: ["endsAt"], message: "Окончание должно быть позже начала" });
   });
 export type PromotionValues = z.infer<typeof promotionSchema>;
-
-// ─── banners ─────────────────────────────────────────────────────────────────
-export const bannerSchema = z.object({
-  imageDesktop: z.string().min(1, "Загрузите картинку для ПК"),
-  imageMobile: z.string(),
-  altUz: required("Текст на картинке (uz) обязателен", 300),
-  altRu: required("Текст на картинке (ru) обязателен", 300),
-  link: linkSchema,
-  headerTone: z.enum(HEADER_TONES),
-  isActive: z.boolean(),
-});
-export type BannerValues = z.infer<typeof bannerSchema>;
 
 // ─── brand phrases ───────────────────────────────────────────────────────────
 export const phraseSchema = z.object({

@@ -27,27 +27,27 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const [products, phrases] = await Promise.all([getCatalogProducts(), getPhrases()]);
 
   const fresh = [...products.filter((p) => p.isNew), ...products.filter((p) => !p.isNew && p.isFeatured)].slice(0, 10);
-  // the rail: 2 hangers per shot pair (scripts/process-wardrobe.mjs); hoodies have no product yet → "Men o'sha"
-  const hoodie = locale === "ru" ? "Худи «Men o'sha»" : 'Xudi "Men o\'sha"';
+  const hoodies = products.filter((p) => p.categorySlug === "xudilar");
+  // the rail: 2 hangers per shot pair (scripts/process-wardrobe.mjs); each hanger opens its own product
   const rail = [
     { shot: "men-osha", slug: "men-osha" },
     { shot: "aylanib-ketay", slug: "aylanib-ketay" },
     { shot: "siz-oshami", slug: "siz-oshami" },
-    { shot: "men-osha-hoodie-black", slug: "men-osha", name: hoodie },
-    { shot: "men-osha-hoodie-grey", slug: "men-osha", name: hoodie },
+    { shot: "men-osha-hoodie-black", slug: "men-osha-xudi" },
+    { shot: "men-osha-hoodie-grey", slug: "men-osha-xudi" },
   ];
-  const wardrobe = rail.flatMap(({ shot, slug, name }) => {
+  const wardrobe = rail.flatMap(({ shot, slug }) => {
     const p = products.find((x) => x.slug === slug);
     const shots = WARDROBE_SHOTS[shot];
-    return p && shots ? Array.from({ length: 2 }, () => ({ slug, name: name ?? tr(p.name, locale), ...shots })) : [];
+    return p && shots ? Array.from({ length: 2 }, () => ({ slug, name: tr(p.name, locale), ...shots })) : [];
   });
 
-  // "turning pages": photo → suzani + ink → paper → paper-2 → ink → paper → ink → paper → suzani border → ink footer
+  // "turning pages": photo → suzani + ink → paper → ink → paper → ink → paper → suzani border → ink footer
   return (
     <>
       <Hero />
       <Manifesto />
-      <Qish />
+      <Qish products={hoodies} />
 
       {wardrobe.length > 0 && (
         <section className="overflow-hidden py-section">

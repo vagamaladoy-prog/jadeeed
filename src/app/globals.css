@@ -69,12 +69,10 @@
   --tracking-wide: 0.1em;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --animate-atlas-flow: atlas-flow var(--atlas-flow) linear infinite;
   --animate-marquee: marquee 40s linear infinite;
   /* above-the-fold appearances: CSS, so they run before hydration (never gate LCP on JS) */
   --animate-rise: rise 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-letter: letter 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  --animate-preloader-stitch: stitch 900ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 
   --container-page: var(--container);
   --spacing-tabbar: calc(var(--tabbar-h) + var(--safe-bottom));
@@ -82,14 +80,6 @@
   --spacing-section: var(--section);
 }
 
-@keyframes atlas-flow {
-  from {
-    transform: translate3d(0, calc(var(--atlas-tile-h, 960px) * -1), 0);
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-  }
-}
 @keyframes marquee {
   from {
     transform: translate3d(0, 0, 0);
@@ -108,14 +98,6 @@
   from {
     opacity: 0;
     transform: translate3d(0, 0.35em, 0) rotate(-4deg);
-  }
-}
-@keyframes stitch {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
   }
 }
 

@@ -284,13 +284,10 @@
     },
     "qish": {
       "eyebrow": "Yangi kolleksiya",
-      "text": "Abdulla Qodiriy xotirasiga bag'ishlangan qishki kolleksiya. Oldida — «Men o'sha», orqasida — ustoz sharafiga naqsh.",
-      "cta": "Oldindan band qilish",
-      "black": "Qora",
-      "ash": "Kulrang",
-      "front": "Oldi",
+      "text": "Abdulla Qodiriy xotirasiga bag'ishlangan qishki xudilar. Oldida — «Men o'sha» yoki «Siz o'shami?», orqasida — ustoz sharafiga naqsh.",
+      "cta": "Kolleksiyani ko'rish",
       "back": "Orqasi",
-      "flip": "Orqasini ko'rish",
+      "flip": "Orqasi — sichqonchani olib keling",
       "story": "Naqsh ortidagi hikoya",
       "storyTitle": "Naqsh ortidagi hikoya",
       "storyText": [
@@ -299,14 +296,16 @@
         "Bu naqsh — birinchi o'zbek romani muallifiga ta'zim. Uni kiygan har kim uning ismini o'zi bilan olib yuradi."
       ],
       "prev": "Oldingi",
-      "next": "Keyingi"
+      "next": "Keyingi",
+      "colors": "Rang",
+      "allColors": "Barcha ranglar",
+      "soldOut": "Tugagan"
     },
     "story": {
       "eyebrow": "Hikoya",
       "years": "1894 – 1938",
       "text": "O'zbek adabiyotining yirik namoyandasi, birinchi o'zbek romani «O'tkan kunlar» muallifi, ma'rifatparvar va jadidlar harakatining faol ishtirokchisi.",
       "cta": "Hayot yo'li",
-      "printAlt": "Abdulla Qodiriy naqshi — Jadeeed xudisining orqasidagi bosma",
       "events": [
         {
           "d": "10.04.1894",
@@ -345,7 +344,8 @@
         0,
         2,
         6
-      ]
+      ],
+      "portraitAlt": "Abdulla Qodiriy, 1938-yilgi arxiv surati"
     },
     "lookbook": {
       "title": "Lookbook",
@@ -359,8 +359,8 @@
       ]
     },
     "footer": {
-      "soon": "Qodiriy | Qish tez kunda…",
-      "soonCta": "Oldindan band qilish"
+      "soon": "Qodiriy | Qish — sotuvda",
+      "soonCta": "Xudilarni ko'rish"
     },
     "nav": {
       "lookbook": "Lookbook",

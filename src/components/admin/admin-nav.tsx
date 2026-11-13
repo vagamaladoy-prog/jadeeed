@@ -27,14 +27,13 @@ const ITEMS: Item[] = [
   { href: "/admin/preorders", label: "Предзаказы", icon: CalendarClock },
   { href: "/admin/products", label: "Товары", icon: Shirt },
   { href: "/admin/promotions", label: "Акции", icon: BadgePercent },
-  { href: "/admin/banners", label: "Баннеры", icon: ImageIcon },
   { href: "/admin/phrases", label: "Фразы бренда", icon: MessageSquareQuote },
   { href: "/admin/categories", label: "Категории", icon: Tags },
   { href: "/admin/size-charts", label: "Размерные сетки", icon: Ruler },
   { href: "/admin/settings", label: "Настройки", icon: Settings },
 ];
 
-const TAB_HREFS = ["/admin/orders", "/admin/products", "/admin/banners"];
+const TAB_HREFS = ["/admin/orders", "/admin/products", "/admin/preorders"];
 
 const isActive = (pathname: string, href: string) => pathname === href || pathname.startsWith(`${href}/`);
 

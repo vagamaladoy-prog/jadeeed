@@ -4,7 +4,7 @@
   /* colour — brand */
   /* "a Jadid manuscript that came alive in streetwear" — colours pulled from the brand photos */
   --ink: #141012; /* Siyoh — ink */
-  --paper: #eee4d0; /* Qog'oz — old paper */
+  --paper: #e6d5b8; /* Qog'oz — old paper, beige */
   --white: #ffffff;
   --anor: #9b1d2e; /* Anor — pomegranate: main buttons, hover, active */
   --firuza: #1e7f80; /* Firuza — Samarkand teal: "new", Qodiriy moments */
@@ -12,16 +12,15 @@
   --gisht: #c27a45; /* G'isht — brick, warm neutral */
   --qaymoq: #7f9170; /* Qaymoq — sage, soft neutral */
   /* colour — derived */
-  --muted: #5e5650;
-  --line: #dccfb5;
-  --navy-2: #2c3e7a; /* atlas pattern only */
-  --paper-2: #e4d7bd;
+  --muted: #574e47;
+  --line: #d3c09e;
+  --paper-2: #dbc8a6;
   --ink-2: #201a1c;
   --on-ink-muted: #a99f95;
   --line-on-ink: rgb(255 255 255 / 0.14);
   --overlay: rgb(20 16 18 / 0.45);
   --bar-bg: rgb(255 255 255 / 0.86);
-  --header-bg: rgb(238 228 208 / 0.86);
+  --header-bg: rgb(230 213 184 / 0.86);
 
   /* radius: defined in globals.css @theme (--radius 4px, --radius-pill, --radius-sheet 12px) */
 
@@ -44,7 +43,6 @@
   --dur-in: 500ms;
   --dur-scene: 1100ms;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* same literal as @theme */
-  --atlas-flow: 60s;
 }
 
 @media (min-width: 768px) {

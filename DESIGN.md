@@ -21,21 +21,21 @@ Proportions: ~70% Siyoh + Qog'oz · 20% Anor + Firuza · 10% Za'faron (tiny high
 | Token | Name | Hex | Role |
 |---|---|---|---|
 | `--ink` | Siyoh (ink) | `#141012` | dark base: text, dark sections, footer |
-| `--paper` | Qog'oz (old paper) | `#EEE4D0` | light base: storefront canvas |
+| `--paper` | Qog'oz (old paper) | `#E6D5B8` | light base: storefront canvas — warm beige |
 | `--anor` | Anor (pomegranate) | `#9B1D2E` | main accent: primary buttons, hover, active states, links, selected size |
 | `--firuza` | Firuza (Samarkand teal) | `#1E7F80` | second accent: "new" badges, Qodiriy moments |
 | `--zafaron` | Za'faron (saffron) | `#E2A23B` | highlight — only stars, dots, underlines |
 | `--gisht` | G'isht (brick) | `#C27A45` | warm neutral (decor) |
 | `--qaymoq` | Qaymoq (sage) | `#7F9170` | soft neutral (decor) |
 | `--white` | — | `#FFFFFF` | surfaces on paper, text on dark |
-| `--muted` | — | `#5E5650` | secondary text (5.69:1 on paper) |
-| `--line` | — | `#DCCFB5` | hairline borders |
-| `--paper-2` | — | `#E4D7BD` | alternating section / image well |
+| `--muted` | — | `#574E47` | secondary text (5.64:1 on paper, 4.96:1 on paper-2) |
+| `--line` | — | `#D3C09E` | hairline borders |
+| `--paper-2` | — | `#DBC8A6` | alternating section / image well |
 | `--ink-2` | — | `#201A1C` | raised surface on dark |
 | `--on-ink-muted` | — | `#A99F95` | secondary text on ink (7.26:1) |
 | `--navy-2` | — | `#2C3E7A` | only inside the atlas pattern |
 
-Contrast: ink/paper 14.96:1 · white/anor 8.05:1 · anor/paper 6.38:1 · white/firuza 4.77:1 · ink/za'faron 8.51:1.
+Contrast: ink/paper 13.1:1 · white/anor 8.05:1 · anor/paper 5.59:1 · white/firuza 4.77:1 · ink/za'faron 8.51:1.
 Firuza on paper is 3.78:1 — use it for fills with white text or large type, never for small text on paper.
 Za'faron is never a text colour on paper.
 
@@ -86,7 +86,7 @@ All four cover Latin-Ext + Cyrillic (o', g', ʻ). Display is set at 400, trackin
 - **Tab bar (mobile)**: white 85% + backdrop blur 12px, 1px top line, active = ink icon + anor dot.
 - **Toast** (`Men o'sha.`): ink bg, white Playfair Display text, bottom-center above tab bar.
 
-## 6. Atlas pattern
+## 6. Atlas pattern (retired 2026-11 — replaced by suzani, see §7)
 
 Jadeeed's visual signature is **Uzbek atlas (ikat)** rendered as a modern graphic device —
 vertical wavy warp bands whose edges are "torn" and slightly blurred, like resist-dyed threads.

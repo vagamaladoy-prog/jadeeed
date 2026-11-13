@@ -16,7 +16,7 @@ type Shot = { src: string; alt: string; wide?: boolean };
 
 const CHAPTERS: { shots: Shot[]; suzani: string }[] = [
   {
-    suzani: "/photos/jd/suzani-firuza.webp",
+    suzani: "/photos/jd/suzani-bukhara.webp",
     shots: [
       { src: "/photos/jd/look-ceiling.webp", alt: "Siz o'shami? / Men o'sha — under the carved ceiling" },
       { src: "/photos/jd/hero-men-osha.webp", alt: "Men o'sha — black and ash hoodies" },
@@ -32,7 +32,7 @@ const CHAPTERS: { shots: Shot[]; suzani: string }[] = [
     ],
   },
   {
-    suzani: "/photos/jd/suzani-zafaron.webp",
+    suzani: "/photos/jd/suzani-nurata.webp",
     shots: [
       { src: "/photos/jd/qish-ash-front.webp", alt: "Men o'sha — ash hoodie by the teal door" },
       { src: "/photos/jd/atmos-chest.webp", alt: "A carved chest and door", wide: true },

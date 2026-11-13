@@ -35,14 +35,14 @@ export async function Footer({
       {/* embroidered suzani border — the last page of the book */}
       <SuzaniBorder />
 
-      {/* "Qodiriy | Qish tez kunda…" + pre-booking */}
+      {/* "Qodiriy | Qish" is on sale → the hoodies */}
       <div className="container-page flex flex-col items-start gap-6 border-b border-line-on-ink py-10 md:flex-row md:items-center md:justify-between md:py-12">
         <div className="flex items-center gap-5">
           <Boteh className="size-12 shrink-0 text-zafaron" />
           <p className="font-display text-heading-lg italic leading-tight">{jd("soon")}</p>
         </div>
         <Link
-          href="/preorder"
+          href={{ pathname: "/catalog", query: { category: "xudilar" } }}
           className="inline-flex h-12 items-center gap-2 rounded bg-anor px-6 text-label uppercase tracking-[0.18em] text-white transition-colors duration-[var(--dur-hover)] hover:bg-paper hover:text-ink"
         >
           {jd("soonCta")} <span aria-hidden>›</span>

@@ -4,7 +4,6 @@ import { db } from "./db";
 import { isPromoLive, resolvePrice, type PromoRule } from "./pricing";
 import {
   SIZES,
-  type BannerDTO,
   type CategoryDTO,
   type ColorDTO,
   type PhrasesDTO,
@@ -163,19 +162,6 @@ export const getCategories = cache(async (): Promise<CategoryDTO[]> => {
     description: c.descriptionUz || c.descriptionRu ? { uz: c.descriptionUz ?? "", ru: c.descriptionRu ?? "" } : null,
     image: c.image ?? c.products[0]?.colors[0]?.images[0]?.url ?? null,
     productCount: c._count.products,
-  }));
-});
-
-// ─── banners ─────────────────────────────────────────────────────────────────
-export const getBanners = cache(async (): Promise<BannerDTO[]> => {
-  const rows = await db.banner.findMany({ where: { isActive: true }, orderBy: { sortOrder: "asc" } });
-  return rows.map((b) => ({
-    id: b.id,
-    imageDesktop: b.imageDesktop,
-    imageMobile: b.imageMobile,
-    alt: { uz: b.altUz, ru: b.altRu },
-    link: b.link,
-    headerTone: b.headerTone,
   }));
 });
 

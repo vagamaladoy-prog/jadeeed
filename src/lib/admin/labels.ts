@@ -33,12 +33,6 @@ export const DISCOUNT_TYPE_LABELS = { PERCENT: "%", AMOUNT: "сум" } as const;
 export const PROMOTION_SCOPES = ["PRODUCTS", "CATEGORY"] as const;
 export const PROMOTION_SCOPE_LABELS = { PRODUCTS: "Выбранные товары", CATEGORY: "Вся категория" } as const;
 
-export const HEADER_TONES = ["LIGHT", "DARK"] as const;
-export const HEADER_TONE_LABELS = {
-  LIGHT: "Картинка светлая — шапка тёмная",
-  DARK: "Картинка тёмная — шапка светлая",
-} as const;
-
 export const PHRASE_SLOTS = ["HOME_QUESTION", "ADD_TO_CART", "ABOUT", "WAITING", "THANKS", "BADGE", "ATLAS_BLOCK"] as const;
 export type PhraseSlotValue = (typeof PHRASE_SLOTS)[number];
 export const PHRASE_SLOT_LABELS: Record<PhraseSlotValue, string> = {

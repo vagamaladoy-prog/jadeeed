@@ -1,5 +1,6 @@
 // node scripts/process-brand-photos.mjs — builds the "Jadid manuscript" imagery from the brand shoot
-// (assets/photos/2026-11, the owner's own photos) into public/photos/jd/*.webp.
+// (assets/photos/2026-11, the owner's own photos), the public-domain Qodiriy portrait and museum suzani
+// (assets/met, The Met Open Access CC0: 445244, 447384, 447385, 448922, 444991) into public/photos/jd/*.webp.
 // Sources stay big; next/image resizes per device. Re-run after replacing a source photo.
 import sharp from "sharp";
 import { mkdirSync } from "node:fs";
@@ -21,11 +22,17 @@ const photo = (src, out, opts = {}) => {
     .toFile(OUT + out);
 };
 
-/** ink → saffron gradient map (archival duotone) */
-const duotone = async (src, out, extract, width = 1200) => {
-  const g = await sharp(SRC + src).extract(extract).resize({ width, withoutEnlargement: true }).grayscale().normalise().toColourspace("srgb").toBuffer();
-  const a = INK.map((c, i) => (SAFFRON[i] - c) / 255);
-  return sharp(g).linear(a, INK).webp({ quality: 80 }).toFile(OUT + out);
+const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+
+/** gradient map dark → light over a grayscale image (archival duotone) */
+const duotone = async (file, out, { extract, width = 1200, dark = INK, light = SAFFRON, blur, q = 80 } = {}) => {
+  let img = sharp(file).rotate();
+  if (extract) img = sharp(await img.extract(extract).toBuffer());
+  img = img.resize({ width, height: width * 2, fit: "inside", withoutEnlargement: true }).grayscale();
+  if (blur) img = img.blur(blur);
+  const g = await img.normalise().toColourspace("srgb").toBuffer();
+  const a = dark.map((c, i) => (light[i] - c) / 255);
+  return sharp(g).linear(a, dark).webp({ quality: q }).toFile(OUT + out);
 };
 
 const jobs = [
@@ -39,6 +46,9 @@ const jobs = [
   photo("5.jpg", "qish-ash-back.webp", { extract: { left: 860, top: 900, width: 863, height: 1079 } }),
   photo("3.jpg", "qish-ash-brick.webp"),
   photo("7.jpg", "qish-ash-suzani.webp"),
+  // "Siz o'shami?" hoodie — the girl, cropped out of the pair shots
+  photo("4.jpg", "siz-oshami-front.webp", { extract: { left: 0, top: 560, width: 960, height: 1200 } }),
+  photo("6.jpg", "siz-oshami-column.webp", { extract: { left: 40, top: 640, width: 800, height: 1000 } }),
   // lookbook
   photo("10.jpg", "look-ceiling.webp"),
   photo("6.jpg", "look-column.webp"),
@@ -49,17 +59,21 @@ const jobs = [
   photo("16.jpg", "atmos-wheels.webp"),
   photo("17.jpg", "atmos-lattice.webp"),
   photo("21.jpg", "atmos-chest.webp"),
-  // manifesto textures (owner-supplied suzani panels)
-  photo("19.jpg", "suzani-anor.webp", { q: 78 }),
-  photo("20.jpg", "suzani-firuza.webp", { q: 78 }),
-  photo("18.jpg", "suzani-zafaron.webp", { q: 78 }),
   // archival duotones for the Qodiriy story
-  duotone("4.jpg", "qodiriy-print.webp", { left: 1150, top: 1080, width: 456, height: 640 }),
-  duotone("15.jpg", "qodiriy-corridor.webp", { left: 0, top: 0, width: 853, height: 1280 }, 900),
-  // embroidered suzani border (from the suzani wall behind photo 7), turned horizontal → footer band
-  sharp(await sharp(SRC + "7.jpg").extract({ left: 0, top: 0, width: 175, height: 2000 }).toBuffer())
+  // portrait: public-domain archival photo (Wikimedia Commons "Абдулла Кадирі.jpg", 1938)
+  duotone("assets/qodiriy-portrait.jpg", "qodiriy-portrait.webp", { extract: { left: 0, top: 30, width: 642, height: 857 }, width: 642, blur: 0.7, q: 84 }),
+  duotone(SRC + "15.jpg", "qodiriy-corridor.webp", { width: 900 }),
+  // manifesto: 18th–19th c. Uzbek suzani from The Met (Open Access, CC0), tinted pomegranate / teal / saffron
+  duotone("assets/met/445244.jpg", "suzani-anor.webp", { extract: { left: 500, top: 600, width: 2300, height: 2800 }, width: 1200, dark: hex("#220609"), light: hex("#b04354"), q: 72 }),
+  duotone("assets/met/447385.jpg", "suzani-firuza.webp", { extract: { left: 300, top: 300, width: 1585, height: 2000 }, width: 1200, dark: hex("#061f20"), light: hex("#3a9493"), q: 72 }),
+  duotone("assets/met/448922.jpg", "suzani-zafaron.webp", { extract: { left: 150, top: 300, width: 1477, height: 2300 }, width: 1200, dark: hex("#2e1a06"), light: hex("#d49a3c"), q: 72 }),
+  // full-colour museum suzani for the lookbook chapters
+  photo("../../met/447384.jpg", "suzani-bukhara.webp", { q: 72, width: 1600, height: 1600 }),
+  photo("../../met/444991.jpg", "suzani-nurata.webp", { q: 72, width: 1600, height: 1600 }),
+  // embroidered border (left edge of the Bukhara cover), turned horizontal → footer band
+  sharp(await sharp("assets/met/447384.jpg").extract({ left: 150, top: 200, width: 200, height: 3100 }).toBuffer())
     .rotate(-90)
-    .resize({ height: 120 })
+    .resize({ height: 160 })
     .webp({ quality: 80 })
     .toFile(OUT + "suzani-border.webp"),
 ];

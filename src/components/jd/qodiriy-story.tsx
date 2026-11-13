@@ -53,7 +53,7 @@ export function QodiriyStory() {
         <Reveal className="relative mx-auto w-full max-w-[340px]">
           <div aria-hidden className="arch absolute -inset-x-5 -bottom-4 top-10 bg-zafaron/85" />
           <div className="arch relative aspect-[3/4] bg-ink-2">
-            <Image src="/photos/jd/qodiriy-print.webp" alt={t("printAlt")} fill sizes="(min-width: 1024px) 26vw, 80vw" className="object-cover" />
+            <Image src="/photos/jd/qodiriy-portrait.webp" alt={t("portraitAlt")} fill sizes="(min-width: 1024px) 26vw, 80vw" className="object-cover object-top" />
           </div>
         </Reveal>
 
