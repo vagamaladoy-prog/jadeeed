@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getCatalogProducts, getPhrases } from "@/lib/data";
 import { alternates } from "@/lib/site";
@@ -50,7 +51,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <Qish products={hoodies} />
 
       {wardrobe.length > 0 && (
-        <section className="overflow-hidden py-section">
+        <section className="relative isolate overflow-hidden py-section">
+          {/* backdrop: carved door, chest and brick of the shoot, warm sepia — a Jadid house behind the rail */}
+          <div aria-hidden className="absolute inset-0 -z-10">
+            <Image src="/photos/jd/wardrobe-backdrop.webp" alt="" fill sizes="100vw" className="object-cover object-center" />
+            <div className="absolute inset-0 bg-paper/45" />
+            <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-paper to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-paper to-transparent" />
+          </div>
           <div className="container-page">
             <SectionHeading title={t("wardrobe")} eyebrow={t("wardrobeHint")} />
           </div>

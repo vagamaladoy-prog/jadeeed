@@ -177,8 +177,9 @@ The site reads like a rare 1920s Turkestan book with a cinematic edge. Imagery c
 | Device | Where | Spec |
 |---|---|---|
 | Intro | first visit per session | black book cover, "Aylanib ketay…" written in script (clip-path), cover opens (rotateY) — ~2.9 s, CSS only (`preloader.tsx`) |
-| Hero | home | full-screen shoot photo with a 26 s breathing zoom; giant Playfair "“Men o'sha” —Jadeeed"; hover/tap → "Siz o'shami?" + the photo changes to the girl in that print; tagline in `deco` |
+| Hero | home | full-screen shoot photo with a 26 s breathing zoom, no text over it — only the "Collection" button at the foot (owner's call: the photo must stay visible) |
 | Manifesto | home | Jadidlar / Madaniyat / Kelajak over pomegranate, teal and saffron suzani; cloth drifts with scroll (`jd-drift`, `animation-timeline: view()`) |
+| Wardrobe backdrop | home wardrobe | carved door, chest and brick of the shoot in warm sepia (`wardrobe-backdrop.webp`) under a 45% paper veil, fading into the page |
 | Arch | collection, lookbook, product cards, Qodiriy | `arch` utility: semicircle top, square foot — the windows of the shoot |
 | Brick grid | every ink section | `brick-grid` utility: 96×32 brick-bond hairlines at 5% white |
 | Boteh / Qodiriy medallion | ornaments, timeline progress, cursor | `components/jd/ornament.tsx`, redrawn from the back print; cursor `public/cursor-boteh*.svg` (mouse only) |

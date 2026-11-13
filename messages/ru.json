@@ -258,11 +258,8 @@
   },
   "jd": {
     "hero": {
-      "tagline": "Zamonaviy. Nafis. Milliy.",
       "cta": "Коллекция",
-      "tap": "Нажмите",
-      "scroll": "Вниз",
-      "alt": "Худи Jadeeed под резным деревянным потолком"
+      "scroll": "Вниз"
     },
     "manifesto": {
       "words": [

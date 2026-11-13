@@ -59,6 +59,8 @@ const jobs = [
   photo("16.jpg", "atmos-wheels.webp"),
   photo("17.jpg", "atmos-lattice.webp"),
   photo("21.jpg", "atmos-chest.webp"),
+  // wardrobe backdrop: carved door, chest and brick of the shoot in warm sepia close to the paper
+  duotone(SRC + "21.jpg", "wardrobe-backdrop.webp", { width: 1800, dark: hex("#4a3322"), light: hex("#efe0c4"), blur: 1.2, q: 74 }),
   // archival duotones for the Qodiriy story
   // portrait: public-domain archival photo (Wikimedia Commons "Абдулла Кадирі.jpg", 1938)
   duotone("assets/qodiriy-portrait.jpg", "qodiriy-portrait.webp", { extract: { left: 0, top: 30, width: 642, height: 857 }, width: 642, blur: 0.7, q: 84 }),

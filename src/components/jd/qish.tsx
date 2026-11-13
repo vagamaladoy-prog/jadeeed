@@ -43,7 +43,7 @@ export function Qish({ products }: { products: ProductCardDTO[] }) {
 
   return (
     <section id="qodiriy-qish" className="scroll-mt-16 overflow-hidden py-section lg:scroll-mt-20">
-      <div className="container-page grid items-center gap-10 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-12">
+      <div className="container-page grid grid-cols-[minmax(0,1fr)] items-center gap-10 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-12">
         <Reveal>
           <p className="deco text-body-sm uppercase text-firuza">{t("eyebrow")}</p>
           <h2 className="mt-3 font-display text-display leading-none tracking-tighter">

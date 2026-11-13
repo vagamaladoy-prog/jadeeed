@@ -258,11 +258,8 @@
   },
   "jd": {
     "hero": {
-      "tagline": "Zamonaviy. Nafis. Milliy.",
       "cta": "Kolleksiya",
-      "tap": "Bosing",
-      "scroll": "Pastga",
-      "alt": "Jadeeed xudilari o'yilgan yog'och shift ostida"
+      "scroll": "Pastga"
     },
     "manifesto": {
       "words": [
