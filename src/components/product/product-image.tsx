@@ -1,12 +1,11 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import { AtlasPattern } from "@/components/atlas/atlas-pattern";
 import { cn } from "@/lib/cn";
 
 /**
  * Product photo that fills its (relative, sized) parent. While loading, the image well shows
- * a faint flowing atlas instead of a grey skeleton (it sits underneath the photo).
+ * a soft paper pulse (it sits underneath the photo).
  * Priority (above-the-fold) photos are visible the moment they decode — never gated on JS —
  * so they don't delay LCP; the others fade in once loaded.
  */
@@ -27,7 +26,7 @@ export function ProductImage({
   const svg = src.endsWith(".svg");
   return (
     <>
-      {!loaded && <AtlasPattern variant="loading" scale={0.6} />}
+      {!loaded && <div aria-hidden className="absolute inset-0 animate-pulse bg-paper-2" />}
       <Image
         src={src}
         alt={alt}

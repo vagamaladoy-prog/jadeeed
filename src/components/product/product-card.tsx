@@ -39,7 +39,8 @@ export function ProductCard({
   return (
     <article className="group relative">
       <Link href={href} className="block" aria-label={name}>
-        <div className="relative aspect-4/5 overflow-hidden rounded bg-paper-2">
+        {/* arch window, like the windows of the shoot */}
+        <div className="arch relative aspect-4/5 bg-paper-2">
           <div className="absolute inset-0 transition-transform duration-[var(--dur-scene)] ease-out group-hover:scale-104">
             {front && <ProductImage src={front} alt={`${name} — ${t("front")}`} sizes={sizes} priority={priority} />}
             {back && (
@@ -50,7 +51,7 @@ export function ProductCard({
           </div>
 
           {/* badges */}
-          <div className="absolute left-2 top-2 flex flex-col items-start gap-1.5 md:left-3 md:top-3">
+          <div className="absolute inset-x-0 top-[14%] flex flex-col items-center gap-1.5">
             {(product.isNew || product.isBestseller) && (
               <span className="phrase rounded-pill bg-firuza px-2.5 py-1 text-micro text-white">{badgePhrase}</span>
             )}
@@ -86,7 +87,7 @@ export function ProductCard({
       </Link>
 
       <div className="mt-3 flex flex-col gap-1">
-        <Link href={href} className="text-body-sm leading-snug text-ink hover:underline hover:underline-offset-4 md:text-body">
+        <Link href={href} className="font-display text-body leading-snug text-ink hover:underline hover:underline-offset-4 md:text-subheading">
           {name}
         </Link>
         <Price pricing={product.pricing} size="sm" />

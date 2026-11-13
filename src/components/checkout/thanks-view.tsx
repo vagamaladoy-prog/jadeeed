@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { Send } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { AtlasPattern } from "@/components/atlas/atlas-pattern";
+import Image from "next/image";
 import { BrandPhrase } from "@/components/brand/brand-phrase";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "@/components/contact/external-link";
@@ -38,7 +38,7 @@ export function ThanksView({
         animate={{ y: "0%" }}
         transition={{ duration: DUR.scene, ease: EASE_OUT }}
       >
-        <AtlasPattern variant="dense" />
+        <Image src="/photos/jd/suzani-anor.webp" alt="" fill sizes="100vw" className="object-cover" />
       </motion.div>
 
       <motion.div

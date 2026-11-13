@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { AtlasPattern } from "@/components/atlas/atlas-pattern";
+import { SuzaniBorder } from "@/components/jd/lookbook";
+import { Boteh } from "@/components/jd/ornament";
 import { ExternalLink } from "@/components/contact/external-link";
 import { InstagramIcon, TelegramIcon } from "@/components/contact/social-icons";
 import { FooterWordmark } from "./footer-wordmark";
@@ -21,6 +22,7 @@ export async function Footer({
   const t = await getTranslations("footer");
   const nav = await getTranslations("nav");
   const c = await getTranslations("contacts");
+  const jd = await getTranslations("jd.footer");
 
   const socials = [
     { href: settings.supportUrl, icon: TelegramIcon, label: c("support"), handle: `@${settings.supportUsername}` },
@@ -29,10 +31,22 @@ export async function Footer({
   ];
 
   return (
-    <footer className="relative overflow-hidden bg-ink text-white">
-      {/* dense atlas band — decorative, no text on it */}
-      <div className="relative h-24 md:h-32">
-        <AtlasPattern variant="dense" interactive />
+    <footer className="brick-grid relative overflow-hidden bg-ink text-white">
+      {/* embroidered suzani border — the last page of the book */}
+      <SuzaniBorder />
+
+      {/* "Qodiriy | Qish tez kunda…" + pre-booking */}
+      <div className="container-page flex flex-col items-start gap-6 border-b border-line-on-ink py-10 md:flex-row md:items-center md:justify-between md:py-12">
+        <div className="flex items-center gap-5">
+          <Boteh className="size-12 shrink-0 text-zafaron" />
+          <p className="font-display text-heading-lg italic leading-tight">{jd("soon")}</p>
+        </div>
+        <Link
+          href="/preorder"
+          className="inline-flex h-12 items-center gap-2 rounded bg-anor px-6 text-label uppercase tracking-[0.18em] text-white transition-colors duration-[var(--dur-hover)] hover:bg-paper hover:text-ink"
+        >
+          {jd("soonCta")} <span aria-hidden>›</span>
+        </Link>
       </div>
 
       <div className="container-page grid grid-cols-2 gap-x-6 gap-y-12 py-16 md:grid-cols-12 md:py-20">
@@ -86,7 +100,7 @@ export async function Footer({
         <nav aria-label={t("info")} className="md:col-span-4">
           <p className="label text-on-ink-muted">{t("info")}</p>
           <ul className="mt-5 flex flex-col gap-1">
-            {(["about", "delivery", "contacts"] as const).map((k) => (
+            {(["lookbook", "about", "delivery", "contacts"] as const).map((k) => (
               <li key={k}>
                 <Link href={`/${k}`} className="flex min-h-11 items-center text-body hover:underline hover:underline-offset-4">
                   {nav(k)}

@@ -11,7 +11,7 @@ export function FooterWordmark() {
         whileInView={{ y: "0%", opacity: 1 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: DUR.scene, ease: EASE_OUT }}
-        className="phrase select-none whitespace-nowrap text-center text-wordmark text-white"
+        className="select-none whitespace-nowrap text-center font-display text-wordmark tracking-tighter text-white/90"
       >
         Jadeeed
       </motion.p>

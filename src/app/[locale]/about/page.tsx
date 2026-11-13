@@ -5,7 +5,8 @@ import { tr } from "@/lib/types";
 import { PageHeader } from "@/components/layout/page-header";
 import { RichText } from "@/components/layout/rich-text";
 import { BrandPhrase } from "@/components/brand/brand-phrase";
-import { AtlasPattern, AtlasStrip } from "@/components/atlas/atlas-pattern";
+import Image from "next/image";
+import { SuzaniBorder } from "@/components/jd/lookbook";
 import { Reveal } from "@/components/motion/reveal";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -25,7 +26,9 @@ export default async function About({ params }: { params: Promise<{ locale: stri
         <PageHeader title={t("aboutTitle")} />
       </div>
       <section className="relative isolate overflow-hidden bg-ink py-20 md:py-28">
-        <AtlasPattern variant="dense" interactive />
+        <div aria-hidden className="jd-drift absolute inset-0 -z-10">
+          <Image src="/photos/jd/suzani-firuza.webp" alt="" fill sizes="100vw" className="object-cover" />
+        </div>
         <div className="container-page relative flex justify-center">
           <div className="bg-ink px-6 py-8 md:px-14 md:py-12">
             <BrandPhrase text={phrases.slots.ABOUT} as="p" animate="write" className="text-display-xl tracking-tightest text-white" />
@@ -37,7 +40,7 @@ export default async function About({ params }: { params: Promise<{ locale: stri
           <RichText text={tr(settings.about, locale)} className="flex flex-col gap-6 text-subheading leading-relaxed" />
         </Reveal>
       </div>
-      <AtlasStrip />
+      <SuzaniBorder />
     </>
   );
 }

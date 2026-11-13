@@ -13,7 +13,9 @@
     "searchTitle": "Qidiruv",
     "notFoundTitle": "Sahifa topilmadi",
     "preorderTitle": "Keyingi partiyaga oldindan buyurtma",
-    "preorderDescription": "Jadeeed futbolka va xudilarini keyingi partiyadan band qiling — tugaganlarini ham."
+    "preorderDescription": "Jadeeed futbolka va xudilarini keyingi partiyadan band qiling — tugaganlarini ham.",
+    "lookbookTitle": "Lookbook — Jadeeed",
+    "lookbookDescription": "O'yilgan shiftlar, g'isht devorlar, sandiq va sharqona eshiklar — Jadeeed o'z uyida."
   },
   "nav": {
     "home": "Asosiy",
@@ -31,7 +33,8 @@
     "skipToContent": "Asosiy mazmunga o'tish",
     "next": "Keyingisi",
     "prev": "Oldingisi",
-    "preorder": "Oldindan buyurtma"
+    "preorder": "Oldindan buyurtma",
+    "lookbook": "Lookbook"
   },
   "price": {
     "currency": "so'm",
@@ -251,6 +254,117 @@
       "closed": "Hozircha oldindan buyurtma yopiq",
       "gone": "Ayrim mahsulotlar endi yo'q — sahifani yangilang",
       "generic": "Nimadir xato ketdi. Qaytadan urinib ko'ring"
+    }
+  },
+  "jd": {
+    "hero": {
+      "tagline": "Zamonaviy. Nafis. Milliy.",
+      "cta": "Kolleksiya",
+      "tap": "Bosing",
+      "scroll": "Pastga",
+      "alt": "Jadeeed xudilari o'yilgan yog'och shift ostida"
+    },
+    "manifesto": {
+      "words": [
+        {
+          "w": "Jadidlar",
+          "s": "Yangilikni boshlaganlar."
+        },
+        {
+          "w": "Madaniyat",
+          "s": "Ildizimiz — kuchimiz."
+        },
+        {
+          "w": "Kelajak",
+          "s": "Ertangi kun bugun tikiladi."
+        }
+      ],
+      "quote": "Jadidlar — bu faqat tarix emas. Bu — bizning ilhomimiz, o'zligimiz va yo'limiz.",
+      "text": "XX asr boshida Turkistonda bir guruh yoshlar o'zgarishni tanladi. Ular yangi usuldagi maktablar ochdi, gazeta va teatr yaratdi, ilm va ma'rifat orqali millatni uyg'otdi. Ularni «jadidlar» — «yangilar» deb atashdi. Jadeeed shu nomdan tug'ildi: o'tmishni unutmaslik va uni bugungi kiyimda davom ettirish uchun."
+    },
+    "qish": {
+      "eyebrow": "Yangi kolleksiya",
+      "text": "Abdulla Qodiriy xotirasiga bag'ishlangan qishki kolleksiya. Oldida — «Men o'sha», orqasida — ustoz sharafiga naqsh.",
+      "cta": "Oldindan band qilish",
+      "black": "Qora",
+      "ash": "Kulrang",
+      "front": "Oldi",
+      "back": "Orqasi",
+      "flip": "Orqasini ko'rish",
+      "story": "Naqsh ortidagi hikoya",
+      "storyTitle": "Naqsh ortidagi hikoya",
+      "storyText": [
+        "Orqadagi naqsh to'rtta butadan iborat — sharq bezagining eng qadimiy ramzlaridan biri: hayot, o'sish va abadiyat belgisi.",
+        "Ular markazdagi ismni — Abdulla Qodiriy — to'rt tomondan qo'riqlaydi. Sanalar uning hayot yo'lini eslatadi: 1894-yil 10-aprel va 1938-yil 4-oktabr.",
+        "Bu naqsh — birinchi o'zbek romani muallifiga ta'zim. Uni kiygan har kim uning ismini o'zi bilan olib yuradi."
+      ],
+      "prev": "Oldingi",
+      "next": "Keyingi"
+    },
+    "story": {
+      "eyebrow": "Hikoya",
+      "years": "1894 – 1938",
+      "text": "O'zbek adabiyotining yirik namoyandasi, birinchi o'zbek romani «O'tkan kunlar» muallifi, ma'rifatparvar va jadidlar harakatining faol ishtirokchisi.",
+      "cta": "Hayot yo'li",
+      "printAlt": "Abdulla Qodiriy naqshi — Jadeeed xudisining orqasidagi bosma",
+      "events": [
+        {
+          "d": "10.04.1894",
+          "t": "Toshkentda tug'ilgan"
+        },
+        {
+          "d": "1915",
+          "t": "Ilk hikoyasi «Juvonboz» chop etildi"
+        },
+        {
+          "d": "1920-yillar",
+          "t": "Jadidlar harakati, «Mushtum» jurnali"
+        },
+        {
+          "d": "1922",
+          "t": "«O'tkan kunlar» — birinchi o'zbek romani"
+        },
+        {
+          "d": "1929",
+          "t": "«Mehrobdan chayon» romani"
+        },
+        {
+          "d": "31.12.1937",
+          "t": "Hibsga olingan"
+        },
+        {
+          "d": "04.10.1938",
+          "t": "Qatag'on qilingan"
+        },
+        {
+          "d": "1956",
+          "t": "Oqlangan. Ismi xalqqa qaytdi"
+        }
+      ],
+      "key": [
+        0,
+        2,
+        6
+      ]
+    },
+    "lookbook": {
+      "title": "Lookbook",
+      "sub": "O'tmish ruhida — bugungi uslub.",
+      "cta": "Ko'rish",
+      "pageSub": "O'yilgan shiftlar, g'isht devorlar, sandiq va sharqona eshiklar — Jadeeed o'z uyida.",
+      "chapters": [
+        "Shift ostida",
+        "Ikki savol",
+        "Eski hovli"
+      ]
+    },
+    "footer": {
+      "soon": "Qodiriy | Qish tez kunda…",
+      "soonCta": "Oldindan band qilish"
+    },
+    "nav": {
+      "lookbook": "Lookbook",
+      "story": "Hikoya"
     }
   }
 }

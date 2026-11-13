@@ -168,3 +168,24 @@ UI copy is short, calm, no exclamation marks, no filler ("Добро пожал�
 
 Gradient blobs, glassmorphism cards, neon, 3D icons, emoji (except ✦ in marquee), stock
 illustrations, identical shadowed cards everywhere, placeholder copy.
+
+## 7. "Jadid manuscript" devices (2026-11 redesign)
+
+The site reads like a rare 1920s Turkestan book with a cinematic edge. Imagery comes only from the brand shoot
+(`assets/photos/2026-11` → `scripts/process-brand-photos.mjs` → `public/photos/jd/*.webp`).
+
+| Device | Where | Spec |
+|---|---|---|
+| Intro | first visit per session | black book cover, "Aylanib ketay…" written in script (clip-path), cover opens (rotateY) — ~2.9 s, CSS only (`preloader.tsx`) |
+| Hero | home | full-screen shoot photo with a 26 s breathing zoom; giant Playfair "“Men o'sha” —Jadeeed"; hover/tap → "Siz o'shami?" + the photo changes to the girl in that print; tagline in `deco` |
+| Manifesto | home | Jadidlar / Madaniyat / Kelajak over pomegranate, teal and saffron suzani; cloth drifts with scroll (`jd-drift`, `animation-timeline: view()`) |
+| Arch | collection, lookbook, product cards, Qodiriy | `arch` utility: semicircle top, square foot — the windows of the shoot |
+| Brick grid | every ink section | `brick-grid` utility: 96×32 brick-bond hairlines at 5% white |
+| Boteh / Qodiriy medallion | ornaments, timeline progress, cursor | `components/jd/ornament.tsx`, redrawn from the back print; cursor `public/cursor-boteh*.svg` (mouse only) |
+| Timeline | Qodiriy section | hairline thread filled with saffron and a turning medallion, both driven by the section's view timeline |
+| Page wipe | every navigation | Anor sheet wiping right→left (`[locale]/template.tsx`) |
+| Suzani border | above the footer, about | embroidered border cut from the suzani wall of the shoot |
+
+Inner pages open with a full-bleed ink band (`PageHeader`) — dark page, then the paper page: turning pages.
+Dates are written our way (DD.MM.YYYY): 10.04.1894 – 04.10.1938.
+The atlas (ikat) pattern is retired from the storefront; its files remain for reference only.

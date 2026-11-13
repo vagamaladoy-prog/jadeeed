@@ -125,6 +125,7 @@
     -webkit-tap-highlight-color: transparent;
   }
   body {
+    overflow-x: clip;
     background: var(--paper);
     color: var(--ink);
     font-family: var(--font-sans);
@@ -233,8 +234,8 @@ html.lenis body {
 
 /* First-visit preloader (see components/layout/preloader.tsx) */
 html[data-preload] .preloader {
-  display: flex;
-  animation: preloader-out 250ms cubic-bezier(0.22, 1, 0.36, 1) 950ms forwards;
+  display: block;
+  animation: preloader-out 200ms linear 2750ms forwards;
 }
 html[data-preload] body {
   overflow: hidden;
@@ -323,5 +324,152 @@ html[data-tg] {
   }
   to {
     transform: scaleX(1);
+  }
+}
+
+/* ───────────── "Jadid manuscript" devices (DESIGN.md §7) ───────────── */
+
+/* arch crop — like the windows of the shoot: semicircle top, square foot */
+@utility arch {
+  border-radius: 999px 999px 4px 4px;
+  overflow: hidden;
+}
+
+/* faint brick-bond grid for dark sections (joints offset by half a brick) */
+@utility brick-grid {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='32'%3E%3Cpath d='M0 .5H96M0 16.5H96M.5 0V16M48.5 16V32' stroke='%23fff' stroke-opacity='.05'/%3E%3C/svg%3E");
+  background-size: 96px 32px;
+}
+
+/* hero photo: a very slow breathing zoom */
+@keyframes jd-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.09);
+  }
+}
+.jd-zoom {
+  animation: jd-zoom 26s ease-in-out infinite alternate;
+  transform-origin: 50% 35%;
+}
+
+/* scroll-driven "comes alive" drift (suzani panels, lookbook) — progressive enhancement */
+@keyframes jd-drift {
+  from {
+    transform: scale(1.18) translate3d(0, -6%, 0);
+  }
+  to {
+    transform: scale(1.02) translate3d(0, 6%, 0);
+  }
+}
+@keyframes jd-spin-scroll {
+  from {
+    transform: rotate(-90deg);
+  }
+  to {
+    transform: rotate(270deg);
+  }
+}
+@keyframes jd-fill-scroll {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@supports (animation-timeline: view()) {
+  .jd-drift {
+    animation: jd-drift linear both;
+    animation-timeline: view();
+  }
+  .jd-spin {
+    animation: jd-spin-scroll linear both;
+    animation-timeline: --jd-story;
+    animation-range: entry 20% exit 80%;
+  }
+  .jd-fill {
+    transform-origin: top;
+    animation: jd-fill-scroll linear both;
+    animation-timeline: --jd-story;
+    animation-range: entry 30% cover 70%;
+  }
+  .jd-story {
+    view-timeline-name: --jd-story;
+  }
+}
+/* no scroll timelines: the ornament turns slowly on its own */
+@supports not (animation-timeline: view()) {
+  .jd-spin {
+    animation: jd-spin-scroll 60s linear infinite;
+  }
+}
+
+/* intro: "Aylanib ketay…" writes itself on black, then the cover opens like a book */
+@keyframes jd-write {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes jd-cover-left {
+  to {
+    transform: perspective(1600px) rotateY(-100deg);
+  }
+}
+@keyframes jd-cover-right {
+  to {
+    transform: perspective(1600px) rotateY(100deg);
+  }
+}
+@keyframes jd-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+.jd-intro .jd-intro-text {
+  animation: jd-write 1300ms cubic-bezier(0.45, 0, 0.2, 1) 200ms both, jd-fade-out 300ms ease-in 1750ms forwards;
+}
+.jd-intro .jd-cover-l {
+  transform-origin: left center;
+  animation: jd-cover-left 900ms cubic-bezier(0.6, 0, 0.3, 1) 1900ms forwards;
+}
+.jd-intro .jd-cover-r {
+  transform-origin: right center;
+  animation: jd-cover-right 900ms cubic-bezier(0.6, 0, 0.3, 1) 1900ms forwards;
+}
+
+/* pomegranate page wipe on navigation (template.tsx) */
+@keyframes jd-wipe {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+.jd-wipe {
+  transform-origin: right center;
+  animation: jd-wipe 650ms cubic-bezier(0.7, 0, 0.2, 1) both;
+}
+
+/* boteh cursor (mouse only) */
+@media (hover: hover) and (pointer: fine) {
+  body.grain {
+    cursor:
+      url("/cursor-boteh.svg") 2 3,
+      auto;
+  }
+  body.grain :is(a, button, [role="button"], label, select, summary) {
+    cursor:
+      url("/cursor-boteh-active.svg") 2 3,
+      pointer;
+  }
+  body.grain :is(input, textarea) {
+    cursor: text;
   }
 }

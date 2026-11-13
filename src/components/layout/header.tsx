@@ -15,9 +15,9 @@ import { cn } from "@/lib/cn";
 
 const NAV = [
   { href: "/catalog", key: "catalog" },
+  { href: "/lookbook", key: "lookbook" },
   { href: "/preorder", key: "preorder" },
   { href: "/about", key: "about" },
-  { href: "/delivery", key: "delivery" },
   { href: "/contacts", key: "contacts" },
 ] as const;
 
@@ -78,9 +78,14 @@ export function Header() {
         initial={false}
         animate={{ y: compact ? 6 : 0 }}
         transition={T}
-        className="container-page relative hidden h-(--header-h) grid-cols-[1fr_auto_1fr] items-center gap-10 lg:grid"
+        className="container-page relative hidden h-(--header-h) grid-cols-[auto_1fr_auto] items-center gap-8 lg:grid"
       >
-        <nav aria-label={t("menu")} className="flex items-center gap-8">
+        <Link href="/" aria-label="Jadeeed" className="flex h-11 items-center">
+          <motion.span initial={false} animate={{ scale: compact ? 0.84 : 1 }} transition={T} className="origin-left">
+            <Logo tone={tone} height={44} />
+          </motion.span>
+        </Link>
+        <nav aria-label={t("menu")} className={cn("flex items-center gap-8 border-l pl-8", tone === "dark" ? "border-white/30" : "border-line")}>
           {NAV.map((n) => {
             const active = pathname === n.href || (n.href === "/catalog" && pathname.startsWith("/product"));
             return (
@@ -89,7 +94,7 @@ export function Header() {
                 href={n.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "relative py-2 text-body-sm font-medium transition-colors duration-[var(--dur-hover)]",
+                  "relative py-2 font-display text-body transition-colors duration-[var(--dur-hover)]",
                   tone === "dark" ? "text-white/85 hover:text-white" : overBanner ? "text-ink/80 hover:text-ink" : "text-muted hover:text-ink",
                   active && (tone === "dark" ? "text-white" : "text-ink"),
                 )}
@@ -100,12 +105,6 @@ export function Header() {
             );
           })}
         </nav>
-        {/* logo in the centre, as in editorial fashion stores */}
-        <Link href="/" aria-label="Jadeeed" className="flex h-11 items-center justify-self-center">
-          <motion.span initial={false} animate={{ scale: compact ? 0.84 : 1 }} transition={T} className="origin-center">
-            <Logo tone={tone} height={48} />
-          </motion.span>
-        </Link>
         <div className="flex items-center justify-self-end gap-2">
           <button type="button" onClick={ui.openSearch} aria-label={t("search")} className={iconBtn}>
             <Search className="size-5" />
