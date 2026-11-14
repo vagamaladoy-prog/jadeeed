@@ -42,7 +42,7 @@ export function Hero() {
       <div className="container-page flex justify-center pb-[calc(var(--tabbar-h)+var(--safe-bottom)+28px)] lg:pb-14">
         <a
           href="#qodiriy-qish"
-          className="inline-flex h-12 animate-rise items-center gap-2 rounded border border-paper/80 bg-ink/25 px-7 text-label uppercase tracking-[0.2em] text-paper backdrop-blur-sm transition-colors duration-[var(--dur-hover)] hover:border-anor hover:bg-anor"
+          className="inline-flex h-12 animate-rise items-center gap-2 glass-dark rounded-pill px-8 text-label uppercase tracking-[0.2em] text-paper hover:bg-anor/70"
         >
           {t("cta")} <span aria-hidden>›</span>
         </a>
@@ -53,7 +53,7 @@ export function Hero() {
         aria-label={t("scroll")}
         className="absolute bottom-14 right-10 hidden flex-col items-center gap-2 text-micro uppercase tracking-[0.25em] text-paper/70 hover:text-paper lg:flex"
       >
-        <span className="grid h-10 w-6 place-items-start justify-center rounded-pill border border-paper/60 pt-2">
+        <span className="grid h-10 w-6 place-items-start justify-center glass-dark rounded-pill pt-2">
           <span className="block h-2 w-0.5 animate-bounce rounded-pill bg-paper" />
         </span>
         {t("scroll")}

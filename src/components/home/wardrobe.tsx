@@ -114,7 +114,7 @@ export function Wardrobe({
   }, [active, pad, extra, step, reduce]);
 
   const arrow =
-    "absolute top-1/2 z-[200] hidden size-11 -translate-y-1/2 place-items-center rounded-pill border border-line bg-paper/90 text-ink shadow-sm backdrop-blur transition-opacity duration-[var(--dur-hover)] hover:bg-white md:grid";
+    "absolute top-1/2 z-[200] hidden size-11 -translate-y-1/2 place-items-center glass rounded-pill text-ink hover:text-anor md:grid";
 
   return (
     <div className="relative">

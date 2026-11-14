@@ -62,7 +62,7 @@ export function Header() {
         initial={false}
         animate={{ opacity: overBanner ? 0 : 1 }}
         transition={T}
-        className="absolute inset-0 border-b border-line bg-header backdrop-blur-md"
+        className="absolute inset-0 glass-bar border-b border-white/50 bg-header"
       />
 
       {/* phone strip */}

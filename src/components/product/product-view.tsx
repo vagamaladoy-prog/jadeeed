@@ -119,7 +119,7 @@ export function ProductView({
             className={cn(
               "relative grid min-w-13 place-items-center rounded-pill border px-3 text-body-sm font-medium transition-colors duration-[var(--dur-hover)]",
               big ? "h-13" : "h-12",
-              active ? "border-anor bg-anor text-white" : "border-line bg-white text-ink hover:border-ink",
+              active ? "glass-gloss border-anor bg-anor text-white" : "glass text-ink hover:border-ink/40",
               out && "cursor-not-allowed border-line bg-transparent text-muted line-through",
             )}
           >
@@ -271,7 +271,7 @@ export function ProductView({
             onClick={() => setSizeSheet(true)}
             className={cn(
               "h-12 min-w-13 rounded-pill border px-4 text-body-sm font-medium",
-              size ? "border-anor bg-anor text-white" : needSize ? "border-anor text-anor" : "border-line bg-white",
+              size ? "glass-gloss border-anor bg-anor text-white" : needSize ? "glass border-anor text-anor" : "glass",
             )}
             aria-label={t("size")}
           >

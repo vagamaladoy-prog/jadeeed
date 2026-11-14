@@ -88,7 +88,7 @@ export function CatalogView({
   const chip = (on: boolean) =>
     cn(
       "flex h-11 min-w-11 items-center justify-center gap-2 rounded-pill border px-4 text-body-sm font-medium transition-colors duration-[var(--dur-hover)]",
-      on ? "border-anor bg-anor text-white" : "border-line bg-white text-ink hover:border-ink",
+      on ? "glass-gloss border-anor bg-anor text-white" : "glass text-ink hover:border-ink/40",
     );
 
   const panel = (

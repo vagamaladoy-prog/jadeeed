@@ -51,7 +51,7 @@ export function TabBar() {
       initial={false}
       animate={{ y: hidden ? "100%" : "0%" }}
       transition={{ duration: DUR.in * 0.7, ease: EASE_OUT }}
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-bar pb-(--safe-bottom) backdrop-blur-md lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 glass-bar border-t border-white/60 bg-bar pb-(--safe-bottom) lg:hidden"
     >
       <ul className="mx-auto flex h-(--tabbar-h) max-w-lg items-stretch justify-between px-1">
         {TABS.map((tab) => {

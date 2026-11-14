@@ -48,7 +48,7 @@ export function ProductRail({ products, badgePhrase }: { products: ProductCardDT
             disabled={!edges[d]}
             aria-label={t(d)}
             className={cn(
-              "grid size-12 place-items-center rounded-pill border border-ink transition-colors duration-[var(--dur-hover)] hover:bg-ink hover:text-white disabled:border-line disabled:text-muted disabled:hover:bg-transparent",
+              "grid size-12 place-items-center glass rounded-pill hover:text-anor disabled:text-muted disabled:opacity-50",
             )}
           >
             {d === "prev" ? <ArrowLeft className="size-5" /> : <ArrowRight className="size-5" />}

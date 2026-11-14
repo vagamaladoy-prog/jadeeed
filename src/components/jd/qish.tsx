@@ -53,7 +53,7 @@ export function Qish({ products }: { products: ProductCardDTO[] }) {
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <Link
               href={{ pathname: "/catalog", query: { category: "xudilar" } }}
-              className="inline-flex h-12 items-center gap-2 rounded bg-anor px-5 text-label uppercase tracking-[0.18em] text-white transition-colors duration-[var(--dur-hover)] hover:bg-ink"
+              className="glass-gloss inline-flex h-12 items-center gap-2 rounded bg-anor px-5 text-label uppercase tracking-[0.18em] text-white hover:bg-ink"
             >
               {t("cta")} <span aria-hidden>›</span>
             </Link>
@@ -141,7 +141,7 @@ export function Qish({ products }: { products: ProductCardDTO[] }) {
                 type="button"
                 onClick={() => page(-1)}
                 aria-label={t("prev")}
-                className="absolute -left-6 top-[38%] hidden size-11 -translate-y-1/2 place-items-center rounded-pill border border-ink/40 bg-paper/80 transition-colors hover:border-anor hover:bg-anor hover:text-white xl:grid"
+                className="absolute -left-6 top-[38%] hidden size-11 -translate-y-1/2 place-items-center glass rounded-pill hover:text-anor xl:grid"
               >
                 <ArrowLeft className="size-4" />
               </button>
@@ -149,7 +149,7 @@ export function Qish({ products }: { products: ProductCardDTO[] }) {
                 type="button"
                 onClick={() => page(1)}
                 aria-label={t("next")}
-                className="absolute -right-6 top-[38%] hidden size-11 -translate-y-1/2 place-items-center rounded-pill border border-ink/40 bg-paper/80 transition-colors hover:border-anor hover:bg-anor hover:text-white xl:grid"
+                className="absolute -right-6 top-[38%] hidden size-11 -translate-y-1/2 place-items-center glass rounded-pill hover:text-anor xl:grid"
               >
                 <ArrowRight className="size-4" />
               </button>

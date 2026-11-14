@@ -19,8 +19,8 @@
   --on-ink-muted: #a99f95;
   --line-on-ink: rgb(255 255 255 / 0.14);
   --overlay: rgb(20 16 18 / 0.45);
-  --bar-bg: rgb(255 255 255 / 0.86);
-  --header-bg: rgb(230 213 184 / 0.86);
+  --bar-bg: rgb(236 222 198 / 0.62);
+  --header-bg: rgb(230 213 184 / 0.7);
 
   /* radius: defined in globals.css @theme (--radius 4px, --radius-pill, --radius-sheet 12px) */
 
