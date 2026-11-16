@@ -1,21 +1,21 @@
 {
   "meta": {
     "title": "Jadeeed — futbolkalar",
-    "description": "Jadeeed — o'zbek brendi. Sokin, ishonchli, biroz sirli futbolkalar. Toshkent bo'ylab yetkazib berish.",
+    "description": "Jadeeed — özbek brendi. Sokin, işonçli, biroz sirli futbolkalar. Toşkent böylab yetkazib beriş.",
     "catalogTitle": "Katalog",
     "catalogDescription": "Jadeeed futbolkalari, oversayz, longsliv va xudilar.",
     "cartTitle": "Savat",
-    "checkoutTitle": "Buyurtma berish",
+    "checkoutTitle": "Buyurtma beriş",
     "thanksTitle": "Rahmat",
     "aboutTitle": "Brend haqida",
-    "deliveryTitle": "Yetkazib berish va to'lov",
+    "deliveryTitle": "Yetkazib beriş va tölov",
     "contactsTitle": "Aloqa",
     "searchTitle": "Qidiruv",
     "notFoundTitle": "Sahifa topilmadi",
     "preorderTitle": "Keyingi partiyaga oldindan buyurtma",
     "preorderDescription": "Jadeeed futbolka va xudilarini keyingi partiyadan band qiling — tugaganlarini ham.",
     "lookbookTitle": "Lookbook — Jadeeed",
-    "lookbookDescription": "O'yilgan shiftlar, g'isht devorlar, sandiq va sharqona eshiklar — Jadeeed o'z uyida."
+    "lookbookDescription": "Öyilgan şiftlar, ğişt devorlar, sandiq va şarqona eşiklar — Jadeeed öz uyida."
   },
   "nav": {
     "home": "Asosiy",
@@ -24,43 +24,43 @@
     "cart": "Savat",
     "contact": "Aloqa",
     "about": "Brend haqida",
-    "delivery": "Yetkazib berish",
+    "delivery": "Yetkazib beriş",
     "contacts": "Aloqa",
     "language": "Til",
     "menu": "Menyu",
     "back": "Orqaga",
-    "close": "Yopish",
-    "skipToContent": "Asosiy mazmunga o'tish",
+    "close": "Yopiş",
+    "skipToContent": "Asosiy mazmunga ötiş",
     "next": "Keyingisi",
     "prev": "Oldingisi",
     "preorder": "Oldindan buyurtma",
     "lookbook": "Lookbook"
   },
   "price": {
-    "currency": "so'm",
-    "discount": "Chegirma",
+    "currency": "söm",
+    "discount": "Çegirma",
     "from": "dan"
   },
   "home": {
     "new": "Yangi",
     "newAll": "Hammasi",
     "collections": "Kolleksiyalar",
-    "bestsellers": "Ko'p sotilganlar",
+    "bestsellers": "Köp sotilganlar",
     "about": "Brend haqida",
     "aboutMore": "Batafsil",
     "contacts": "Aloqa",
     "toCatalog": "Katalogga",
     "wardrobe": "Garderob",
-    "wardrobeHint": "Bosing — futbolka sizga buriladi. Yana bosing — ochiladi.",
-    "wardrobeTurn": "o'girish",
-    "wardrobeOpen": "ochish",
+    "wardrobeHint": "Bosing — futbolka sizga buriladi. Yana bosing — oçiladi.",
+    "wardrobeTurn": "ögiriş",
+    "wardrobeOpen": "oçiş",
     "items": "{count, plural, one {# ta mahsulot} other {# ta mahsulot}}"
   },
   "product": {
     "color": "Rang",
-    "size": "O'lcham",
-    "sizeChart": "O'lchamlar jadvali",
-    "chooseSize": "O'lchamni tanlang",
+    "size": "Ölçam",
+    "sizeChart": "Ölçamlar jadvali",
+    "chooseSize": "Ölçamni tanlang",
     "addToCart": "Savatga",
     "added": "Savatda",
     "outOfStock": "Tugagan",
@@ -68,11 +68,11 @@
     "question": "Savolingiz bormi? Yozing",
     "description": "Tavsif",
     "composition": "Tarkib",
-    "density": "Zichlik",
+    "density": "Ziçlik",
     "densityValue": "{value} g/m²",
-    "care": "Parvarish",
-    "fit": "Bichim",
-    "similar": "O'xshash",
+    "care": "Parvariş",
+    "fit": "Biçim",
+    "similar": "Öxşaş",
     "photo": "Rasm {n}",
     "front": "Old tomoni",
     "back": "Orqa tomoni",
@@ -85,60 +85,60 @@
     "SLIM": "Slim"
   },
   "fitting": {
-    "open": "Fitting — o'lcham tanlash",
+    "open": "Fitting — ölçam tanlaş",
     "title": "Fitting",
-    "height": "Bo'y",
+    "height": "Böy",
     "weight": "Vazn",
     "shoulders": "Kenglik",
-    "shouldersHint": "yelkadan yelkagacha",
+    "shouldersHint": "yelkadan yelkagaça",
     "cm": "sm",
     "kg": "kg",
-    "result": "Taxminiy o'lchamingiz",
+    "result": "Taxminiy ölçamingiz",
     "between": "{small} tanaga yaqinroq, {large} kengroq turadi",
-    "below": "Eng kichik o'lcham ham mo'ljaldagidan kengroq turadi",
-    "above": "Eng katta o'lcham ham mo'ljaldagidan torroq turadi",
-    "tryOn": "O'lchamni kiyib ko'rish",
+    "below": "Eng kiçik ölçam ham möljaldagidan kengroq turadi",
+    "above": "Eng katta ölçam ham möljaldagidan torroq turadi",
+    "tryOn": "Ölçamni kiyib köriş",
     "verdict": {
-      "tight": "Tor bo'ladi",
+      "tight": "Tor böladi",
       "snug": "Tanaga yaqinroq",
-      "ideal": "Mo'ljaldagidek",
+      "ideal": "Möljaldagidek",
       "loose": "Kengroq",
       "tooLoose": "Juda keng"
     },
-    "pick": "{size} o'lchamni tanlash",
-    "soldOut": "{size} o'lcham tugagan",
-    "disclaimer": "Bo'y, vazn, kenglik va shu model o'lchamlari bo'yicha taxminiy hisob."
+    "pick": "{size} ölçamni tanlaş",
+    "soldOut": "{size} ölçam tugagan",
+    "disclaimer": "Böy, vazn, kenglik va şu model ölçamlari böyiça taxminiy hisob."
   },
   "sizeChart": {
-    "title": "O'lchamlar jadvali",
-    "size": "O'lcham",
+    "title": "Ölçamlar jadvali",
+    "size": "Ölçam",
     "width": "Kengligi",
     "length": "Uzunligi",
     "sleeve": "Yeng",
     "unit": "sm",
-    "notFit": "O'lcham to'g'ri kelmayaptimi? Qo'llab-quvvatlashga yozing",
-    "empty": "Jadval hali qo'shilmagan"
+    "notFit": "Ölçam töğri kelmayaptimi? Qöllab-quvvatlaşga yozing",
+    "empty": "Jadval hali qöşilmagan"
   },
   "catalog": {
     "title": "Katalog",
     "filters": "Filtrlar",
-    "sort": "Saralash",
+    "sort": "Saralaş",
     "category": "Kategoriya",
     "all": "Hammasi",
-    "size": "O'lcham",
+    "size": "Ölçam",
     "color": "Rang",
-    "fit": "Bichim",
+    "fit": "Biçim",
     "price": "Narx",
     "priceFrom": "dan",
-    "priceTo": "gacha",
-    "onSale": "Chegirmadagilar",
-    "apply": "Ko'rsatish",
-    "reset": "Tozalash",
-    "showMore": "Yana ko'rsatish",
-    "empty": "Hech narsa topilmadi",
-    "emptyHint": "Filtrlarni o'zgartirib ko'ring",
+    "priceTo": "gaça",
+    "onSale": "Çegirmadagilar",
+    "apply": "Körsatiş",
+    "reset": "Tozalaş",
+    "showMore": "Yana körsatiş",
+    "empty": "Heç narsa topilmadi",
+    "emptyHint": "Filtrlarni özgartirib köring",
     "results": "{count, plural, one {# ta} other {# ta}}",
-    "sortPopular": "Mashhur",
+    "sortPopular": "Maşhur",
     "sortNew": "Yangi",
     "sortPriceAsc": "Arzonroq",
     "sortPriceDesc": "Qimmatroq"
@@ -146,114 +146,114 @@
   "search": {
     "placeholder": "Futbolka, rang, kolleksiya",
     "hint": "Nima qidiramiz?",
-    "empty": "Hech narsa topilmadi",
+    "empty": "Heç narsa topilmadi",
     "popular": "Kolleksiyalar"
   },
   "cart": {
     "title": "Savat",
-    "empty": "Savat bo'sh",
-    "continue": "Xaridni davom ettirish",
+    "empty": "Savat böş",
+    "continue": "Xaridni davom ettiriş",
     "total": "Jami",
     "items": "{count, plural, one {# ta mahsulot} other {# ta mahsulot}}",
-    "checkout": "Buyurtma berish",
-    "remove": "O'chirish",
+    "checkout": "Buyurtma beriş",
+    "remove": "Öçiriş",
     "quantity": "Soni",
-    "decrease": "Kamaytirish",
-    "increase": "Ko'paytirish",
-    "size": "O'lcham",
+    "decrease": "Kamaytiriş",
+    "increase": "Köpaytiriş",
+    "size": "Ölçam",
     "color": "Rang",
     "openPage": "Savat sahifasi",
     "unavailable": "Mavjud emas",
-    "delivery": "Yetkazib berish narxi menejer bilan kelishiladi"
+    "delivery": "Yetkazib beriş narxi menejer bilan kelişiladi"
   },
   "checkout": {
-    "title": "Buyurtma berish",
+    "title": "Buyurtma beriş",
     "name": "Ism",
     "namePlaceholder": "Ismingiz",
     "phone": "Telefon",
     "comment": "Izoh",
-    "commentPlaceholder": "Masalan: soat 18:00 dan keyin qo'ng'iroq qiling",
+    "commentPlaceholder": "Masalan: soat 18:00 dan keyin qönğiroq qiling",
     "optional": "ixtiyoriy",
-    "submit": "Buyurtma berish",
+    "submit": "Buyurtma beriş",
     "sending": "Yuborilmoqda",
-    "shareContact": "Raqamni ulashish",
+    "shareContact": "Raqamni ulaşiş",
     "summary": "Buyurtma",
-    "note": "Menejer tez orada bog'lanib, buyurtmani tasdiqlaydi.",
+    "note": "Menejer tez orada boğlanib, buyurtmani tasdiqlaydi.",
     "errors": {
       "name": "Ismingizni yozing",
-      "phone": "Telefon raqamini to'liq kiriting",
-      "empty": "Savat bo'sh",
-      "stock": "Ba'zi mahsulotlar tugab qoldi — savatni tekshiring",
-      "generic": "Xatolik yuz berdi. Qayta urinib ko'ring"
+      "phone": "Telefon raqamini töliq kiriting",
+      "empty": "Savat böş",
+      "stock": "Ba'zi mahsulotlar tugab qoldi — savatni tekşiring",
+      "generic": "Xatolik yuz berdi. Qayta urinib köring"
     }
   },
   "thanks": {
     "order": "Buyurtma #{number}",
-    "text": "Buyurtmangiz qabul qilindi. Menejer tez orada siz bilan bog'lanadi.",
-    "subscribe": "Kanalga obuna bo'ling",
-    "support": "Qo'llab-quvvatlash",
-    "home": "Bosh sahifa"
+    "text": "Buyurtmangiz qabul qilindi. Menejer tez orada siz bilan boğlanadi.",
+    "subscribe": "Kanalga obuna böling",
+    "support": "Qöllab-quvvatlaş",
+    "home": "Boş sahifa"
   },
   "contacts": {
-    "support": "Qo'llab-quvvatlash",
-    "supportText": "Savol, o'lcham, yetkazib berish — shu yerga yozing",
+    "support": "Qöllab-quvvatlaş",
+    "supportText": "Savol, ölçam, yetkazib beriş — şu yerga yozing",
     "channel": "Kanal",
-    "channelText": "Yangi kolleksiyalar va chegirmalar",
+    "channelText": "Yangi kolleksiyalar va çegirmalar",
     "instagram": "Instagram",
     "instagramText": "Suratlar va obrazlar",
     "phone": "Telefon",
     "address": "Manzil",
-    "hours": "Ish vaqti",
-    "write": "Yozish"
+    "hours": "Iş vaqti",
+    "write": "Yoziş"
   },
   "footer": {
-    "shop": "Do'kon",
+    "shop": "Dökon",
     "info": "Ma'lumot",
     "rights": "© {year} Jadeeed"
   },
   "notFound": {
-    "text": "Bu sahifa yo'q. Balki boshqa joydadir.",
-    "home": "Bosh sahifaga"
+    "text": "Bu sahifa yöq. Balki boşqa joydadir.",
+    "home": "Boş sahifaga"
   },
   "telegram": {
-    "openInTelegram": "Telegram'da ochish"
+    "openInTelegram": "Telegram'da oçiş"
   },
   "preorder": {
     "title": "Oldindan buyurtma",
     "eyebrow": "Keyingi partiya",
-    "lead": "Keyingi partiyadan kiyimlarni band qiling — hozir tugaganlarini ham. Oldindan to'lov shart emas: menejer qo'ng'iroq qilib tasdiqlaydi va partiya kelganini xabar qiladi.",
-    "closed": "Hozircha oldindan buyurtma yopiq. Kanalimizdagi yangiliklarni kuzating.",
+    "lead": "Keyingi partiyadan kiyimlarni band qiling — hozir tugaganlarini ham. Oldindan tölov şart emas: menejer qönğiroq qilib tasdiqlaydi va partiya kelganini xabar qiladi.",
+    "closed": "Hozirça oldindan buyurtma yopiq. Kanalimizdagi yangiliklarni kuzating.",
     "channel": "Jadeeed kanali",
     "soldOut": "Mavjud emas",
     "inStock": "Mavjud",
-    "pick": "Tanlash",
-    "add": "Buyurtmaga qo'shish",
+    "pick": "Tanlaş",
+    "add": "Buyurtmaga qöşiş",
     "color": "Rang",
-    "size": "O'lcham",
+    "size": "Ölçam",
     "qty": "Soni",
     "less": "Kamroq",
-    "more": "Ko'proq",
+    "more": "Köproq",
     "step1": "Kiyimlarni tanlang",
     "step2": "Sizning buyurtmangiz",
-    "empty": "Yuqoridan kiyimlarni tanlang — ular shu yerda paydo bo'ladi.",
-    "remove": "Olib tashlash",
+    "empty": "Yuqoridan kiyimlarni tanlang — ular şu yerda paydo böladi.",
+    "remove": "Olib taşlaş",
     "estimate": "Taxminan",
-    "priceNote": "Partiya kelguncha narx o'zgarishi mumkin — menejer telefon orqali tasdiqlaydi.",
-    "submit": "Oldindan buyurtma berish",
+    "priceNote": "Partiya kelgunça narx özgarişi mumkin — menejer telefon orqali tasdiqlaydi.",
+    "submit": "Oldindan buyurtma beriş",
     "sending": "Yuborilmoqda",
-    "toForm": "Rasmiylashtirish",
+    "toForm": "Rasmiylaştiriş",
     "count": "{count} dona",
     "doneTitle": "Oldindan buyurtma #{number} qabul qilindi",
-    "doneText": "Menejer siz bilan bog'lanadi va partiya kelganini xabar qiladi.",
-    "again": "Yana bittasini berish",
-    "home": "Bosh sahifa",
+    "doneText": "Menejer siz bilan boğlanadi va partiya kelganini xabar qiladi.",
+    "again": "Yana bittasini beriş",
+    "home": "Boş sahifa",
     "productLink": "Keyingi partiyaga oldindan buyurtma",
     "productLinkSoldOut": "Tugadimi? Oldindan buyurtma bering",
     "errors": {
-      "empty": "Kamida bitta kiyim qo'shing",
-      "closed": "Hozircha oldindan buyurtma yopiq",
-      "gone": "Ayrim mahsulotlar endi yo'q — sahifani yangilang",
-      "generic": "Nimadir xato ketdi. Qaytadan urinib ko'ring"
+      "empty": "Kamida bitta kiyim qöşing",
+      "closed": "Hozirça oldindan buyurtma yopiq",
+      "gone": "Ayrim mahsulotlar endi yöq — sahifani yangilang",
+      "generic": "Nimadir xato ketdi. Qaytadan urinib köring"
     }
   },
   "jd": {
@@ -265,64 +265,64 @@
       "words": [
         {
           "w": "Jadidlar",
-          "s": "Yangilikni boshlaganlar."
+          "s": "Yangilikni boşlaganlar."
         },
         {
           "w": "Madaniyat",
-          "s": "Ildizimiz — kuchimiz."
+          "s": "Ildizimiz — kuçimiz."
         },
         {
           "w": "Kelajak",
           "s": "Ertangi kun bugun tikiladi."
         }
       ],
-      "quote": "Jadidlar — bu faqat tarix emas. Bu — bizning ilhomimiz, o'zligimiz va yo'limiz.",
-      "text": "XX asr boshida Turkistonda bir guruh yoshlar o'zgarishni tanladi. Ular yangi usuldagi maktablar ochdi, gazeta va teatr yaratdi, ilm va ma'rifat orqali millatni uyg'otdi. Ularni «jadidlar» — «yangilar» deb atashdi. Jadeeed shu nomdan tug'ildi: o'tmishni unutmaslik va uni bugungi kiyimda davom ettirish uchun."
+      "quote": "Jadidlar — bu faqat tarix emas. Bu — bizning ilhomimiz, özligimiz va yölimiz.",
+      "text": "XX asr boşida Turkistonda bir guruh yoşlar özgarişni tanladi. Ular yangi usuldagi maktablar oçdi, gazeta va teatr yaratdi, ilm va ma'rifat orqali millatni uyğotdi. Ularni «jadidlar» — «yangilar» deb ataşdi. Jadeeed şu nomdan tuğildi: ötmişni unutmaslik va uni bugungi kiyimda davom ettiriş uçun."
     },
     "qish": {
       "eyebrow": "Yangi kolleksiya",
-      "text": "Abdulla Qodiriy xotirasiga bag'ishlangan qishki xudilar. Oldida — «Men o'sha» yoki «Siz o'shami?», orqasida — ustoz sharafiga naqsh.",
-      "cta": "Kolleksiyani ko'rish",
+      "text": "Abdulla Qodiriy xotirasiga bağişlangan qişki xudilar. Oldida — «Men o'sha» yoki «Siz o'shami?», orqasida — ustoz şarafiga naqş.",
+      "cta": "Kolleksiyani köriş",
       "back": "Orqasi",
-      "flip": "Orqasi — sichqonchani olib keling",
-      "story": "Naqsh ortidagi hikoya",
-      "storyTitle": "Naqsh ortidagi hikoya",
+      "flip": "Orqasi — siçqonçani olib keling",
+      "story": "Naqş ortidagi hikoya",
+      "storyTitle": "Naqş ortidagi hikoya",
       "storyText": [
-        "Orqadagi naqsh to'rtta butadan iborat — sharq bezagining eng qadimiy ramzlaridan biri: hayot, o'sish va abadiyat belgisi.",
-        "Ular markazdagi ismni — Abdulla Qodiriy — to'rt tomondan qo'riqlaydi. Sanalar uning hayot yo'lini eslatadi: 1894-yil 10-aprel va 1938-yil 4-oktabr.",
-        "Bu naqsh — birinchi o'zbek romani muallifiga ta'zim. Uni kiygan har kim uning ismini o'zi bilan olib yuradi."
+        "Orqadagi naqş törtta butadan iborat — şarq bezagining eng qadimiy ramzlaridan biri: hayot, ösiş va abadiyat belgisi.",
+        "Ular markazdagi ismni — Abdulla Qodiriy — tört tomondan qöriqlaydi. Sanalar uning hayot yölini eslatadi: 1894-yil 10-aprel va 1938-yil 4-oktabr.",
+        "Bu naqş — birinçi özbek romani muallifiga ta'zim. Uni kiygan har kim uning ismini özi bilan olib yuradi."
       ],
       "prev": "Oldingi",
       "next": "Keyingi",
       "colors": "Rang",
-      "allColors": "Barcha ranglar",
+      "allColors": "Barça ranglar",
       "soldOut": "Tugagan"
     },
     "story": {
       "eyebrow": "Hikoya",
       "years": "1894 – 1938",
-      "text": "O'zbek adabiyotining yirik namoyandasi, birinchi o'zbek romani «O'tkan kunlar» muallifi, ma'rifatparvar va jadidlar harakatining faol ishtirokchisi.",
-      "cta": "Hayot yo'li",
+      "text": "Özbek adabiyotining yirik namoyandasi, birinçi özbek romani «Ötkan kunlar» muallifi, ma'rifatparvar va jadidlar harakatining faol iştirokçisi.",
+      "cta": "Hayot yöli",
       "events": [
         {
           "d": "10.04.1894",
-          "t": "Toshkentda tug'ilgan"
+          "t": "Toşkentda tuğilgan"
         },
         {
           "d": "1915",
-          "t": "Ilk hikoyasi «Juvonboz» chop etildi"
+          "t": "Ilk hikoyasi «Juvonboz» çop etildi"
         },
         {
           "d": "1920-yillar",
-          "t": "Jadidlar harakati, «Mushtum» jurnali"
+          "t": "Jadidlar harakati, «Muştum» jurnali"
         },
         {
           "d": "1922",
-          "t": "«O'tkan kunlar» — birinchi o'zbek romani"
+          "t": "«Ötkan kunlar» — birinçi özbek romani"
         },
         {
           "d": "1929",
-          "t": "«Mehrobdan chayon» romani"
+          "t": "«Mehrobdan çayon» romani"
         },
         {
           "d": "31.12.1937",
@@ -330,7 +330,7 @@
         },
         {
           "d": "04.10.1938",
-          "t": "Qatag'on qilingan"
+          "t": "Qatağon qilingan"
         },
         {
           "d": "1956",
@@ -346,18 +346,18 @@
     },
     "lookbook": {
       "title": "Lookbook",
-      "sub": "O'tmish ruhida — bugungi uslub.",
-      "cta": "Ko'rish",
-      "pageSub": "O'yilgan shiftlar, g'isht devorlar, sandiq va sharqona eshiklar — Jadeeed o'z uyida.",
+      "sub": "Ötmiş ruhida — bugungi uslub.",
+      "cta": "Köriş",
+      "pageSub": "Öyilgan şiftlar, ğişt devorlar, sandiq va şarqona eşiklar — Jadeeed öz uyida.",
       "chapters": [
-        "Shift ostida",
+        "Şift ostida",
         "Ikki savol",
         "Eski hovli"
       ]
     },
     "footer": {
       "soon": "Qodiriy | Qish — sotuvda",
-      "soonCta": "Xudilarni ko'rish"
+      "soonCta": "Xudilarni köriş"
     },
     "nav": {
       "lookbook": "Lookbook",

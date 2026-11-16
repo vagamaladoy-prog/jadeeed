@@ -38,6 +38,8 @@ const duotone = async (file, out, { extract, width = 1200, dark = INK, light = S
 const jobs = [
   // hero: "Men o'sha" (two hoodies under the carved ceiling) and its answer "Siz o'shami?"
   photo("1.jpg", "hero-men-osha.webp"),
+  // home cover (owner's pick 2026-11-16): the pair under the vine trellis, "Siz o'shami?" + "Men o'sha"
+  photo("22.jpg", "hero-cover.webp", { q: 86 }),
   photo("4.jpg", "hero-siz-oshami.webp"),
   // Qodiriy | Qish — hoodies, front + back print
   photo("2.jpg", "qish-black-front.webp"),

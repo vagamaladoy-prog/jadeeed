@@ -26,13 +26,13 @@ export function Hero() {
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="jd-zoom absolute inset-0">
           <Image
-            src="/photos/jd/hero-men-osha.webp"
+            src="/photos/jd/hero-cover.webp"
             alt=""
             fill
             priority
             quality={90}
             sizes="100vw"
-            className="object-cover object-[50%_28%]"
+            className="object-cover object-[50%_42%] lg:object-[50%_38%]"
           />
         </div>
         {/* only a soft shade at the foot, so the button reads */}

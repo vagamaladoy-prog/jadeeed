@@ -37,21 +37,21 @@ export async function POST(req: NextRequest) {
       ? [
           `Xush kelibsiz${hi}!`,
           "",
-          "<b>Men o'sha.</b> Bu chatga har bir yangi buyurtma haqida xabar keladi: ism, telefon, tarkib va summa.",
+          "<b>Men o'sha.</b> Bu çatga har bir yangi buyurtma haqida xabar keladi: ism, telefon, tarkib va summa.",
           "",
           `Buyurtmalar: ${siteUrl()}/admin/orders`,
         ].join("\n")
       : [
           `Salom${hi}!`,
           "",
-          "Bu — <b>Jadeeed</b> do'konining xizmat boti: u faqat do'kon jamoasiga yangi buyurtmalar haqida xabar beradi.",
+          "Bu — <b>Jadeeed</b> dökonining xizmat boti: u faqat dökon jamoasiga yangi buyurtmalar haqida xabar beradi.",
           "",
-          "Futbolka tanlash yoki savol berish uchun — pastdagi tugmalar.",
+          "Futbolka tanlaş yoki savol beriş uçun — pastdagi tugmalar.",
         ].join("\n");
 
     await callTelegram(
       "sendMessage",
-      { chat_id: msg.chat.id, text, parse_mode: "HTML", link_preview_options: { is_disabled: true }, reply_markup: mainKeyboard(settings.supportUrl, "Saytni ochish") },
+      { chat_id: msg.chat.id, text, parse_mode: "HTML", link_preview_options: { is_disabled: true }, reply_markup: mainKeyboard(settings.supportUrl, "Saytni oçiş") },
       6000,
       "admin",
     );

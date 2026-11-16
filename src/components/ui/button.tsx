@@ -5,7 +5,7 @@ import type { ComponentProps } from "react";
 import { cn } from "@/lib/cn";
 
 export const buttonVariants = cva(
-  "inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded font-sans font-medium transition-[background-color,color,border-color,box-shadow,opacity,transform] duration-[var(--dur-hover)] ease-out active:scale-98 disabled:pointer-events-none disabled:opacity-40 [&_svg]:size-4.5 [&_svg]:shrink-0",
+  "inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded font-sans font-medium transition-[background-color,color,border-color,box-shadow,opacity,transform] duration-[var(--dur-hover)] ease-out disabled:pointer-events-none disabled:opacity-40 [&_svg]:size-4.5 [&_svg]:shrink-0",
   {
     variants: {
       variant: {

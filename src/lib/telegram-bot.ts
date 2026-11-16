@@ -32,7 +32,7 @@ export function mainKeyboard(supportUrl: string, openLabel: string) {
   return {
     inline_keyboard: [
       [{ text: openLabel, web_app: { url: `${siteUrl()}/` } }],
-      [{ text: "Qo'llab-quvvatlash", url: supportUrl }],
+      [{ text: "Qöllab-quvvatlaş", url: supportUrl }],
     ],
   };
 }

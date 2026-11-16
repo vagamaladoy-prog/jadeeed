@@ -9,6 +9,7 @@ import { siteUrl } from "@/lib/site";
 import { Providers } from "@/components/layout/providers";
 import { Header } from "@/components/layout/header";
 import { TabBar } from "@/components/layout/tab-bar";
+import { GlassPress } from "@/components/layout/glass-press";
 import { Footer } from "@/components/layout/footer";
 import { FlyLayer, PhraseToast } from "@/components/layout/overlays";
 import { LazyOverlays } from "@/components/layout/lazy-overlays";
@@ -94,6 +95,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
             <main id="main">{children}</main>
             <Footer settings={settings} categories={visibleCategories} locale={locale} phrase={phrases.slots.HOME_QUESTION} />
             <TabBar />
+            <GlassPress />
             <LazyOverlays waitingPhrase={phrases.slots.WAITING} categories={visibleCategories} settings={settings} />
             <PhraseToast />
             <FlyLayer />

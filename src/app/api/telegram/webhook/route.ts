@@ -23,16 +23,16 @@ export async function POST(req: NextRequest) {
       "",
       `<b>${escHtml(phrases.slots.HOME_QUESTION)}</b>`,
       "",
-      "Jadeeed — o'zimizning so'zlar yozilgan futbolkalar: sokin rang, yuvilgan paxta, oversayz bichim.",
-      "Katalog, o'lchamlar va buyurtma — hammasi shu yerda, Telegram'dan chiqmasdan.",
+      "Jadeeed — özimizning sözlar yozilgan futbolkalar: sokin rang, yuvilgan paxta, oversayz biçim.",
+      "Katalog, ölçamlar va buyurtma — hammasi şu yerda, Telegram'dan çiqmasdan.",
       "",
-      "Savol bo'lsa — qo'llab-quvvatlash xizmatiga yozing, tez javob beramiz.",
+      "Savol bölsa — qöllab-quvvatlaş xizmatiga yozing, tez javob beramiz.",
     ].join("\n");
     await callTelegram("sendMessage", {
       chat_id: msg.chat.id,
       text,
       parse_mode: "HTML",
-      reply_markup: mainKeyboard(settings.supportUrl, "Do'konni ochish"),
+      reply_markup: mainKeyboard(settings.supportUrl, "Dökonni oçiş"),
     });
   } catch (e) {
     console.error("[client bot] /start reply failed", e);

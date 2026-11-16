@@ -113,7 +113,6 @@ export function ProductView({
             aria-checked={active}
             aria-disabled={out}
             onClick={() => pickSize(s)}
-            whileTap={out ? undefined : { scale: 0.9 }}
             animate={{ scale: active ? 1.06 : 1 }}
             transition={SPRING}
             className={cn(

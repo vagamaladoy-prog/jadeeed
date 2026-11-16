@@ -9,9 +9,9 @@ export function groupDigits(n: number): string {
     .replace(/\B(?=(\d{3})+(?!\d))/g, NBSP);
 }
 
-/** 250000 → "250 000 so'm" / "250 000 сум" */
+/** 250000 → "250 000 söm" / "250 000 сум" */
 export function formatPrice(n: number, locale: Locale | string = "uz"): string {
-  return `${groupDigits(n)}${NBSP}${locale === "ru" ? "сум" : "so'm"}`;
+  return `${groupDigits(n)}${NBSP}${locale === "ru" ? "сум" : "söm"}`;
 }
 
 /** Keeps only the 9 national digits of an Uzbek number. */

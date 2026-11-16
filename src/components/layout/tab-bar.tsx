@@ -59,6 +59,15 @@ export function TabBar() {
           const Icon = tab.icon;
           const inner = (
             <>
+              {/* the active tab sits under a drop of glass that glides between tabs (iOS 26 tab bar) */}
+              {active && (
+                <motion.span
+                  layoutId="tab-glass"
+                  transition={SPRING}
+                  className="glass pointer-events-none absolute inset-x-0.5 inset-y-1.5 -z-10 rounded-pill"
+                  aria-hidden
+                />
+              )}
               <motion.span
                 key={tab.key === "cart" ? pulse : undefined}
                 initial={tab.key === "cart" && pulse ? { y: -8, scale: 1.15 } : false}
@@ -70,18 +79,10 @@ export function TabBar() {
                 {tab.key === "cart" && <CartCount className="absolute -right-2.5 -top-1.5" />}
               </motion.span>
               <span className={cn("text-micro font-medium", active ? "text-ink" : "text-muted")}>{t(tab.key)}</span>
-              {active && (
-                <motion.span
-                  layoutId="tab-dot"
-                  transition={SPRING}
-                  className="absolute bottom-1 size-1 rounded-pill bg-anor"
-                  aria-hidden
-                />
-              )}
             </>
           );
           const cls =
-            "relative flex h-full min-w-14 flex-1 flex-col items-center justify-center gap-1 rounded -outline-offset-4";
+            "glass-press relative isolate flex h-full min-w-14 flex-1 flex-col items-center justify-center gap-1 rounded-pill -outline-offset-4";
           return (
             <li key={tab.key} className="flex flex-1">
               {tab.href ? (
