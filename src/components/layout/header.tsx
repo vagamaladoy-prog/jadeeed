@@ -26,7 +26,7 @@ const T = { duration: DUR.in * 0.7, ease: EASE_OUT };
 /**
  * Desktop (≥1024): transparent over the banner; on scroll it compacts (translate + scale only)
  * and gets a blurred backing; hides while scrolling down, returns on scroll up.
- * Phone: a thin strip with logo + language only (navigation lives in the bottom tab bar);
+ * Phone: a floating glass capsule with logo + language only (navigation lives in the bottom tab bar);
  * hidden inside the Telegram Mini App, where Telegram draws its own header.
  */
 export function Header() {
@@ -56,21 +56,28 @@ export function Header() {
       transition={T}
       className="fixed inset-x-0 top-0 z-40 pt-(--tg-content-top) lg:pt-0"
     >
-      {/* backing: fades in instead of animating background-color */}
+      {/* desktop backing: a floating glass capsule, fades in instead of animating background-color */}
       <motion.div
         aria-hidden
         initial={false}
         animate={{ opacity: overBanner ? 0 : 1 }}
         transition={T}
-        className="absolute inset-0 glass-bar border-b border-white/50 bg-header"
+        className="glass-bar absolute inset-x-4 bottom-1 top-3 hidden rounded-[30px] border border-white/50 bg-header shadow-[0_12px_32px_-16px_rgb(20_16_18/0.45)] lg:block"
       />
 
-      {/* phone strip */}
-      <div className="container-page relative flex h-16 items-center justify-between lg:hidden">
-        <Link href="/" aria-label="Jadeeed" className="-ml-1 flex h-14 items-center px-1">
-          <Logo tone={tone} height={50} />
-        </Link>
-        <LanguageSwitch tone={tone} />
+      {/* phone: a floating glass capsule below the top edge (like the iPhone island, only wider) —
+          the cover photo shows above and around it. Same 64px total as before (8 gap + 56). */}
+      <div className="relative mx-3 mt-2 lg:hidden">
+        <div
+          aria-hidden
+          className="glass-bar absolute inset-0 rounded-[28px] border border-white/50 bg-header shadow-[0_10px_30px_-14px_rgb(20_16_18/0.5)]"
+        />
+        <div className="relative flex h-14 items-center justify-between pl-3 pr-1.5">
+          <Link href="/" aria-label="Jadeeed" className="flex h-12 items-center">
+            <Logo tone={tone} height={44} />
+          </Link>
+          <LanguageSwitch tone={tone} />
+        </div>
       </div>
 
       {/* desktop header */}
