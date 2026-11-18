@@ -363,5 +363,29 @@
       "lookbook": "Lookbook",
       "story": "Hikoya"
     }
+  },
+  "tryOn": {
+    "title": "AI bilan kiyib köriş",
+    "lead": "Futbolkani tanlang, öz suratingizni yuklang — sun'iy intellekt uni sizga kiydirib köradi. Test rejimi.",
+    "pick": "Futbolkani tanlang",
+    "upload": "Suratingizni yuklang",
+    "uploadCta": "Surat yuklaş",
+    "uploadHint": "Beldan yuqori yoki böyingiz bilan, yuzingiz va ustki kiyimingiz yaxşi körinib tursin.",
+    "yourPhoto": "Sizning suratingiz",
+    "change": "Boşqa surat",
+    "pickFirst": "Avval futbolkani tanlang",
+    "go": "{name} — kiyib köriş",
+    "working": "Kiydirilmoqda… 1–2 daqiqa",
+    "before": "Avval",
+    "after": "Keyin",
+    "save": "Saqlaş",
+    "again": "Yana urinib köriş",
+    "privacy": "Surat faqat kiydiriş uçun sun'iy intellektga yuboriladi va bizda saqlanmaydi.",
+    "error": {
+      "upload": "Suratni öqib bölmadi. JPG yoki PNG formatida boşqa surat tanlang.",
+      "failed": "Kiydiriş amalga oşmadi. Boşqa surat bilan qayta urinib köring.",
+      "timeout": "Juda uzoq çözildi. Birozdan keyin qayta urinib köring.",
+      "limit": "Urinişlar juda köp. 10 daqiqadan keyin qayta urinib köring."
+    }
   }
 }
