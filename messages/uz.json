@@ -386,6 +386,8 @@
       "failed": "Kiydiriş amalga oşmadi. Boşqa surat bilan qayta urinib köring.",
       "timeout": "Juda uzoq çözildi. Birozdan keyin qayta urinib köring.",
       "limit": "Urinişlar juda köp. 10 daqiqadan keyin qayta urinib köring."
-    }
+    },
+    "zoom": "Kattalaştiriş",
+    "close": "Yopiş"
   }
 }

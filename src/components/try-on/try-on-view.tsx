@@ -1,7 +1,16 @@
 "use client";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type MouseEvent } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "motion/react";
-import { Camera, Check, Download, RotateCcw, Sparkles } from "lucide-react";
+import {
+  Camera,
+  Check,
+  Download,
+  RotateCcw,
+  Sparkles,
+  X,
+  ZoomIn,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { hangerShape } from "@/components/home/wardrobe";
@@ -9,7 +18,12 @@ import { WARDROBE_SHOULDERS } from "@/components/home/wardrobe-shoulders";
 import { EASE_OUT } from "@/lib/motion";
 import { cn } from "@/lib/cn";
 
-export type TryOnGarment = { key: string; name: string; src: string; ratio: number };
+export type TryOnGarment = {
+  key: string;
+  name: string;
+  src: string;
+  ratio: number;
+};
 
 const SHOW = 4;
 const MAX_SIDE = 1280; // the photo is shrunk in the browser before upload
@@ -58,6 +72,7 @@ export function TryOnView({ pool }: { pool: TryOnGarment[] }) {
   const [picked, setPicked] = useState<string | null>(null);
   const [photo, setPhoto] = useState<Photo | null>(null);
   const [phase, setPhase] = useState<Phase>({ kind: "idle" });
+  const [view, setView] = useState<number | null>(null); // index into shots, opened full screen
   const fileRef = useRef<HTMLInputElement>(null);
   const run = useRef(0);
   const garment = items.find((g) => g.key === picked) ?? null;
@@ -82,21 +97,31 @@ export function TryOnView({ pool }: { pool: TryOnGarment[] }) {
       const res = await fetch("/api/try-on", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ garment: garment.key, photo: photo.data, width: photo.w, height: photo.h }),
+        body: JSON.stringify({
+          garment: garment.key,
+          photo: photo.data,
+          width: photo.w,
+          height: photo.h,
+        }),
       });
-      if (res.status === 429) return setPhase({ kind: "error", reason: "limit" });
+      if (res.status === 429)
+        return setPhase({ kind: "error", reason: "limit" });
       const { id } = (await res.json()) as { id?: string };
       if (!res.ok || !id) throw new Error("start");
       for (let n = 0; n < TIMEOUT_MS / POLL_MS; n++) {
         await new Promise((r) => setTimeout(r, POLL_MS));
         if (run.current !== my) return;
-        const s = (await fetch(`/api/try-on/${id}`, { cache: "no-store" }).then((r) => r.json())) as {
+        const s = (await fetch(`/api/try-on/${id}`, { cache: "no-store" }).then(
+          (r) => r.json(),
+        )) as {
           status: string;
           url?: string;
         };
         if (run.current !== my) return;
-        if (s.status === "done" && s.url) return setPhase({ kind: "done", url: s.url });
-        if (s.status === "failed") return setPhase({ kind: "error", reason: "failed" });
+        if (s.status === "done" && s.url)
+          return setPhase({ kind: "done", url: s.url });
+        if (s.status === "failed")
+          return setPhase({ kind: "error", reason: "failed" });
       }
       setPhase({ kind: "error", reason: "timeout" });
     } catch {
@@ -110,6 +135,15 @@ export function TryOnView({ pool }: { pool: TryOnGarment[] }) {
   };
 
   const working = phase.kind === "working";
+  const shots: Shot[] =
+    phase.kind === "done" && photo
+      ? [
+          { src: photo.data, label: t("before") },
+          { src: phase.url, label: t("after") },
+        ]
+      : photo
+        ? [{ src: photo.data, label: t("yourPhoto") }]
+        : [];
 
   return (
     <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
@@ -128,11 +162,15 @@ export function TryOnView({ pool }: { pool: TryOnGarment[] }) {
                 aria-pressed={on}
                 className={cn(
                   "group relative flex flex-col items-center rounded-[22px] border px-3 pb-4 pt-3 text-left transition-[border-color,background-color,box-shadow] duration-[var(--dur-hover)]",
-                  on ? "border-anor bg-white/70 shadow-[0_14px_30px_-18px_rgb(20_16_18/0.5)]" : "border-ink/10 bg-paper-2/60 hover:border-ink/30",
+                  on
+                    ? "border-anor bg-white/70 shadow-[0_14px_30px_-18px_rgb(20_16_18/0.5)]"
+                    : "border-ink/10 bg-paper-2/60 hover:border-ink/30",
                 )}
               >
                 <HangingShirt g={g} />
-                <span className="mt-3 w-full truncate text-center text-body-sm font-medium">{g.name}</span>
+                <span className="mt-3 w-full truncate text-center text-body-sm font-medium">
+                  {g.name}
+                </span>
                 <AnimatePresence>
                   {on && (
                     <motion.span
@@ -170,20 +208,46 @@ export function TryOnView({ pool }: { pool: TryOnGarment[] }) {
           {phase.kind === "done" ? (
             <div className="grid grid-cols-2">
               <figure className="relative">
+                <ZoomButton label={t("zoom")} onClick={() => setView(0)} />
                 {/* eslint-disable-next-line @next/next/no-img-element -- local data: URL */}
-                <img src={photo!.data} alt={t("before")} className="w-full object-cover" style={{ aspectRatio: `${photo!.w} / ${photo!.h}` }} />
-                <figcaption className="absolute left-2 top-2 rounded-pill bg-ink/60 px-2.5 py-1 text-caption text-white">{t("before")}</figcaption>
+                <img
+                  src={photo!.data}
+                  alt={t("before")}
+                  className="w-full object-cover"
+                  style={{ aspectRatio: `${photo!.w} / ${photo!.h}` }}
+                />
+                <figcaption className="absolute left-2 top-2 rounded-pill bg-ink/60 px-2.5 py-1 text-caption text-white">
+                  {t("before")}
+                </figcaption>
               </figure>
               <figure className="relative">
+                <ZoomButton label={t("zoom")} onClick={() => setView(1)} />
                 {/* eslint-disable-next-line @next/next/no-img-element -- generated image on ModelScope's storage */}
-                <img src={phase.url} alt={t("after")} className="w-full object-cover" style={{ aspectRatio: `${photo!.w} / ${photo!.h}` }} />
-                <figcaption className="absolute left-2 top-2 rounded-pill bg-anor px-2.5 py-1 text-caption text-white">{t("after")}</figcaption>
+                <img
+                  src={phase.url}
+                  alt={t("after")}
+                  className="w-full object-cover"
+                  style={{ aspectRatio: `${photo!.w} / ${photo!.h}` }}
+                />
+                <figcaption className="absolute left-2 top-2 rounded-pill bg-anor px-2.5 py-1 text-caption text-white">
+                  {t("after")}
+                </figcaption>
               </figure>
             </div>
           ) : photo ? (
             <div className="relative">
+              {!working && (
+                <ZoomButton label={t("zoom")} onClick={() => setView(0)} />
+              )}
               {/* eslint-disable-next-line @next/next/no-img-element -- local data: URL */}
-              <img src={photo.data} alt={t("yourPhoto")} className={cn("max-h-[70vh] w-full object-contain transition-[filter] duration-500", working && "blur-[2px] brightness-90")} />
+              <img
+                src={photo.data}
+                alt={t("yourPhoto")}
+                className={cn(
+                  "max-h-[70vh] w-full object-contain transition-[filter] duration-500",
+                  working && "blur-[2px] brightness-90",
+                )}
+              />
               {working && <Scan label={t("working")} />}
             </div>
           ) : (
@@ -195,19 +259,30 @@ export function TryOnView({ pool }: { pool: TryOnGarment[] }) {
               <span className="glass grid size-16 place-items-center rounded-pill text-ink">
                 <Camera className="size-7" />
               </span>
-              <span className="text-body font-medium text-ink">{t("uploadCta")}</span>
+              <span className="text-body font-medium text-ink">
+                {t("uploadCta")}
+              </span>
               <span className="max-w-xs text-body-sm">{t("uploadHint")}</span>
             </button>
           )}
         </div>
 
-        {phase.kind === "error" && <p className="mt-4 text-body-sm text-anor">{t(`error.${phase.reason}`)}</p>}
+        {phase.kind === "error" && (
+          <p className="mt-4 text-body-sm text-anor">
+            {t(`error.${phase.reason}`)}
+          </p>
+        )}
 
         <div className="mt-5 flex flex-wrap gap-3">
           {phase.kind === "done" ? (
             <>
               <Button asChild variant="primary" size="lg">
-                <a href={phase.url} target="_blank" rel="noopener noreferrer" download>
+                <a
+                  href={phase.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                >
                   <Download /> {t("save")}
                 </a>
               </Button>
@@ -217,11 +292,27 @@ export function TryOnView({ pool }: { pool: TryOnGarment[] }) {
             </>
           ) : (
             <>
-              <Button variant="primary" size="lg" disabled={!garment || !photo || working} onClick={start} className="flex-1">
-                <Sparkles /> {working ? t("working") : garment ? t("go", { name: garment.name }) : t("pickFirst")}
+              <Button
+                variant="primary"
+                size="lg"
+                disabled={!garment || !photo || working}
+                onClick={start}
+                className="flex-1"
+              >
+                <Sparkles />{" "}
+                {working
+                  ? t("working")
+                  : garment
+                    ? t("go", { name: garment.name })
+                    : t("pickFirst")}
               </Button>
               {photo && (
-                <Button variant="outline" size="lg" disabled={working} onClick={() => fileRef.current?.click()}>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  disabled={working}
+                  onClick={() => fileRef.current?.click()}
+                >
                   <Camera /> {t("change")}
                 </Button>
               )}
@@ -230,6 +321,23 @@ export function TryOnView({ pool }: { pool: TryOnGarment[] }) {
         </div>
         <p className="mt-4 text-caption text-muted">{t("privacy")}</p>
       </section>
+
+      {/* portal (photo exists only after a client upload, so SSR never renders it): page transitions transform the page, which would trap a fixed overlay */}
+      {photo &&
+        createPortal(
+          <AnimatePresence>
+            {view !== null && shots[view] && (
+              <Viewer
+                shots={shots}
+                index={view}
+                onIndex={setView}
+                onClose={() => setView(null)}
+                closeLabel={t("close")}
+              />
+            )}
+          </AnimatePresence>,
+          document.body,
+        )}
     </div>
   );
 }
@@ -246,13 +354,37 @@ function HangingShirt({ g }: { g: TryOnGarment }) {
   const s = H / 300;
   const nw = 7 * s;
   return (
-    <span className="wardrobe-sway pointer-events-none relative block origin-top" style={{ width: W, height: HOOK + H, animationDuration: "5s" }}>
-      <svg aria-hidden width="20" height={HOOK} viewBox={`0 0 20 ${HOOK}`} className="absolute left-1/2 top-0 -translate-x-1/2">
-        <path d={`M10 ${HOOK - 4} V10 a5 5 0 1 0 -5 -5`} fill="none" stroke="#6f747b" strokeWidth="2.2" strokeLinecap="round" />
+    <span
+      className="wardrobe-sway pointer-events-none relative block origin-top"
+      style={{ width: W, height: HOOK + H, animationDuration: "5s" }}
+    >
+      <svg
+        aria-hidden
+        width="20"
+        height={HOOK}
+        viewBox={`0 0 20 ${HOOK}`}
+        className="absolute left-1/2 top-0 -translate-x-1/2"
+      >
+        <path
+          d={`M10 ${HOOK - 4} V10 a5 5 0 1 0 -5 -5`}
+          fill="none"
+          stroke="#6f747b"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+        />
       </svg>
-      <span className="absolute left-0 block" style={{ top: HOOK - 6, width: W, height: H }}>
+      <span
+        className="absolute left-0 block"
+        style={{ top: HOOK - 6, width: W, height: H }}
+      >
         {hanger && (
-          <svg aria-hidden width={W} height={Math.ceil(hanger.bottom)} viewBox={`0 0 ${W} ${Math.ceil(hanger.bottom)}`} className="absolute left-0 top-0 overflow-visible">
+          <svg
+            aria-hidden
+            width={W}
+            height={Math.ceil(hanger.bottom)}
+            viewBox={`0 0 ${W} ${Math.ceil(hanger.bottom)}`}
+            className="absolute left-0 top-0 overflow-visible"
+          >
             <defs>
               <linearGradient id={`${id}w`} x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stopColor="#a8733f" />
@@ -260,7 +392,13 @@ function HangingShirt({ g }: { g: TryOnGarment }) {
                 <stop offset="1" stopColor="#5a371c" />
               </linearGradient>
             </defs>
-            <path d={hanger.shape} fill={`url(#${id}w)`} stroke="#4a2c15" strokeWidth={0.8} strokeLinejoin="round" />
+            <path
+              d={hanger.shape}
+              fill={`url(#${id}w)`}
+              stroke="#4a2c15"
+              strokeWidth={0.8}
+              strokeLinejoin="round"
+            />
             <path
               d={`M${c - nw} ${-6 * s} H${c + nw} L${c + nw * 1.6} ${10 * s} H${c - nw * 1.6} Z`}
               fill={`url(#${id}w)`}
@@ -270,9 +408,169 @@ function HangingShirt({ g }: { g: TryOnGarment }) {
           </svg>
         )}
         {/* eslint-disable-next-line @next/next/no-img-element -- transparent cut-out, already sized */}
-        <img src={g.src} alt="" width={W} height={H} draggable={false} className="absolute left-0 top-0 h-full w-full drop-shadow-[0_10px_14px_rgb(11_11_12/0.18)]" />
+        <img
+          src={g.src}
+          alt=""
+          width={W}
+          height={H}
+          draggable={false}
+          className="absolute left-0 top-0 h-full w-full drop-shadow-[0_10px_14px_rgb(11_11_12/0.18)]"
+        />
       </span>
     </span>
+  );
+}
+
+type Shot = { src: string; label: string };
+
+/** Transparent button over a photo: tap opens it full screen. */
+function ZoomButton({
+  label,
+  onClick,
+}: {
+  label: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={label}
+      className="absolute inset-0 z-10 cursor-zoom-in"
+    >
+      <span className="glass-dark absolute bottom-2.5 right-2.5 grid size-9 place-items-center rounded-pill text-white">
+        <ZoomIn className="size-4.5" />
+      </span>
+    </button>
+  );
+}
+
+/**
+ * Full-screen photo viewer. Tap the photo to zoom in at that point (then drag / scroll to look
+ * around), tap again to zoom out. Before / after switch at the bottom; Esc, × or the backdrop closes.
+ */
+function Viewer({
+  shots,
+  index,
+  onIndex,
+  onClose,
+  closeLabel,
+}: {
+  shots: Shot[];
+  index: number;
+  onIndex: (i: number) => void;
+  onClose: () => void;
+  closeLabel: string;
+}) {
+  const [zoomed, setZoomed] = useState(false);
+  const box = useRef<HTMLDivElement>(null);
+  const shot = shots[index];
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight" && index < shots.length - 1)
+        onIndex(index + 1);
+      if (e.key === "ArrowLeft" && index > 0) onIndex(index - 1);
+    };
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [index, shots.length, onIndex, onClose]);
+
+  const toggle = (e: MouseEvent<HTMLImageElement>) => {
+    e.stopPropagation();
+    const el = box.current;
+    if (zoomed || !el) return setZoomed(false);
+    // keep the tapped point in the middle after zooming in
+    const r = e.currentTarget.getBoundingClientRect();
+    const fx = (e.clientX - r.left) / r.width;
+    const fy = (e.clientY - r.top) / r.height;
+    setZoomed(true);
+    requestAnimationFrame(() => {
+      el.scrollLeft = fx * el.scrollWidth - el.clientWidth / 2;
+      el.scrollTop = fy * el.scrollHeight - el.clientHeight / 2;
+    });
+  };
+
+  return (
+    <motion.div
+      role="dialog"
+      aria-modal="true"
+      aria-label={shot.label}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-[400] bg-ink/95"
+      onClick={onClose}
+    >
+      <div
+        ref={box}
+        className={cn(
+          "no-scrollbar size-full",
+          zoomed
+            ? "overflow-auto"
+            : "grid place-items-center overflow-hidden p-3 pb-20 pt-16 md:p-10 md:pb-24",
+        )}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element -- data: URL / generated image */}
+        <motion.img
+          key={shot.src}
+          src={shot.src}
+          alt={shot.label}
+          draggable={false}
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.25, ease: EASE_OUT }}
+          onClick={toggle}
+          className={cn(
+            "select-none",
+            zoomed
+              ? "h-[250vh] w-auto max-w-none cursor-zoom-out"
+              : "max-h-[calc(100dvh-9rem)] max-w-full cursor-zoom-in rounded-[18px] object-contain",
+          )}
+        />
+      </div>
+
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label={closeLabel}
+        className="glass-dark absolute right-3 top-[max(12px,env(safe-area-inset-top))] grid size-11 place-items-center rounded-pill text-white"
+      >
+        <X className="size-5" />
+      </button>
+
+      {shots.length > 1 && (
+        <div
+          className="glass-dark absolute bottom-[max(16px,env(safe-area-inset-bottom))] left-1/2 flex -translate-x-1/2 gap-1 rounded-pill p-1"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {shots.map((s, i) => (
+            <button
+              key={s.label}
+              type="button"
+              onClick={() => {
+                setZoomed(false);
+                onIndex(i);
+              }}
+              aria-pressed={i === index}
+              className={cn(
+                "h-10 rounded-pill px-5 text-body-sm font-medium text-white transition-colors",
+                i === index ? "bg-anor" : "hover:bg-white/10",
+              )}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </motion.div>
   );
 }
 
@@ -287,7 +585,10 @@ function Scan({ label }: { label: string }) {
         animate={{ top: "100%" }}
         transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
       />
-      <span role="status" className="glass-dark relative rounded-pill px-5 py-2.5 text-body-sm font-medium text-white">
+      <span
+        role="status"
+        className="glass-dark relative rounded-pill px-5 py-2.5 text-body-sm font-medium text-white"
+      >
         {label}
       </span>
     </div>
