@@ -21,7 +21,7 @@ export async function LookbookTeaser() {
           <p className="mt-4 max-w-xs font-display text-heading italic text-muted">{t("sub")}</p>
           <Link
             href="/lookbook"
-            className="mt-7 inline-flex h-12 items-center gap-2 rounded border border-ink px-5 text-label uppercase tracking-[0.18em] transition-colors duration-[var(--dur-hover)] hover:border-anor hover:bg-anor hover:text-white"
+            className="mt-7 inline-flex h-12 items-center gap-2 rounded-pill border border-ink px-6 text-label uppercase tracking-[0.18em] transition-colors duration-[var(--dur-hover)] hover:border-anor hover:bg-anor hover:text-white"
           >
             {t("cta")} <span aria-hidden>›</span>
           </Link>

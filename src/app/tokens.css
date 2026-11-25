@@ -22,13 +22,20 @@
   --bar-bg: rgb(236 222 198 / 0.62);
   --header-bg: rgb(230 213 184 / 0.7);
 
-  /* radius: defined in globals.css @theme (--radius 4px, --radius-pill, --radius-sheet 12px) */
+  /* radius — the whole site is soft-cornered (rounded-sm / rounded / rounded-sheet / rounded-section);
+     buttons are pills; the admin overrides these on its <body> */
+  --r-sm: 12px;
+  --r: 20px;
+  --r-sheet: 28px;
+  --r-section: 32px; /* full-width bands, panels, the footer */
 
   /* layout */
   --container: 1440px;
   --gutter: 16px;
   --section: 64px;
   --tabbar-h: 60px;
+  --tabbar-gap: max(8px, calc(var(--safe-bottom) - 12px)); /* the phone tab bar floats above the bottom edge */
+  --tabbar-total: calc(var(--tabbar-h) + var(--tabbar-gap));
   --topbar-h: 64px; /* phone logo strip (h-16) */
   --header-h: 76px;
   --header-h-compact: 60px;

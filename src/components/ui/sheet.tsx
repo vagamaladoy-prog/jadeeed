@@ -37,7 +37,7 @@ export function Sheet({ open, onOpenChange, title, hideTitle, side = "bottom", f
                 "inset-x-0 bottom-0 rounded-t-sheet pb-[max(var(--safe-bottom),var(--tg-content-bottom))]",
                 full ? "h-[calc(100dvh-var(--safe-top)-var(--tg-content-top)-12px)]" : "max-h-[88dvh]",
               ),
-            side === "right" && "inset-y-0 right-0 h-dvh w-full max-w-md border-l border-line",
+            side === "right" && "inset-y-0 right-0 h-dvh w-full max-w-md overflow-hidden rounded-l-sheet border-l border-line",
             className,
           )}
         >
@@ -48,7 +48,7 @@ export function Sheet({ open, onOpenChange, title, hideTitle, side = "bottom", f
             </Drawer.Title>
             <Drawer.Close
               aria-label={t("close")}
-              className="-mr-2 grid size-11 place-items-center rounded text-ink transition-colors duration-[var(--dur-hover)] hover:bg-paper-2"
+              className="-mr-2 grid size-11 place-items-center rounded-pill text-ink transition-colors duration-[var(--dur-hover)] hover:bg-paper-2"
             >
               <X className="size-5" />
             </Drawer.Close>

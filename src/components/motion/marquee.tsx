@@ -18,7 +18,7 @@ export function Marquee({ phrases }: { phrases: string[] }) {
     </div>
   );
   return (
-    <section className="group overflow-hidden bg-ink py-5 text-white md:py-7">
+    <section className="group mx-2 overflow-hidden rounded-section bg-ink py-5 md:mx-3 text-white md:py-7">
       <p className="sr-only">{phrases.join(" · ")}</p>
       <div className="flex w-max animate-marquee whitespace-nowrap will-change-transform group-hover:[animation-play-state:paused]">
         {row}

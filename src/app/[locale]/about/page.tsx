@@ -25,12 +25,12 @@ export default async function About({ params }: { params: Promise<{ locale: stri
       <div className="container-page">
         <PageHeader title={t("aboutTitle")} />
       </div>
-      <section className="relative isolate overflow-hidden bg-ink py-20 md:py-28">
+      <section className="relative isolate mx-2 overflow-hidden rounded-section bg-ink py-20 md:mx-3 md:py-28">
         <div aria-hidden className="jd-drift absolute inset-0 -z-10">
           <Image src="/photos/jd/suzani-firuza.webp" alt="" fill sizes="100vw" className="object-cover" />
         </div>
         <div className="container-page relative flex justify-center">
-          <div className="bg-ink px-6 py-8 md:px-14 md:py-12">
+          <div className="rounded-section bg-ink px-6 py-8 md:px-14 md:py-12">
             <BrandPhrase text={phrases.slots.ABOUT} as="p" animate="write" className="text-display-xl tracking-tightest text-white" />
           </div>
         </div>
@@ -40,7 +40,7 @@ export default async function About({ params }: { params: Promise<{ locale: stri
           <RichText text={tr(settings.about, locale)} className="flex flex-col gap-6 text-subheading leading-relaxed" />
         </Reveal>
       </div>
-      <SuzaniBorder />
+      <SuzaniBorder className="mx-2 mb-2 rounded md:mx-3" />
     </>
   );
 }

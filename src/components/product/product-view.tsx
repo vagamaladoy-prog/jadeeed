@@ -258,7 +258,7 @@ export function ProductView({
         initial={false}
         animate={{ y: dir === "down" && !atTop ? TABBAR_H : 0 }}
         transition={{ duration: DUR.in * 0.7, ease: EASE_OUT }}
-        className="fixed inset-x-0 bottom-[calc(var(--tabbar-h)+var(--safe-bottom))] z-30 border-t border-line bg-paper px-gutter py-2 lg:hidden"
+        className="fixed inset-x-3 bottom-[calc(var(--tabbar-total)+8px)] z-30 glass-bar rounded-[30px] border border-white/50 bg-bar py-2 pl-5 pr-2 shadow-[0_10px_30px_-14px_rgb(20_16_18/0.5)] lg:hidden"
       >
         <div className="flex items-center gap-2">
           <div className="min-w-0 flex-1">
@@ -279,7 +279,7 @@ export function ProductView({
           {addButton()}
         </div>
       </motion.div>
-      <div className="h-16 lg:hidden" aria-hidden />
+      <div className="h-20 lg:hidden" aria-hidden />
 
       {sheetsUsed.size && (
         <Sheet open={sizeSheet} onOpenChange={setSizeSheet} title={t("chooseSize")}>

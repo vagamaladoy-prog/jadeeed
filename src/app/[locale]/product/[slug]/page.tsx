@@ -98,7 +98,7 @@ export default async function ProductPage({ params }: Props) {
             <SectionHeading title={t("similar")} />
           </div>
           <div className="lg:container-page">
-            <ProductRail products={similar} badgePhrase={phrases.slots.BADGE} />
+            <ProductRail products={similar} />
           </div>
         </section>
       )}

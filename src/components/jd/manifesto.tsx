@@ -19,9 +19,9 @@ export async function Manifesto() {
   const words = t.raw("words") as { w: string; s: string }[];
   return (
     <section id="manifest" aria-label={words.map((w) => w.w).join(" · ")} className="scroll-mt-0">
-      <div className="grid md:grid-cols-3">
+      <div className="grid gap-2 p-2 md:grid-cols-3 md:gap-3 md:p-3">
         {words.map((w, i) => (
-          <div key={w.w} className={`relative isolate flex h-[72svh] items-center justify-center overflow-hidden md:h-[min(62vh,620px)] ${PANELS[i].tone}`}>
+          <div key={w.w} className={`relative isolate flex h-[72svh] items-center justify-center overflow-hidden rounded-section md:h-[min(62vh,620px)] ${PANELS[i].tone}`}>
             <div aria-hidden className="jd-drift absolute inset-0 -z-10">
               <Image src={PANELS[i].src} alt="" fill sizes="(min-width: 768px) 34vw, 100vw" className="object-cover" />
             </div>
@@ -36,7 +36,7 @@ export async function Manifesto() {
         ))}
       </div>
 
-      <div className="brick-grid bg-ink text-paper">
+      <div className="brick-grid mx-2 rounded-section bg-ink text-paper md:mx-3">
         <div className="container-page py-section">
           <Reveal className="flex items-center gap-6">
             <span aria-hidden className="hidden h-px flex-1 bg-line-on-ink md:block" />

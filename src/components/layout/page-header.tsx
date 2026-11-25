@@ -11,7 +11,7 @@ export function PageHeader({ title, subtitle, className }: { title: string; subt
         className,
       )}
     >
-      <div aria-hidden className="brick-grid absolute inset-y-0 left-[calc(50%-50vw)] -z-10 w-screen bg-ink" />
+      <div aria-hidden className="brick-grid absolute inset-y-0 left-[calc(50%-50vw)] -z-10 w-screen rounded-b-section bg-ink" />
       <div className="animate-rise">
         <p aria-hidden className="mb-4 text-zafaron">
           ✦

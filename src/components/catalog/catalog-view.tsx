@@ -37,12 +37,10 @@ const SORT_LABEL: Record<SortKey, string> = {
 export function CatalogView({
   products,
   categories,
-  badgePhrase,
   initial,
 }: {
   products: ProductCardDTO[];
   categories: CategoryDTO[];
-  badgePhrase: string;
   initial: Filters;
 }) {
   const t = useTranslations("catalog");
@@ -279,7 +277,6 @@ export function CatalogView({
                 >
                   <ProductCard
                     product={p}
-                    badgePhrase={badgePhrase}
                     priority={i < 4}
                     colorId={filters.colors.length ? p.colors.find((c) => filters.colors.includes(colorKey(c.name.uz)))?.id : undefined}
                     sizes="(min-width: 1024px) 24vw, (min-width: 768px) 33vw, 50vw"
@@ -304,7 +301,7 @@ export function CatalogView({
         initial={false}
         animate={{ y: dir === "down" && !atTop ? TABBAR_H : 0 }}
         transition={{ duration: DUR.in * 0.7, ease: EASE_OUT }}
-        className="fixed inset-x-0 bottom-[calc(var(--tabbar-h)+var(--safe-bottom))] z-30 flex gap-2 border-t border-line bg-paper px-gutter py-2 lg:hidden"
+        className="fixed inset-x-3 bottom-[calc(var(--tabbar-total)+8px)] z-30 flex gap-2 glass-bar rounded-[30px] border border-white/50 bg-bar p-2 shadow-[0_10px_30px_-14px_rgb(20_16_18/0.5)] lg:hidden"
       >
         <Button variant="primary" className="flex-1" onClick={() => setSheet("filters")}>
           <SlidersHorizontal /> {t("filters")}
@@ -314,7 +311,7 @@ export function CatalogView({
           <ArrowUpDown /> {t("sort")}
         </Button>
       </motion.div>
-      <div className="h-16 lg:hidden" aria-hidden />
+      <div className="h-20 lg:hidden" aria-hidden />
 
       <Sheet
         open={sheet === "filters"}

@@ -14,13 +14,11 @@ import { cn } from "@/lib/cn";
  */
 export function ProductCard({
   product,
-  badgePhrase,
   priority,
   sizes = "(min-width: 1280px) 25vw, (min-width: 768px) 33vw, 50vw",
   colorId,
 }: {
   product: ProductCardDTO;
-  badgePhrase: string;
   priority?: boolean;
   sizes?: string;
   /** preselect a colour (e.g. catalogue filtered by colour) */
@@ -50,11 +48,8 @@ export function ProductCard({
             )}
           </div>
 
-          {/* badges */}
+          {/* discount badge only — no phrase over the clothes */}
           <div className="absolute inset-x-0 top-[14%] flex flex-col items-center gap-1.5">
-            {(product.isNew || product.isBestseller) && (
-              <span className="phrase rounded-pill bg-firuza px-2.5 py-1 text-micro text-white">{badgePhrase}</span>
-            )}
             {product.pricing.discountPercent ? (
               <span className="rounded-pill bg-ink px-2.5 py-1 text-micro font-medium text-white">−{product.pricing.discountPercent}%</span>
             ) : null}

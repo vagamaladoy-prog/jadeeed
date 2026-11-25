@@ -11,7 +11,7 @@ export function PhraseToast() {
   return (
     <div
       aria-live="polite"
-      className="pointer-events-none fixed inset-x-0 bottom-[calc(var(--tabbar-h)+var(--safe-bottom)+16px)] z-[60] flex justify-center px-gutter lg:bottom-10"
+      className="pointer-events-none fixed inset-x-0 bottom-[calc(var(--tabbar-total)+16px)] z-[60] flex justify-center px-gutter lg:bottom-10"
     >
       <AnimatePresence>
         {toast && (

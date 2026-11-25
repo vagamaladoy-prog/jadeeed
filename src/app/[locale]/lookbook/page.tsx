@@ -55,7 +55,7 @@ export default async function Lookbook({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <header className="brick-grid relative overflow-hidden bg-ink pb-14 pt-[calc(var(--topbar-h)+40px)] text-paper md:pb-20 lg:pt-[calc(var(--header-h)+64px)]">
+      <header className="brick-grid relative overflow-hidden rounded-b-section bg-ink pb-14 pt-[calc(var(--topbar-h)+40px)] text-paper md:pb-20 lg:pt-[calc(var(--header-h)+64px)]">
         <Boteh className="absolute -right-6 top-1/2 h-56 w-56 -translate-y-1/2 rotate-12 text-zafaron/25 md:right-10" />
         <div className="container-page relative animate-rise">
           <p className="deco text-body-sm uppercase text-zafaron">Qodiriy | Qish</p>
@@ -68,7 +68,7 @@ export default async function Lookbook({ params }: { params: Promise<{ locale: s
       {CHAPTERS.map((c, ci) => (
         <div key={c.suzani}>
           {/* full-bleed suzani with parallax — a page turning between chapters */}
-          <div className="relative isolate flex h-[38svh] min-h-56 items-center justify-center overflow-hidden">
+          <div className="relative isolate mx-2 mt-2 flex h-[38svh] min-h-56 items-center justify-center overflow-hidden rounded-section md:mx-3 md:mt-3">
             <div aria-hidden className="jd-drift absolute inset-0 -z-10">
               <Image src={c.suzani} alt="" fill sizes="100vw" className="object-cover" />
             </div>

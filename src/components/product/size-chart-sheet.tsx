@@ -38,7 +38,7 @@ export function SizeChartSheet({
             </thead>
             <tbody>
               {chart.rows.map((r) => (
-                <tr key={r.size} className={cn("border-b border-line", highlight === r.size && "bg-anor text-white")}>
+                <tr key={r.size} className={cn("border-b border-line", highlight === r.size && "bg-anor text-white [&>:first-child]:rounded-l-pill [&>:first-child]:pl-4 [&>:last-child]:rounded-r-pill")}>
                   <th scope="row" className="py-3 pl-2 pr-2 font-medium">{r.size}</th>
                   <td className="py-3 pr-2">{r.width ?? "—"}</td>
                   <td className="py-3 pr-2">{r.length ?? "—"}</td>

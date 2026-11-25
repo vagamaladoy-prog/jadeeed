@@ -80,7 +80,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <SectionHeading title={t("new")} link={{ href: { pathname: "/catalog", query: { sort: "new" } }, label: t("newAll") }} />
           </div>
           <div className="lg:container-page">
-            <ProductRail products={fresh} badgePhrase={phrases.slots.BADGE} />
+            <ProductRail products={fresh} />
           </div>
         </section>
       )}

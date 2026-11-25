@@ -34,10 +34,11 @@
 
   --radius-*: initial;
   --radius-none: 0;
-  --radius-sm: 4px;
-  --radius: 4px;
+  --radius-sm: var(--r-sm);
+  --radius: var(--r);
   --radius-pill: 999px;
-  --radius-sheet: 12px;
+  --radius-sheet: var(--r-sheet);
+  --radius-section: var(--r-section);
 
   /* type scale (DESIGN.md §2) */
   --text-micro: 11px;
@@ -311,9 +312,10 @@ html[data-tg] {
 
 /* ───────────── "Jadid manuscript" devices (DESIGN.md §7) ───────────── */
 
-/* arch crop — like the windows of the shoot: semicircle top, square foot */
+/* arch crop — like the windows of the shoot: semicircle top, softly rounded foot. The browser scales
+   all four radii by the same factor (width / 1998), so 150px here ≈ 7.5% of the window's width. */
 @utility arch {
-  border-radius: 999px 999px 4px 4px;
+  border-radius: 999px 999px 150px 150px;
   overflow: hidden;
 }
 

@@ -53,7 +53,7 @@ export function Qish({ products }: { products: ProductCardDTO[] }) {
           <div className="mt-7 flex flex-wrap items-center gap-3">
             <Link
               href={{ pathname: "/catalog", query: { category: "xudilar" } }}
-              className="glass-gloss inline-flex h-12 items-center gap-2 rounded bg-anor px-5 text-label uppercase tracking-[0.18em] text-white hover:bg-ink"
+              className="glass-gloss inline-flex h-12 items-center gap-2 rounded-pill bg-anor px-6 text-label uppercase tracking-[0.18em] text-white hover:bg-ink"
             >
               {t("cta")} <span aria-hidden>›</span>
             </Link>

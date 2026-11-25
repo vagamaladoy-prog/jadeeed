@@ -23,7 +23,7 @@ export const viewport: Viewport = {
 export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru" className={`${manrope.variable} ${playfair.variable}`}>
-      <body className="min-h-dvh bg-paper font-sans text-ink">
+      <body className="min-h-dvh [--r-section:12px] [--r-sheet:16px] [--r-sm:6px] [--r:10px] bg-paper font-sans text-ink">
         {children}
         <Toaster
           position="top-center"

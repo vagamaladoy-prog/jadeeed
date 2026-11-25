@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { getCatalogProducts, getCategories, getPhrases } from "@/lib/data";
+import { getCatalogProducts, getCategories } from "@/lib/data";
 import { parseFilters } from "@/lib/catalog-filter";
 import { alternates } from "@/lib/site";
 import { tr } from "@/lib/types";
@@ -28,7 +28,7 @@ export default async function CatalogPage({ params, searchParams }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("catalog");
-  const [products, categories, phrases, sp] = await Promise.all([getCatalogProducts(), getCategories(), getPhrases(), searchParams]);
+  const [products, categories, sp] = await Promise.all([getCatalogProducts(), getCategories(), searchParams]);
   const initial = parseFilters(sp);
   const cat = categories.find((c) => c.slug === initial.category);
 
@@ -38,7 +38,6 @@ export default async function CatalogPage({ params, searchParams }: Props) {
       <CatalogView
         products={products}
         categories={categories.filter((c) => c.productCount > 0)}
-        badgePhrase={phrases.slots.BADGE}
         initial={initial}
       />
     </div>

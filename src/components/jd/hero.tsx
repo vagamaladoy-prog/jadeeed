@@ -21,7 +21,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative isolate flex h-[100svh] min-h-[560px] flex-col justify-end overflow-hidden bg-ink text-paper">
+    <section className="relative isolate flex h-[100svh] min-h-[560px] flex-col justify-end overflow-hidden rounded-b-section bg-ink text-paper">
       <h1 className="sr-only">Jadeeed — Men o&apos;sha</h1>
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="jd-zoom absolute inset-0">
@@ -39,7 +39,7 @@ export function Hero() {
         <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/70 to-transparent" />
       </div>
 
-      <div className="container-page flex justify-center pb-[calc(var(--tabbar-h)+var(--safe-bottom)+28px)] lg:pb-14">
+      <div className="container-page flex justify-center pb-[calc(var(--tabbar-total)+28px)] lg:pb-14">
         <a
           href="#qodiriy-qish"
           className="inline-flex h-12 animate-rise items-center gap-2 glass-dark rounded-pill px-8 text-label uppercase tracking-[0.2em] text-paper hover:bg-anor/70"

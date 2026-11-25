@@ -49,11 +49,12 @@ export function TabBar() {
     <motion.nav
       aria-label={t("menu")}
       initial={false}
-      animate={{ y: hidden ? "100%" : "0%" }}
+      animate={{ y: hidden ? "115%" : "0%" }}
       transition={{ duration: DUR.in * 0.7, ease: EASE_OUT }}
-      className="fixed inset-x-0 bottom-0 z-40 glass-bar border-t border-white/60 bg-bar pb-(--safe-bottom) lg:hidden"
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-40 px-3 pb-(--tabbar-gap) lg:hidden"
     >
-      <ul className="mx-auto flex h-(--tabbar-h) max-w-lg items-stretch justify-between px-1">
+      {/* a floating glass capsule, the twin of the one at the top */}
+      <ul className="glass-bar pointer-events-auto mx-auto flex h-(--tabbar-h) max-w-lg items-stretch justify-between rounded-[30px] border border-white/50 bg-bar px-1.5 shadow-[0_10px_30px_-14px_rgb(20_16_18/0.5)]">
         {TABS.map((tab) => {
           const active = activeKey === tab.key;
           const Icon = tab.icon;

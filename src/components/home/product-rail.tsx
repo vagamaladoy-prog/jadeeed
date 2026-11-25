@@ -9,7 +9,7 @@ import type { ProductCardDTO } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
 /** Horizontal, swipeable ribbon of products (Embla). Arrows on desktop only. */
-export function ProductRail({ products, badgePhrase }: { products: ProductCardDTO[]; badgePhrase: string }) {
+export function ProductRail({ products }: { products: ProductCardDTO[] }) {
   const t = useTranslations("nav");
   const [ref, api] = useEmblaCarousel({ align: "start", dragFree: true, containScroll: "trimSnaps" });
   const [edges, setEdges] = useState({ prev: false, next: true });
@@ -34,7 +34,7 @@ export function ProductRail({ products, badgePhrase }: { products: ProductCardDT
         <Stagger className="flex touch-pan-y gap-3 md:gap-5">
           {products.map((p) => (
             <StaggerItem key={p.id} className="w-[64%] shrink-0 sm:w-[42%] md:w-[31%] lg:w-[23.5%]">
-              <ProductCard product={p} badgePhrase={badgePhrase} sizes="(min-width: 1024px) 24vw, (min-width: 768px) 31vw, 64vw" />
+              <ProductCard product={p} sizes="(min-width: 1024px) 24vw, (min-width: 768px) 31vw, 64vw" />
             </StaggerItem>
           ))}
         </Stagger>

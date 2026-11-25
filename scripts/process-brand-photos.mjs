@@ -1,5 +1,5 @@
 // node scripts/process-brand-photos.mjs — builds the "Jadid manuscript" imagery from the brand shoot
-// (assets/photos/2026-11, the owner's own photos), the public-domain Qodiriy portrait and museum suzani
+// (assets/photos/2026-11, the owner's own photos), the Qodiriy portrait and museum suzani
 // (assets/met, The Met Open Access CC0: 445244, 447384, 447385, 448922, 444991) into public/photos/jd/*.webp.
 // Sources stay big; next/image resizes per device. Re-run after replacing a source photo.
 import sharp from "sharp";
@@ -64,8 +64,8 @@ const jobs = [
   // wardrobe backdrop: carved door, chest and brick of the shoot in warm sepia close to the paper
   duotone(SRC + "21.jpg", "wardrobe-backdrop.webp", { width: 1800, dark: hex("#4a3322"), light: hex("#efe0c4"), blur: 1.2, q: 74 }),
   // archival duotones for the Qodiriy story
-  // portrait: public-domain archival photo (Wikimedia Commons "Абдулла Кадирі.jpg", 1938)
-  duotone("assets/qodiriy-portrait.jpg", "qodiriy-portrait.webp", { extract: { left: 0, top: 30, width: 642, height: 857 }, width: 642, blur: 0.7, q: 84 }),
+  // portrait: painting supplied by the owner (2026-11-25), in full colour
+  photo("../../qodiriy-painting.webp", "qodiriy-painting.webp", { q: 88 }),
   duotone(SRC + "15.jpg", "qodiriy-corridor.webp", { width: 900 }),
   // manifesto: 18th–19th c. Uzbek suzani from The Met (Open Access, CC0), tinted pomegranate / teal / saffron
   duotone("assets/met/445244.jpg", "suzani-anor.webp", { extract: { left: 500, top: 600, width: 2300, height: 2800 }, width: 1200, dark: hex("#220609"), light: hex("#b04354"), q: 72 }),

@@ -31,7 +31,7 @@ export async function Footer({
   ];
 
   return (
-    <footer className="brick-grid relative overflow-hidden bg-ink text-white">
+    <footer className="brick-grid relative overflow-hidden rounded-t-section bg-ink text-white">
       {/* embroidered suzani border — the last page of the book */}
       <SuzaniBorder />
 
@@ -43,7 +43,7 @@ export async function Footer({
         </div>
         <Link
           href={{ pathname: "/catalog", query: { category: "xudilar" } }}
-          className="inline-flex h-12 items-center gap-2 rounded bg-anor px-6 text-label uppercase tracking-[0.18em] text-white transition-colors duration-[var(--dur-hover)] hover:bg-paper hover:text-ink"
+          className="glass-gloss inline-flex h-12 items-center gap-2 rounded-pill bg-anor px-6 text-label uppercase tracking-[0.18em] text-white hover:bg-paper hover:text-ink"
         >
           {jd("soonCta")} <span aria-hidden>›</span>
         </Link>
@@ -118,7 +118,7 @@ export async function Footer({
 
       <FooterWordmark />
 
-      <div className="container-page flex items-center justify-between border-t border-line-on-ink py-6 pb-[calc(var(--tabbar-h)+var(--safe-bottom)+24px)] text-body-sm text-on-ink-muted lg:pb-6">
+      <div className="container-page flex items-center justify-between border-t border-line-on-ink py-6 pb-[calc(var(--tabbar-total)+24px)] text-body-sm text-on-ink-muted lg:pb-6">
         <span>{t("rights", { year: new Date().getFullYear() })}</span>
         <span className="phrase">{phrase}</span>
       </div>

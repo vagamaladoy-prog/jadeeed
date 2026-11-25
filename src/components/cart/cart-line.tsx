@@ -41,7 +41,7 @@ export function CartLine({ item, compact }: { item: CartItem; compact?: boolean 
             type="button"
             onClick={() => cart.remove(item.key)}
             aria-label={t("remove")}
-            className="-mr-2 -mt-2 grid size-11 shrink-0 place-items-center rounded text-muted hover:bg-paper-2 hover:text-ink"
+            className="-mr-2 -mt-2 grid size-11 shrink-0 place-items-center rounded-pill text-muted hover:bg-paper-2 hover:text-ink"
           >
             <X className="size-4.5" />
           </button>

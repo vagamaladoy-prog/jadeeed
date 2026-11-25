@@ -42,7 +42,7 @@ export function QodiriyStory() {
   const key = (t.raw("key") as number[]).map((i) => events[i]);
 
   return (
-    <section aria-labelledby="qodiriy-title" className="jd-story brick-grid relative isolate overflow-hidden bg-ink text-paper">
+    <section aria-labelledby="qodiriy-title" className="jd-story brick-grid relative isolate mx-2 overflow-hidden rounded-section bg-ink md:mx-3 text-paper">
       {/* archival courtyard, duotone, fading into the page */}
       <div aria-hidden className="absolute inset-y-0 right-0 -z-10 hidden w-1/2 lg:block">
         <Image src="/photos/jd/qodiriy-corridor.webp" alt="" fill sizes="50vw" className="object-cover opacity-45" />
@@ -51,9 +51,9 @@ export function QodiriyStory() {
 
       <div className="container-page grid items-center gap-10 py-section md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)_minmax(0,0.8fr)] lg:gap-12">
         <Reveal className="relative mx-auto w-full max-w-[340px]">
-          <div aria-hidden className="arch absolute -inset-x-5 -bottom-4 top-10 bg-zafaron/85" />
+          <div aria-hidden className="arch absolute -inset-x-2 -bottom-4 md:-inset-x-5 top-10 bg-zafaron/85" />
           <div className="arch relative aspect-[3/4] bg-ink-2">
-            <Image src="/photos/jd/qodiriy-portrait.webp" alt={t("portraitAlt")} fill sizes="(min-width: 1024px) 26vw, 80vw" className="object-cover object-top" />
+            <Image src="/photos/jd/qodiriy-painting.webp" alt={t("portraitAlt")} fill sizes="(min-width: 1024px) 26vw, 80vw" className="object-cover object-top" />
           </div>
         </Reveal>
 
@@ -67,7 +67,7 @@ export function QodiriyStory() {
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="mt-8 inline-flex h-12 items-center gap-2 rounded border border-zafaron px-5 text-label uppercase tracking-[0.18em] text-zafaron transition-colors duration-[var(--dur-hover)] hover:bg-zafaron hover:text-ink"
+            className="mt-8 inline-flex h-12 items-center gap-2 rounded-pill border border-zafaron px-6 text-label uppercase tracking-[0.18em] text-zafaron transition-colors duration-[var(--dur-hover)] hover:bg-zafaron hover:text-ink"
           >
             {t("cta")} <span aria-hidden>›</span>
           </button>

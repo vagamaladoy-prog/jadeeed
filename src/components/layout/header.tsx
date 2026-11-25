@@ -45,7 +45,7 @@ export function Header() {
   const compact = !atTop;
 
   const iconBtn = cn(
-    "relative grid size-11 place-items-center rounded transition-colors duration-[var(--dur-hover)]",
+    "relative grid size-11 place-items-center rounded-pill transition-colors duration-[var(--dur-hover)]",
     tone === "dark" ? "text-white hover:bg-white/10" : "text-ink hover:bg-paper-2",
   );
 
@@ -72,7 +72,7 @@ export function Header() {
           aria-hidden
           className="glass-bar absolute inset-0 rounded-[28px] border border-white/50 bg-header shadow-[0_10px_30px_-14px_rgb(20_16_18/0.5)]"
         />
-        <div className="relative flex h-14 items-center justify-between pl-3 pr-1.5">
+        <div className="relative flex h-14 items-center justify-between pl-4 pr-1.5">
           <Link href="/" aria-label="Jadeeed" className="flex h-12 items-center">
             <Logo tone={tone} height={44} />
           </Link>
@@ -107,7 +107,7 @@ export function Header() {
                 )}
               >
                 {t(n.key)}
-                {active && <span className="absolute inset-x-0 -bottom-0.5 h-0.5 bg-anor" aria-hidden />}
+                {active && <span className="absolute inset-x-0 -bottom-0.5 h-0.5 rounded-pill bg-anor" aria-hidden />}
               </Link>
             );
           })}

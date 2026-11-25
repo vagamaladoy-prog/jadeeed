@@ -77,7 +77,7 @@ export function CartPage({ waitingPhrase }: { waitingPhrase: string }) {
 
       {/* phone: total + checkout pinned to the bottom (Telegram MainButton replaces it in the Mini App) */}
       {!tgMain && (
-        <div className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-paper px-gutter pb-[calc(var(--safe-bottom)+8px)] pt-3 lg:hidden">
+        <div className="fixed inset-x-0 bottom-0 z-30 rounded-t-sheet border-t border-line bg-paper px-gutter pb-[calc(var(--safe-bottom)+8px)] pt-3 lg:hidden">
           <div className="mb-2 flex items-baseline justify-between">
             <span className="text-body-sm text-muted">{t("total")}</span>
             <span className="text-subheading font-medium tabular-nums">{formatPrice(total, locale)}</span>

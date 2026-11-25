@@ -177,7 +177,7 @@ export function CheckoutForm() {
         {/* phone submit: pinned right above the keyboard (Telegram MainButton replaces it in the Mini App) */}
         {!tgMain && (
           <div
-            className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-paper px-gutter pb-[calc(var(--safe-bottom)+8px)] pt-2 lg:hidden"
+            className="fixed inset-x-0 bottom-0 z-30 rounded-t-sheet border-t border-line bg-paper px-gutter pb-[calc(var(--safe-bottom)+8px)] pt-2 lg:hidden"
             style={{ transform: keyboard ? `translateY(-${keyboard}px)` : undefined }}
           >
             <Button type="submit" size="lg" disabled={pending} className="w-full">

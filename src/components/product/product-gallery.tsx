@@ -96,8 +96,8 @@ export function ProductGallery({ images, alt }: { images: string[]; alt: string 
       </div>
 
       {/* phone / tablet swipe */}
-      <div className="relative -mx-gutter lg:hidden" data-fly-source>
-        <div ref={emblaRef} className="overflow-hidden">
+      <div className="relative -mx-2 mt-2 lg:hidden" data-fly-source>
+        <div ref={emblaRef} className="overflow-hidden rounded-sheet">
           <div className="flex touch-pan-y">
             {images.map((src, i) => (
               <div key={src} className="relative aspect-4/5 w-full shrink-0 bg-paper-2">

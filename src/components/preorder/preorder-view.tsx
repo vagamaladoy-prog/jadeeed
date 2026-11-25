@@ -297,7 +297,7 @@ export function PreorderView({
                             type="button"
                             onClick={() => setQty(k, 0)}
                             aria-label={`${t("remove")}: ${tr(l.p.name, locale)} ${l.size}`}
-                            className="-mr-2 grid size-11 place-items-center rounded text-muted hover:text-ink"
+                            className="-mr-2 grid size-11 place-items-center rounded-pill text-muted hover:text-ink"
                           >
                             <X className="size-4" />
                           </button>
@@ -380,10 +380,10 @@ export function PreorderView({
       <AnimatePresence>
         {count > 0 && (
           <motion.div
-            initial={{ y: "100%" }}
+            initial={{ y: "250%" }}
             animate={{ y: 0 }}
-            exit={{ y: "100%" }}
-            className="fixed inset-x-0 bottom-[calc(var(--tabbar-h)+var(--safe-bottom))] z-30 border-t border-line bg-paper px-gutter py-2 lg:hidden"
+            exit={{ y: "250%" }}
+            className="fixed inset-x-3 bottom-[calc(var(--tabbar-total)+8px)] z-30 glass-bar rounded-[30px] border border-white/50 bg-bar p-2 shadow-[0_10px_30px_-14px_rgb(20_16_18/0.5)] lg:hidden"
           >
             <Button size="lg" className="w-full" onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}>
               {t("toForm")} · {t("count", { count })} · {formatPrice(total, locale)}
@@ -391,7 +391,7 @@ export function PreorderView({
           </motion.div>
         )}
       </AnimatePresence>
-      <div className="h-16 lg:hidden" aria-hidden />
+      <div className="h-20 lg:hidden" aria-hidden />
 
       {sheetUsed && (
         <PickSheet
